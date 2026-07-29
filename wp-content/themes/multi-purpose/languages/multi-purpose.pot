@@ -1,0 +1,1591 @@
+# Copyright (C) 2026 ThemesPixel
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Multi Purpose 0.0.5\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/multi-purpose\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-06-05T17:12:10+05:30\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: multi-purpose\n"
+
+#. Theme Name of the theme
+#: style.css
+#: inc/block-patterns.php:11
+msgid "Multi Purpose"
+msgstr ""
+
+#. Theme URI of the theme
+#: style.css
+#: functions.php:35
+msgid "https://www.themepixels.net/products/multi-purpose/"
+msgstr ""
+
+#. Description of the theme
+#: style.css
+msgid "A multi-purpose theme is a versatile website template designed to support a wide range of use cases across different industries. It typically includes flexible layout options, pre-built demo content, and customizable design elements that allow users to adapt the theme to their specific needs. Small business owners, entrepreneurs, and freelancers can use it to create professional websites without extensive coding knowledge, while digital agencies and web developers benefit from its scalability and time-saving features. These themes often include drag-and-drop page builders, responsive design for mobile compatibility, and integration with popular plugins for eCommerce, SEO, and performance optimization. Bloggers and creative professionals can take advantage of multiple blog layouts, typography controls, and media display options to present content effectively. Photographers, in particular, benefit from gallery features and image-focused templates that highlight visual work. Overall, a multi-purpose theme provides a balanced combination of functionality and adaptability, making it suitable for users who require a single solution capable of handling diverse website requirements."
+msgstr ""
+
+#. Author of the theme
+#: style.css
+msgid "ThemesPixel"
+msgstr ""
+
+#. Author URI of the theme
+#: style.css
+msgid "https://www.themepixels.net/"
+msgstr ""
+
+#: functions.php:36
+msgid "https://www.themepixels.net/products/multi-purpose-wordpress-theme/"
+msgstr ""
+
+#: functions.php:37
+msgid "themepixels.net/demo-site/multi-purpose-pro/"
+msgstr ""
+
+#: functions.php:38
+msgid "https://www.themepixels.net/docs/multi-purpose-free/"
+msgstr ""
+
+#: functions.php:39
+msgid "https://www.themepixels.net/products/wp-theme-bundle"
+msgstr ""
+
+#: functions.php:40
+msgid "https://wordpress.org/support/theme/multi-purpose"
+msgstr ""
+
+#. translators: 1: Theme name
+#: functions.php:121
+msgid "Hello! Thank you for choosing our %1$s!"
+msgstr ""
+
+#. translators: 1: Theme name
+#: functions.php:130
+msgid "%1$s has been successfully installed and is ready for use. The links below will help you get started."
+msgstr ""
+
+#: functions.php:136
+msgid "Multi Purpose Theme Information"
+msgstr ""
+
+#: functions.php:138
+msgid "Buy Now"
+msgstr ""
+
+#: functions.php:139
+#: themeinfo/multi_purpose_themeinfo_page.php:239
+msgid "Get All Themes"
+msgstr ""
+
+#: functions.php:140
+msgid "Live Demo"
+msgstr ""
+
+#: functions.php:145
+msgid "Theme Screenshot"
+msgstr ""
+
+#: inc/block-patterns.php:12
+#: patterns/main-header.php:53
+msgid "Pages"
+msgstr ""
+
+#: inc/block-styles.php:17
+msgid "No Padding"
+msgstr ""
+
+#: inc/block-styles.php:26
+#: inc/block-styles.php:44
+#: inc/block-styles.php:53
+#: inc/block-styles.php:63
+#: inc/block-styles.php:73
+#: inc/block-styles.php:82
+msgid "Theme Style"
+msgstr ""
+
+#: inc/block-styles.php:35
+msgid "Plain"
+msgstr ""
+
+#: inc/customizer.php:22
+#: themeinfo/multi_purpose_themeinfo_page.php:219
+msgid "Buy Multi Purpose Pro"
+msgstr ""
+
+#: inc/customizer.php:23
+#: themeinfo/multi_purpose_themeinfo_page.php:221
+msgid "Buy Pro Theme"
+msgstr ""
+
+#: inc/customizer.php:29
+#: themeinfo/multi_purpose_themeinfo_page.php:231
+msgid "Preview Pro Theme"
+msgstr ""
+
+#: inc/customizer.php:30
+#: themeinfo/multi_purpose_themeinfo_page.php:233
+msgid "View Live Demo"
+msgstr ""
+
+#: inc/icon-function.php:26
+msgid "Please define default parameters in the form of an array."
+msgstr ""
+
+#: inc/icon-function.php:31
+msgid "Please define an SVG icon filename."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:340
+msgid "Install Required Plugins"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:341
+msgid "Install Plugins"
+msgstr ""
+
+#. translators: %s: plugin name.
+#: inc/TGM/class-tgm-plugin-activation.php:343
+msgid "Installing Plugin: %s"
+msgstr ""
+
+#. translators: %s: plugin name.
+#: inc/TGM/class-tgm-plugin-activation.php:345
+msgid "Updating Plugin: %s"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:346
+msgid "Something went wrong with the plugin API."
+msgstr ""
+
+#. translators: 1: plugin name(s).
+#: inc/TGM/class-tgm-plugin-activation.php:348
+msgid "This theme requires the following plugin: %1$s."
+msgid_plural "This theme requires the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: plugin name(s).
+#: inc/TGM/class-tgm-plugin-activation.php:354
+msgid "This theme recommends the following plugin: %1$s."
+msgid_plural "This theme recommends the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: plugin name(s).
+#: inc/TGM/class-tgm-plugin-activation.php:360
+msgid "The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s."
+msgid_plural "The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: plugin name(s).
+#: inc/TGM/class-tgm-plugin-activation.php:366
+msgid "There is an update available for: %1$s."
+msgid_plural "There are updates available for the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: plugin name(s).
+#: inc/TGM/class-tgm-plugin-activation.php:372
+msgid "The following required plugin is currently inactive: %1$s."
+msgid_plural "The following required plugins are currently inactive: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: plugin name(s).
+#: inc/TGM/class-tgm-plugin-activation.php:378
+msgid "The following recommended plugin is currently inactive: %1$s."
+msgid_plural "The following recommended plugins are currently inactive: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:383
+msgid "Begin installing plugin"
+msgid_plural "Begin installing plugins"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:388
+msgid "Begin updating plugin"
+msgid_plural "Begin updating plugins"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:393
+msgid "Begin activating plugin"
+msgid_plural "Begin activating plugins"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:398
+msgid "Return to Required Plugins Installer"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:399
+msgid "Return to the Dashboard"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:400
+#: inc/TGM/class-tgm-plugin-activation.php:3311
+msgid "Plugin activated successfully."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:401
+#: inc/TGM/class-tgm-plugin-activation.php:3103
+msgid "The following plugin was activated successfully:"
+msgid_plural "The following plugins were activated successfully:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: plugin name.
+#: inc/TGM/class-tgm-plugin-activation.php:403
+msgid "No action taken. Plugin %1$s was already active."
+msgstr ""
+
+#. translators: 1: plugin name.
+#: inc/TGM/class-tgm-plugin-activation.php:405
+msgid "Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin."
+msgstr ""
+
+#. translators: 1: dashboard link.
+#: inc/TGM/class-tgm-plugin-activation.php:407
+msgid "All plugins installed and activated successfully. %1$s"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:408
+msgid "Dismiss this notice"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:409
+msgid "There are one or more required or recommended plugins to install, update or activate."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:410
+msgid "Please contact the administrator of this site for help."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:616
+msgid "This plugin needs to be updated to be compatible with your theme."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:617
+msgid "Update Required"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:735
+msgid "Set the parent_slug config variable instead."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:1042
+msgid "The remote plugin package does not contain a folder with the desired slug and renaming did not work."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:1042
+#: inc/TGM/class-tgm-plugin-activation.php:1052
+msgid "Please contact the plugin provider and ask them to package their plugin according to the WordPress guidelines."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:1052
+msgid "The remote plugin package consists of more than one file, but the files are not packaged in a folder."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:1243
+#: inc/TGM/class-tgm-plugin-activation.php:3099
+msgctxt "plugin A *and* plugin B"
+msgid "and"
+msgstr ""
+
+#. translators: %s: version number
+#: inc/TGM/class-tgm-plugin-activation.php:2112
+msgid "TGMPA v%s"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2421
+msgid "Required"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2424
+msgid "Recommended"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2440
+msgid "WordPress Repository"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2443
+msgid "External Source"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2446
+msgid "Pre-Packaged"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2463
+msgid "Not Installed"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2467
+msgid "Installed But Not Activated"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2469
+msgid "Active"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2475
+msgid "Required Update not Available"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2478
+msgid "Requires Update"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2481
+msgid "Update recommended"
+msgstr ""
+
+#. translators: 1: install status, 2: update status
+#: inc/TGM/class-tgm-plugin-activation.php:2490
+msgctxt "Install/Update Status"
+msgid "%1$s, %2$s"
+msgstr ""
+
+#. translators: 1: number of plugins.
+#: inc/TGM/class-tgm-plugin-activation.php:2536
+msgctxt "plugins"
+msgid "All <span class=\"count\">(%s)</span>"
+msgid_plural "All <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: number of plugins.
+#: inc/TGM/class-tgm-plugin-activation.php:2540
+msgid "To Install <span class=\"count\">(%s)</span>"
+msgid_plural "To Install <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: number of plugins.
+#: inc/TGM/class-tgm-plugin-activation.php:2544
+msgid "Update Available <span class=\"count\">(%s)</span>"
+msgid_plural "Update Available <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: number of plugins.
+#: inc/TGM/class-tgm-plugin-activation.php:2548
+msgid "To Activate <span class=\"count\">(%s)</span>"
+msgid_plural "To Activate <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2630
+msgctxt "as in: \"version nr unknown\""
+msgid "unknown"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2638
+msgid "Installed version:"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2646
+msgid "Minimum required version:"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2658
+msgid "Available version:"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2681
+msgid "No plugins to install, update or activate."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2695
+msgid "Plugin"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2696
+msgid "Source"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2697
+msgid "Type"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2701
+msgid "Version"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2702
+msgid "Status"
+msgstr ""
+
+#. translators: %2$s: plugin name in screen reader markup
+#: inc/TGM/class-tgm-plugin-activation.php:2751
+msgid "Install %2$s"
+msgstr ""
+
+#. translators: %2$s: plugin name in screen reader markup
+#: inc/TGM/class-tgm-plugin-activation.php:2756
+msgid "Update %2$s"
+msgstr ""
+
+#. translators: %2$s: plugin name in screen reader markup
+#: inc/TGM/class-tgm-plugin-activation.php:2762
+msgid "Activate %2$s"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2834
+msgid "Upgrade message from the plugin author:"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2867
+msgid "Install"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2873
+msgid "Update"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2876
+msgid "Activate"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2907
+msgid "No plugins were selected to be installed. No action taken."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2909
+msgid "No plugins were selected to be updated. No action taken."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2950
+msgid "No plugins are available to be installed at this time."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:2952
+msgid "No plugins are available to be updated at this time."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:3059
+msgid "No plugins were selected to be activated. No action taken."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:3085
+msgid "No plugins are available to be activated at this time."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:3310
+msgid "Plugin activation failed."
+msgstr ""
+
+#. translators: 1: plugin name, 2: action number 3: total number of actions.
+#: inc/TGM/class-tgm-plugin-activation.php:3655
+msgid "Updating Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#. translators: 1: plugin name, 2: error message.
+#: inc/TGM/class-tgm-plugin-activation.php:3658
+msgid "An error occurred while installing %1$s: <strong>%2$s</strong>."
+msgstr ""
+
+#. translators: 1: plugin name.
+#: inc/TGM/class-tgm-plugin-activation.php:3660
+msgid "The installation of %1$s failed."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:3664
+msgid "The installation and activation process is starting. This process may take a while on some hosts, so please be patient."
+msgstr ""
+
+#. translators: 1: plugin name.
+#: inc/TGM/class-tgm-plugin-activation.php:3666
+msgid "%1$s installed and activated successfully."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:3667
+msgid "All installations and activations have been completed."
+msgstr ""
+
+#. translators: 1: plugin name, 2: action number 3: total number of actions.
+#: inc/TGM/class-tgm-plugin-activation.php:3669
+msgid "Installing and Activating Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:3672
+msgid "The installation process is starting. This process may take a while on some hosts, so please be patient."
+msgstr ""
+
+#. translators: 1: plugin name.
+#: inc/TGM/class-tgm-plugin-activation.php:3674
+msgid "%1$s installed successfully."
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:3675
+msgid "All installations have been completed."
+msgstr ""
+
+#. translators: 1: plugin name, 2: action number 3: total number of actions.
+#: inc/TGM/class-tgm-plugin-activation.php:3677
+msgid "Installing Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:3682
+msgid "Show Details"
+msgstr ""
+
+#: inc/TGM/class-tgm-plugin-activation.php:3682
+msgid "Hide Details"
+msgstr ""
+
+#: inc/TGM/tgm.php:10
+msgid "woocommerce"
+msgstr ""
+
+#: inc/TGM/tgm.php:16
+msgid "Gutentor"
+msgstr ""
+
+#: inc/TGM/tgm.php:22
+msgid "Currency Switcher for WooCommerce"
+msgstr ""
+
+#: inc/TGM/tgm.php:28
+msgid "Translate WordPress with GTranslate"
+msgstr ""
+
+#: patterns/404.php
+msgctxt "Pattern title"
+msgid "404 Page"
+msgstr ""
+
+#: patterns/404.php:9
+msgid "404"
+msgstr ""
+
+#: patterns/404.php:13
+msgid "Oops! That page cannot be found"
+msgstr ""
+
+#: patterns/archive-header-with-background.php
+msgctxt "Pattern title"
+msgid "Archive Header With Background"
+msgstr ""
+
+#: patterns/default-header.php
+msgctxt "Pattern title"
+msgid "Default Header"
+msgstr ""
+
+#: patterns/footer-columns.php
+msgctxt "Pattern title"
+msgid "Footer Columns"
+msgstr ""
+
+#: patterns/footer-columns.php:22
+msgid "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+msgstr ""
+
+#: patterns/footer-columns.php:28
+msgid "Our Link"
+msgstr ""
+
+#: patterns/footer-columns.php:44
+msgid "Contact Us"
+msgstr ""
+
+#: patterns/footer-columns.php:48
+msgid "your location here"
+msgstr ""
+
+#: patterns/footer-columns.php:52
+msgid "+12 3456789123"
+msgstr ""
+
+#: patterns/footer-columns.php:56
+msgid "support@example.com"
+msgstr ""
+
+#: patterns/footer-columns.php:62
+msgid "Social Media"
+msgstr ""
+
+#: patterns/footer-columns.php:84
+msgid "Multi Purpose."
+msgstr ""
+
+#: patterns/footer-columns.php:84
+msgid "All Rights Reserved."
+msgstr ""
+
+#: patterns/main-banner.php
+msgctxt "Pattern title"
+msgid "Main Banner"
+msgstr ""
+
+#: patterns/main-banner.php:19
+#: patterns/main-banner.php:81
+msgid "Shop Everything You Need, All in One Place"
+msgstr ""
+
+#: patterns/main-banner.php:23
+#: patterns/main-banner.php:85
+msgid "Discover Top Deals Across Electronics, Fashion, Home Essentials &amp; More."
+msgstr ""
+
+#: patterns/main-banner.php:28
+#: patterns/main-banner.php:90
+msgid "shop now"
+msgstr ""
+
+#: patterns/main-banner.php:115
+#: patterns/main-banner.php:163
+msgid "Electronic"
+msgstr ""
+
+#: patterns/main-banner.php:119
+#: patterns/main-banner.php:167
+msgid "(25% Off)"
+msgstr ""
+
+#: patterns/main-banner.php:124
+#: patterns/main-banner.php:172
+msgid "Product Name Here"
+msgstr ""
+
+#: patterns/main-banner.php:130
+#: patterns/main-banner.php:178
+msgid "$ 99.00"
+msgstr ""
+
+#: patterns/main-banner.php:134
+#: patterns/main-banner.php:182
+msgid "110.00"
+msgstr ""
+
+#: patterns/main-banner.php:144
+#: patterns/main-banner.php:192
+msgid "4.5"
+msgstr ""
+
+#: patterns/main-banner.php:148
+#: patterns/main-banner.php:196
+msgid "533"
+msgstr ""
+
+#: patterns/main-header.php
+msgctxt "Pattern title"
+msgid "Main Header"
+msgstr ""
+
+#: patterns/main-header.php:15
+#: patterns/product-sec.php:114
+#: patterns/product-sec.php:148
+#: patterns/product-sec.php:182
+msgid "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+msgstr ""
+
+#: patterns/main-header.php:23
+msgid "Tracking Order"
+msgstr ""
+
+#: patterns/main-header.php:49
+#: themeinfo/multi_purpose_themeinfo_page.php:58
+msgid "Home"
+msgstr ""
+
+#: patterns/main-header.php:51
+msgid "Shop"
+msgstr ""
+
+#: patterns/main-header.php:55
+msgid "Blog"
+msgstr ""
+
+#: patterns/main-header.php:57
+msgid "Page 1"
+msgstr ""
+
+#: patterns/main-header.php:59
+msgid "Page 2"
+msgstr ""
+
+#: patterns/main-product-cat.php
+msgctxt "Pattern title"
+msgid "Main Product Category"
+msgstr ""
+
+#: patterns/main-product-cat.php:28
+msgid "Electronics"
+msgstr ""
+
+#: patterns/main-product-cat.php:32
+#: patterns/main-product-cat.php:48
+#: patterns/main-product-cat.php:64
+#: patterns/main-product-cat.php:80
+#: patterns/main-product-cat.php:96
+#: patterns/main-product-cat.php:112
+msgid "02 Product"
+msgstr ""
+
+#: patterns/main-product-cat.php:44
+msgid "Fashion"
+msgstr ""
+
+#: patterns/main-product-cat.php:60
+msgid "Home &amp; Kitchen"
+msgstr ""
+
+#: patterns/main-product-cat.php:76
+msgid "Personal Care"
+msgstr ""
+
+#: patterns/main-product-cat.php:92
+msgid "Groceries"
+msgstr ""
+
+#: patterns/main-product-cat.php:108
+msgid "Mobile Accessories"
+msgstr ""
+
+#: patterns/post-header-with-background.php
+msgctxt "Pattern title"
+msgid "Post Header With Background"
+msgstr ""
+
+#: patterns/product-sec.php
+msgctxt "Pattern title"
+msgid "Product Sec"
+msgstr ""
+
+#: patterns/product-sec.php:24
+#: patterns/product-sec.php:96
+#: patterns/product-sec.php:130
+#: patterns/product-sec.php:164
+msgid "Headphone 30% Off"
+msgstr ""
+
+#: patterns/product-sec.php:33
+msgid "Buy 1 Get 1 Freef"
+msgstr ""
+
+#: patterns/product-sec.php:100
+msgid "Shop For Great Selection Of Headphone"
+msgstr ""
+
+#: patterns/product-sec.php:105
+#: patterns/product-sec.php:139
+#: patterns/product-sec.php:173
+msgid "$40.00"
+msgstr ""
+
+#: patterns/product-sec.php:109
+#: patterns/product-sec.php:143
+#: patterns/product-sec.php:177
+msgid "Buy 1 Get 1 Free"
+msgstr ""
+
+#: patterns/product-sec.php:134
+msgid "Shop For Top Quality Choice Of Headphone"
+msgstr ""
+
+#: patterns/product-sec.php:168
+msgid "Shop For Premium Collection Of Headphone"
+msgstr ""
+
+#: patterns/product-sec.php:205
+msgid "15% Off"
+msgstr ""
+
+#: patterns/product-sec.php:214
+msgid "Smart Headphone"
+msgstr ""
+
+#: patterns/product-sec.php:223
+msgid "4.8"
+msgstr ""
+
+#: patterns/product-sec.php:227
+msgid "5k"
+msgstr ""
+
+#: patterns/product-sec.php:235
+msgid "$38.00"
+msgstr ""
+
+#: patterns/product-sec.php:239
+msgid "$30.00"
+msgstr ""
+
+#: patterns/search.php
+msgctxt "Pattern title"
+msgid "Search"
+msgstr ""
+
+#: patterns/search.php:42
+msgid "Sorry Nothing Found. Try searching..!!"
+msgstr ""
+
+#: patterns/service-section.php
+msgctxt "Pattern title"
+msgid "Service Section"
+msgstr ""
+
+#: patterns/service-section.php:18
+msgid "Free Shipping"
+msgstr ""
+
+#: patterns/service-section.php:22
+msgid "Design On Order Over $99"
+msgstr ""
+
+#: patterns/service-section.php:36
+msgid "Order Online"
+msgstr ""
+
+#: patterns/service-section.php:40
+msgid "Easy 24/7 Online Ordering"
+msgstr ""
+
+#: patterns/service-section.php:54
+msgid "Shop &amp; Save"
+msgstr ""
+
+#: patterns/service-section.php:58
+msgid "For All Special &amp; Heart"
+msgstr ""
+
+#: patterns/service-section.php:72
+msgid "Free Return"
+msgstr ""
+
+#: patterns/service-section.php:76
+msgid "Money Back Guarantee"
+msgstr ""
+
+#: patterns/sidebar.php
+msgctxt "Pattern title"
+msgid "Sidebar"
+msgstr ""
+
+#: patterns/sidebar.php:10
+msgid "Search"
+msgstr ""
+
+#: patterns/sidebar.php:18
+msgid "About"
+msgstr ""
+
+#: patterns/sidebar.php:22
+msgid "Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown prPoppins took a galley of type and scrambled it to make a type specimen book."
+msgstr ""
+
+#: patterns/sidebar.php:26
+msgid "Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown prPoppins took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+msgstr ""
+
+#: patterns/sidebar.php:32
+msgid "Archive"
+msgstr ""
+
+#: patterns/sidebar.php:40
+msgid "Categories"
+msgstr ""
+
+#: patterns/sidebar.php:48
+msgid "Recent Posts"
+msgstr ""
+
+#: patterns/sidebar.php:56
+msgid "Tags"
+msgstr ""
+
+#: patterns/sidebar.php:64
+msgid "Social Icons"
+msgstr ""
+
+#: patterns/sidebar.php:82
+msgid "Gallery"
+msgstr ""
+
+#. translators: 1: Theme Name.
+#: themeinfo/multi_purpose_themeinfo_page.php:47
+#: themeinfo/multi_purpose_themeinfo_page.php:48
+msgid "%1$s Info"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:59
+msgid "Free VS Pro"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:60
+#: themeinfo/multi_purpose_themeinfo_page.php:576
+msgid "FAQs"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:61
+msgid "Free Theme Supports"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:62
+msgid "Please Rate Us"
+msgstr ""
+
+#. translators: 1: Theme Name.
+#: themeinfo/multi_purpose_themeinfo_page.php:74
+msgid "%1$s - Version %2$s"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:81
+msgid "Visit Sites :-"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:84
+msgid "View Website"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:88
+msgid "View Demo Site"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:92
+msgid "Contact Support"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:96
+#: themeinfo/multi_purpose_themeinfo_page.php:225
+msgid "Documentation"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:185
+msgid "Multi Purpose Pro"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:186
+msgid "Get all of the features that are infinite!!!"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:187
+msgid "Upgrade To Pro"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:220
+msgid "To get limitless features and improvements, buy the Multi Purpose Theme Pro edition."
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:226
+msgid "Do you need additional information? You may find detailed instructions on how to use the Multi Purpose Theme in our extensive documentation."
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:227
+msgid "Go to Free Docs"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:232
+msgid "Explore our Pro Themes full potential! To see the stunning designs and high-end functionality, click the Live Demo button."
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:237
+msgid "Get the Bundle"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:238
+msgid "Introducing the WP Theme Bundle by Theme Pixel, a comprehensive collection of over 50 professionally designed WordPress themes tailored for various niches and businesses."
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:253
+msgid "HOME"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:256
+msgid "Theme screenshot"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:262
+msgid "Quick Customizer Settings"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:265
+msgid "Go To Customizer"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:275
+msgid "Site Identity"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:278
+#: themeinfo/multi_purpose_themeinfo_page.php:292
+#: themeinfo/multi_purpose_themeinfo_page.php:306
+#: themeinfo/multi_purpose_themeinfo_page.php:320
+#: themeinfo/multi_purpose_themeinfo_page.php:334
+#: themeinfo/multi_purpose_themeinfo_page.php:348
+msgid "Customize"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:289
+msgid "Color Settings"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:303
+msgid "Layout Settings"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:317
+msgid "General Settings"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:331
+msgid "Frontpage Settings"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:345
+msgid "Footer Settings"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:361
+msgid "FREE VS PRO"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:366
+msgid "Features"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:367
+msgid "Free theme"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:368
+msgid "Pro Theme"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:374
+msgid "Responsive Design"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:384
+msgid "Site Logo upload"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:394
+msgid "Footer Copyright text"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:398
+msgid "Remove the copyright text from the Footer."
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:410
+msgid "Easy Customization"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:420
+msgid "Lightweight & Fast Loading"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:430
+msgid "Global Color"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:440
+msgid "Regular Bug Fixes"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:450
+#: themeinfo/multi_purpose_themeinfo_page.php:532
+msgid "Premium Support"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:460
+msgid "Theme Sections"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:463
+msgid "2 Sections"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:464
+msgid "15+ Sections"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:470
+msgid "Custom colors"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:474
+msgid "Choose a color for links, buttons, icons and so on."
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:486
+msgid "Google fonts"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:490
+msgid "You can choose and use over 600 different fonts, for the logo, the menu and the titles."
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:502
+msgid "Compatible with Popular Plugins"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:512
+msgid "Translation & WPML Ready"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:522
+msgid "SEO Optimized"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:542
+msgid "Extensive Customization"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:552
+msgid "Custom Post Types"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:562
+msgid "High-Level Compatibility with Modern Browsers"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:583
+msgid "What is the difference between Free and Pro?"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:589
+msgid "The themes are well-made in both their free and premium versions. But there are a lot more features in the Pro edition."
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:592
+msgid "You may quickly alter the appearance and feel of your website with the Pro version. You can alter your websites color and typeface with a few clicks. With more customization choices, the premium version gives you greater control over the theme. In addition, the theme offers more layout options and sections than the free version."
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:601
+msgid "What are the advantages of upgrading to the Premium version?"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:607
+msgid "In addition to the additional features and regular upgrades, the Premium version comes with premium support. Compared to the free assistance, you will receive a much faster response if you encounter any theme problems."
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:616
+msgid "Upgrading to the Pro version- will I lose my changes?"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:622
+msgid "Your posts, pages, media, categories, and other data will all be preserved when you upgrade to the Pro theme."
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:625
+msgid "You will need to configure the extra features via the customizer, though, because the Pro edition has more features and options. It just takes a few minutes to complete this easy process."
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:628
+msgid "There is a lot of flexibility in the Pro version to accommodate future updates. As a result, it differs slightly from the free theme yet is incredibly versatile and user-friendly."
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:637
+msgid "How do I change the copyright text?"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:643
+msgid "You can change the copyright text going to Appearance > Customize > Footer Option > And here you can find (Edit Footer Copyright Text)"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:652
+msgid "Why is my theme not working well?"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:658
+msgid "It could be a plugin conflict if your customizer is not loading correctly or if you are experiencing problems with the theme."
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:661
+msgid "Deactivate every plugin first, with the exception of those the theme suggests, to resolve the problem. After that, use \"Ctrl+Shift+R\" on Windows to force a new page load. Once the problems have been resolved, begin turning on each plugin individually, then refresh and verify your website each time. This will assist you in identifying the problematic plugin."
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:664
+msgid "Please get in touch with us if this was not helpful."
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:673
+msgid "How can I solve my issues quickly and get faster support?"
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:679
+msgid "Please make sure you have updated the theme to the most recent version before sending us a support ticket for any problems. The theme update may have resolved the issue."
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:682
+msgid "Please try to include as much information as you can in your support ticket submission so that we can address your issue more quickly. We advise you to email us one or more screenshots that clearly illustrate the problems and include the URL of your website."
+msgstr ""
+
+#: themeinfo/multi_purpose_themeinfo_page.php:685
+msgid "Please be patient with us as we may have a delayed response time during the weekend."
+msgstr ""
+
+#: styles/brown.json
+msgctxt "Style variation name"
+msgid "Brown"
+msgstr ""
+
+#: styles/brown.json
+#: styles/Gold.json
+#: styles/orange.json
+#: styles/pink.json
+#: styles/Purple.json
+#: styles/Red.json
+#: styles/sky-blue.json
+#: styles/yellow.json
+#: theme.json
+msgctxt "Color name"
+msgid "Primary"
+msgstr ""
+
+#: styles/brown.json
+#: styles/Gold.json
+#: styles/orange.json
+#: styles/pink.json
+#: styles/Purple.json
+#: styles/Red.json
+#: styles/sky-blue.json
+#: styles/yellow.json
+#: theme.json
+msgctxt "Color name"
+msgid "Third Color"
+msgstr ""
+
+#: styles/brown.json
+#: styles/Gold.json
+#: styles/orange.json
+#: styles/pink.json
+#: styles/Purple.json
+#: styles/Red.json
+#: styles/sky-blue.json
+#: styles/yellow.json
+#: theme.json
+msgctxt "Color name"
+msgid "shape"
+msgstr ""
+
+#: styles/brown.json
+#: styles/Gold.json
+#: styles/orange.json
+#: styles/pink.json
+#: styles/Purple.json
+#: styles/Red.json
+#: styles/sky-blue.json
+#: styles/yellow.json
+#: theme.json
+msgctxt "Color name"
+msgid "Secondary"
+msgstr ""
+
+#: styles/brown.json
+#: styles/Gold.json
+#: styles/orange.json
+#: styles/pink.json
+#: styles/Purple.json
+#: styles/Red.json
+#: styles/sky-blue.json
+#: styles/yellow.json
+#: theme.json
+msgctxt "Color name"
+msgid "Background"
+msgstr ""
+
+#: styles/brown.json
+#: styles/Gold.json
+#: styles/orange.json
+#: styles/pink.json
+#: styles/Purple.json
+#: styles/Red.json
+#: styles/sky-blue.json
+#: styles/yellow.json
+#: theme.json
+msgctxt "Color name"
+msgid "Heading"
+msgstr ""
+
+#: styles/brown.json
+#: styles/Gold.json
+#: styles/orange.json
+#: styles/pink.json
+#: styles/Purple.json
+#: styles/Red.json
+#: styles/sky-blue.json
+#: styles/yellow.json
+#: theme.json
+msgctxt "Color name"
+msgid "Body Text"
+msgstr ""
+
+#: styles/brown.json
+#: styles/Gold.json
+#: styles/orange.json
+#: styles/pink.json
+#: styles/Purple.json
+#: styles/Red.json
+#: styles/sky-blue.json
+#: styles/yellow.json
+#: theme.json
+msgctxt "Color name"
+msgid "Tertiary Text Color"
+msgstr ""
+
+#: styles/brown.json
+#: styles/Gold.json
+#: styles/orange.json
+#: styles/pink.json
+#: styles/Purple.json
+#: styles/Red.json
+#: styles/sky-blue.json
+#: styles/yellow.json
+#: theme.json
+msgctxt "Color name"
+msgid "Tertiary Bg Color"
+msgstr ""
+
+#: styles/brown.json
+#: styles/Gold.json
+#: styles/orange.json
+#: styles/pink.json
+#: styles/Purple.json
+#: styles/Red.json
+#: styles/sky-blue.json
+#: styles/yellow.json
+#: theme.json
+msgctxt "Color name"
+msgid "Foreground"
+msgstr ""
+
+#: styles/Gold.json
+msgctxt "Style variation name"
+msgid "Gold"
+msgstr ""
+
+#: styles/orange.json
+msgctxt "Style variation name"
+msgid "Orange"
+msgstr ""
+
+#: styles/pink.json
+msgctxt "Style variation name"
+msgid "Pink"
+msgstr ""
+
+#: styles/Purple.json
+msgctxt "Style variation name"
+msgid "Purple"
+msgstr ""
+
+#: styles/Red.json
+msgctxt "Style variation name"
+msgid "Red"
+msgstr ""
+
+#: styles/sky-blue.json
+msgctxt "Style variation name"
+msgid "Sky Blue"
+msgstr ""
+
+#: styles/yellow.json
+msgctxt "Style variation name"
+msgid "Yellow"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Poppins"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Tiny"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Extra Small"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Small"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Medium"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Upper Heading"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Normal"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Content Heading"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Site Title"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Post Title"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Large"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Extra large"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Semi Huge"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Huge (Display)"
+msgstr ""
+
+#: theme.json
+msgctxt "Duotone name"
+msgid "Foreground and background"
+msgstr ""
+
+#: theme.json
+msgctxt "Duotone name"
+msgid "Primary and Heading"
+msgstr ""
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Vertical foreground to background"
+msgstr ""
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Vertical background to foreground"
+msgstr ""
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Diagonal primary to foreground"
+msgstr ""
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Diagonal primary to background"
+msgstr ""
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Diagonal primary to heading"
+msgstr ""
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Projects Overlay"
+msgstr ""
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Header"
+msgstr ""
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Footer"
+msgstr ""
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Footer Columns"
+msgstr ""
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Post Content"
+msgstr ""
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Page Content"
+msgstr ""
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Sidebar"
+msgstr ""
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Blank"
+msgstr ""
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Single Post (Sidebar on Left)"
+msgstr ""
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Single Post (No Sidebar)"
+msgstr ""
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Post (No Header Image)"
+msgstr ""
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Single Page (Sidebar on Right)"
+msgstr ""
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Single Page (Sidebar on Left)"
+msgstr ""
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Page (No Header Image)"
+msgstr ""
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Blog Page (Right Sidebar)"
+msgstr ""
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Blog Page (Left Sidebar)"
+msgstr ""
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Blog Page (No Sidebar)"
+msgstr ""

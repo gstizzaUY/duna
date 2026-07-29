@@ -1,0 +1,50 @@
+# WordPress core
+/wp-admin/
+/wp-includes/
+/wp-*.php
+/index.php
+/license.txt
+/readme.html
+/xmlrpc.php
+
+# WordPress config (contains DB credentials)
+wp-config.php
+
+# WordPress content
+/wp-content/uploads/
+/wp-content/upgrade/
+/wp-content/cache/
+/wp-content/debug.log
+
+# Plugins and themes (uncomment if you want to track them in separate repos)
+# /wp-content/plugins/
+# /wp-content/themes/
+
+# Composer
+/vendor/
+composer.lock
+
+# Node
+/node_modules/
+package-lock.json
+
+# Cache / temporary
+*.cache
+*.tmp
+*.log
+*.sql
+*.sqlite
+.wp-cli/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Build
+*.map
