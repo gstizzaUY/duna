@@ -661,3 +661,28 @@
       no usado del parent) quedan como pendientes documentados.
     - Bump version -> 1.3.1 (functions.php + style.css). Verificado sin
       regresiones (home/shop/buscador: skin, fuentes, productos OK).
+61. OPTIMIZACION - PRECARGA de la imagen del hero (duna-child v1.3.2, 2026-09-05):
+    - Contexto: tras optimizar fuentes, el usuario pidio mejorar la precarga de la
+      imagen del hero. Diagnostico CDP: la imagen del slider (fachada.webp, 148KB)
+      la descarga RevSlider de forma DIFERIDA a los ~4559ms (casi al final). El
+      hero es un slider RevSlider en una fila WPBakery (.vc_row / stm-slider-nice-
+      height); la imagen se aplica por el slider (no es <img> ni background CSS
+      detectable directamente).
+    - FIX en functions.php del child: duna_child_preload_hero emite
+      <link rel="preload" as="image" href=".../fachada.webp"> SOLO en la home
+      (is_front_page), con wp_head prioridad -10.
+    - DETALLE CRITICO DE ORDEN: el head tiene un <style> inline GIGANTE (~2MB,
+      WooCommerce blocks + CF7 + Font Awesome) que empieza en la posicion ~289 del
+      head. Con prioridad normal (2) el preload quedaba a los 2.1M chars (DESPUES
+      del style), por lo que la imagen no arrancaba antes. Con prioridad -10 el
+      preload queda en posicion ~295 (antes del style gigante).
+    - VERIFICADO CDP (timing de fachada.webp):
+      * ANTES: se descargaba a los ~4559ms (initiator img, la pedia RevSlider).
+      * DESPUES: arranca a los ~3630ms via preload (initiator link); RevSlider la
+        reutiliza desde cache (no duplica red, dur 10ms = cache hit).
+    - LIMITACION: el adelanto real (~1s) esta limitado por el TTFB local (~3s):
+      la imagen no puede empezar antes de que llegue el HTML. En produccion (TTFB
+      normal ~200ms) el preload hara que la imagen del hero arranque casi
+      inmediatamente (mejora el LCP real).
+    - Bump version -> 1.3.2 (functions.php + style.css). Sin regresiones
+      (home/shop/buscador sin errores JS, skin intacto).

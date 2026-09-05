@@ -21,14 +21,14 @@ function duna_child_enqueue() {
 		'duna-child',
 		get_stylesheet_directory_uri() . '/assets/css/duna-child.css',
 		array(),
-		'1.3.1'
+		'1.3.2'
 	);
 
 	wp_enqueue_script(
 		'duna-child',
 		get_stylesheet_directory_uri() . '/assets/js/duna-child.js',
 		array( 'jquery' ),
-		'1.3.1',
+		'1.3.2',
 		true
 	);
 }
@@ -56,6 +56,19 @@ function duna_child_optimize_google_fonts() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'duna_child_optimize_google_fonts', 21 );
+
+/**
+ * Precarga la imagen del hero (slider RevSlider) SOLO en la home.
+ * RevSlider la descarga de forma diferida (~4.5s en local); el <link rel=preload>
+ * adelanta la descarga al inicio y RevSlider la reutiliza desde cache HTTP.
+ */
+function duna_child_preload_hero() {
+	if ( ! is_front_page() ) {
+		return;
+	}
+	echo '<link rel="preload" as="image" href="' . esc_url( home_url( '/wp-content/uploads/2026/08/fachada.webp' ) ) . '" />' . "\n";
+}
+add_action( 'wp_head', 'duna_child_preload_hero', -10 );
 
 /**
  * SEO basico (opcion A, sin plugin): emite <meta name="description">

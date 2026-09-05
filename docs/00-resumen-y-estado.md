@@ -65,6 +65,10 @@ Backend API Node del buscador: http://localhost:3002.
     Montserrat no usada + pesos/itálicas innecesarios; Open Sans 400/600/700 +
     Exo 2 400/500/600/700 + display=swap) via functions.php. Lighthouse real en
     navegador (incognito): Perf 70/A11y 70/BP 96/SEO 92. Historico 60.
+  - v1.3.2: precarga de la imagen del hero (fachada.webp) via <link rel=preload>
+    en la home (wp_head prio -10, antes del <style> inline gigante de 2MB de
+    WooCommerce). Adelanta la descarga del hero ~1s (el techo es el TTFB local
+    ~3s; en produccion mejora el LCP real). Historico 61.
   - ESTADO: rediseno V2 del child COMPLETO (F1-F6) + fixes visuales
     puntuales + SEO basico (meta-description) implementado + fuentes
     optimizadas. Pendientes no-child: a11y del plugin (testimonios/buscador),
