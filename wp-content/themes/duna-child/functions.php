@@ -21,18 +21,41 @@ function duna_child_enqueue() {
 		'duna-child',
 		get_stylesheet_directory_uri() . '/assets/css/duna-child.css',
 		array(),
-		'1.3.0'
+		'1.3.1'
 	);
 
 	wp_enqueue_script(
 		'duna-child',
 		get_stylesheet_directory_uri() . '/assets/js/duna-child.js',
 		array( 'jquery' ),
-		'1.3.0',
+		'1.3.1',
 		true
 	);
 }
 add_action( 'wp_enqueue_scripts', 'duna_child_enqueue', 20 );
+
+/**
+ * Optimizacion de Google Fonts: el parent (Motors) encola una URL con 28
+ * variantes (Open Sans 300-800 + italic, Exo 2 100-900 + italic, Montserrat
+ * 100-900 + italic) porque asi vienen los variants en las opciones Nuxy.
+ * Las fuentes REALMENTE usadas en el skin (verificado por CDP) son:
+ *   - Open Sans: 400 (body), 600 (botones), 700 (precios/categorias)
+ *   - Exo 2: 400/500/700 (titulos/menu/h5)
+ *   - Montserrat: NO se usa.
+ * Se desregistra la hoja del parent y se encola una URL recortada.
+ */
+function duna_child_optimize_google_fonts() {
+	wp_dequeue_style( 'stm_default_google_font' );
+	wp_deregister_style( 'stm_default_google_font' );
+
+	wp_enqueue_style(
+		'duna-google-fonts',
+		'https://fonts.googleapis.com/css?family=Exo%202:400,500,600,700%7COpen%20Sans:400,600,700&display=swap&subset=latin,latin-ext',
+		array(),
+		null
+	);
+}
+add_action( 'wp_enqueue_scripts', 'duna_child_optimize_google_fonts', 21 );
 
 /**
  * SEO basico (opcion A, sin plugin): emite <meta name="description">

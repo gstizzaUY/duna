@@ -627,3 +627,37 @@
     - PENDIENTE en produccion: revisar si conviene habilitar defer JS con
       exclusiones finas (el CSS ya esta; el JS requiere testeo real), y evaluar
       WP Super Cache / page cache para el TTFB de produccion.
+60. OPTIMIZACION - Google Fonts recortadas + analisis Lighthouse navegador real
+    (duna-child v1.3.1, 2026-09-05):
+    - El usuario corrio Lighthouse en incognito en el navegador (NO el CLI
+      headless): Perf 70 / A11y 70 / BP 96 / SEO 92. El Perf real (70) es mucho
+      mejor que el CLI (43) porque el TTFB del navegador es menor. Hallazgos:
+      * SEO 92: "robots.txt no es valido - Timed out fetching resource" (timeout
+        al fetchear, no el "invalid" de antes; probablemente TTFB lento local).
+      * BP 96: errores en consola (no reproducidos por CDP: sin errores JS);
+        bfcache 3 motivos; [user-scalable=no] del viewport (del parent).
+      * A11y 70: fallos del plugin (selects sin label, botones testimonios sin
+        nombre) y parent (landmark, contraste) - fuera de alcance child.
+      * Perf: CLS 0.081, imagenes grandes sin dimensiones, JS/CSS no usado.
+    - DIAGNOSTICO CLS (0.081): medido con PerformanceObserver por CDP. Los shifts
+      vienen de: (a) la fila WPBakery del slider/hero .vc_custom_1471237765688 que
+      se expande al cargar RevSlider (shift 0.0256, x:35->0 / w:1280->1349), y (b)
+      un contenedor ancho completo que cambia con el lazy-load. NO corregible via
+      child sin tocar RevSlider (fuera de alcance). DOCUMENTADO como limitacion.
+    - FIX GOOGLE FONTS: el parent (Motors) encolaba UNA URL con 28 variantes
+      (Open Sans 300-800+italic, Exo 2 100-900+italic, Montserrat 100-900+italic)
+      porque las opciones Nuxy traen font-data.variants = todos los pesos. Por CDP
+      se verificaron las fuentes REALES usadas: Open Sans 400/600/700, Exo 2
+      400/500/700; Montserrat NO se usa (no aparece en loadedFonts ni en estilos
+      computados). FIX en functions.php del child: duna_child_optimize_google_fonts
+      (prio 21) hace wp_dequeue+deregister de 'stm_default_google_font' y encola
+      'duna-google-fonts' recortada: "Exo 2:400,500,600,700|Open Sans:400,600,700"
+      + display=swap. VERIFICADO CDP: estilos computados identicos (body Open Sans
+      400, h2/h3/wsf-titles/menu Exo 2 700, buttons Open Sans 600, precios 700);
+      loadedFonts = Exo 2 400/500/700 + Open Sans 400/600/700 (sin Montserrat).
+      @font-face en la URL: 28 -> 7.
+    - No se corrigio el CLS del slider (documentado). Las demas optimizaciones de
+      Lighthouse (imagenes grandes sin width/height en .wsf-category-card, JS/CSS
+      no usado del parent) quedan como pendientes documentados.
+    - Bump version -> 1.3.1 (functions.php + style.css). Verificado sin
+      regresiones (home/shop/buscador: skin, fuentes, productos OK).

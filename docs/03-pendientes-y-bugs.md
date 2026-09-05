@@ -127,8 +127,25 @@
       (TTFB normal).
     - PENDIENTE en produccion: (a) habilitar defer/agregar JS con exclusiones
       finas (requiere testeo real, hoy rompe RevSlider en local), (b) page cache
-      (WP Super Cache u otro) para atacar el TTFB de produccion, (c) diferir/
-      reducir Google Fonts (28 variantes de 3 familias, render-blocking).
+      (WP Super Cache u otro) para atacar el TTFB de produccion.
+    - RESUELTO en v1.3.1 (2026-09-05, historico 60): Google Fonts recortadas de
+      28 a 7 variantes via child (se quito Montserrat no usada + pesos extra;
+      Open Sans 400/600/700 + Exo 2 400/500/600/700 + display=swap).
+32. LIGHTHOUSE NAVEGADOR REAL (incognito, Perf 70/A11y 70/BP 96/SEO 92;
+    2026-09-05, historico 60) - hallazgos restantes:
+    - SEO 92: robots.txt "Timed out fetching resource" (timeout local al
+      fetchear, no el invalid previo; verificar en prod con dominio real).
+    - BP 96: [user-scalable=no] en el viewport (del parent, fuera de child);
+      bfcache 3 motivos; errores de consola no reproducidos por CDP.
+    - CLS 0.081: ORIGEN = slider/hero RevSlider (.vc_custom_1471237765688 se
+      expande al cargar; shift 0.0256 x:35->0) + contenedor ancho completo con
+      lazy-load. NO corregible via child sin tocar RevSlider (fuera de alcance).
+    - Imagenes grandes: .wsf-category-card (home) muestra img 1500x1500 sin
+      width/height (el contenedor .wsf-category-image si tiene aspect-ratio 1/1,
+      pero Lighthouse pide dimensiones en el <img>). Requiere tocar el shortcode
+      del plugin (fuera de alcance child) o un filtro JS.
+    - JS/CSS no usado (~944/2009 KiB): del parent/plugins, requiere optimizador
+      agresivo (fuera de alcance, Autoptimize JS rompe RevSlider).
 29. NAVBAR STICKY "CORTADO" (reporte de usuario): RESUELTO = no-bug. El usuario
     vio el logo de la cinta negra del header cortado al scrollear, pero en una
     ventana de INCOGNITO (sin cache previo) NO se corta. Diagnostico CDP completo

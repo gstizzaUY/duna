@@ -61,11 +61,15 @@ Backend API Node del buscador: http://localhost:3002.
     functions.php (opcion A, sin plugin) + fix del typo del tagline
     "Aolienación"->"Alineación | Neumáticos e Insumos". Lighthouse SEO:
     Home 92->100 | Shop 85->100 | Single 85->100. Historico 58.
+  - v1.3.1: optimizacion Google Fonts - recorte de 28 a 7 variantes (se quito
+    Montserrat no usada + pesos/itálicas innecesarios; Open Sans 400/600/700 +
+    Exo 2 400/500/600/700 + display=swap) via functions.php. Lighthouse real en
+    navegador (incognito): Perf 70/A11y 70/BP 96/SEO 92. Historico 60.
   - ESTADO: rediseno V2 del child COMPLETO (F1-F6) + fixes visuales
-    puntuales + SEO basico (meta-description) implementado. Pendientes
-    no-child: a11y del plugin (testimonios/buscador), robots.txt Sitemap a
-    dominio real en produccion (item 31), etapa cache
-    (07-tema-hijo.md Decisiones abiertas).
+    puntuales + SEO basico (meta-description) implementado + fuentes
+    optimizadas. Pendientes no-child: a11y del plugin (testimonios/buscador),
+    robots.txt Sitemap a dominio real en produccion (item 31), CLS del slider
+    RevSlider, imagenes grandes sin width/height, JS/CSS no usado del parent.
   - OPTIMIZACION (2026-09-05, historico 59): se instalo Autoptimize 3.1.15.1
     en modo solo-CSS (minify+agregar+diferir; JS intacto por RevSlider). El
     Perf local sigue bajo (home 43) por el TTFB del servidor Studio (~2.5s),
