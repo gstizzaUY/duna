@@ -288,6 +288,10 @@ acá y no se agreguen de nuevo al plugin.
   ya apuntaba a /about-us/. Queda SOLO en produccion: robots.txt Sitemap apuntando
   al dominio real (hoy localhost:8881, causa del "invalid" local).
 - (Futuro) etapa cache: plugin de cache + LazyLoad + minify child, fuera de scope.
+  ACTUALIZADO 2026-09-05 (historico 59): Autoptimize instalado en modo solo-CSS
+  (minify+agregar+diferir CSS; JS intacto porque rompe RevSlider). El Perf local
+  sigue limitado por el TTFB del servidor Studio (~2.5s), no por assets; el
+  beneficio real se vera en produccion.
 
 ### Nota sticky header (v1.1.5, sin cambios)
 Reporte de usuario de navbar sticky "cortado" (logo de la cinta negra) resulto

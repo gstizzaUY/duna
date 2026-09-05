@@ -66,6 +66,10 @@ Backend API Node del buscador: http://localhost:3002.
     no-child: a11y del plugin (testimonios/buscador), robots.txt Sitemap a
     dominio real en produccion (item 31), etapa cache
     (07-tema-hijo.md Decisiones abiertas).
+  - OPTIMIZACION (2026-09-05, historico 59): se instalo Autoptimize 3.1.15.1
+    en modo solo-CSS (minify+agregar+diferir; JS intacto por RevSlider). El
+    Perf local sigue bajo (home 43) por el TTFB del servidor Studio (~2.5s),
+    no por assets; beneficio real en produccion.
 - **Home**: seccion "PRODUCTOS" (titulo WPBakery) con 4 cards de categorias de
   LISTINGS (Motorcycles, Scooters, ATVS, Watercraft) -> A REEMPLAZAR por categorias WooCommerce.
 - **7 listings demo** (motos) -> a convertir en SERVICIOS o eliminar.

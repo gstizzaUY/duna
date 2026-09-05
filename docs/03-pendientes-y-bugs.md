@@ -113,10 +113,22 @@
     nada en child (F1-F6 completos). Pendientes NO-child: a11y del PLUGIN
     (testimonios/buscador), SEO contenido (meta-description/robots), etapa
     cache (item 28). Git commit por fase aun pendiente si se desea.
-28. ETAPA CACHE/OPTIMIZACION (proxima, fuera del rediseno v2): el parent sirve
-    ~641KB motorcycle/app.css + 64KB header + 47KB bootstrap sin minificar; no hay
-    plugin de cache ni LazyLoad. Instalar/decidir (p. ej. WP Super Cache + LazyLoad)
-    y minificar el CSS/JS del child. (No tocar en la etapa actual.)
+28. ETAPA CACHE/OPTIMIZACION - PARCIALMENTE RESUELTO (2026-09-05, ver historico 59):
+    - Se instalo y configuro Autoptimize 3.1.15.1 en modo SOLO-CSS (minify +
+      agregar + diferir CSS en 1 archivo no-bloqueante; autoptimize_js=0).
+      El parent/plugins seguian ~950KB CSS en ~30 hojas render-blocking; ahora
+      un solo archivo diferido. JS intacto (autoptimize rompe RevSlider si lo
+      toca: "SR7 is not defined").
+    - DIAGNOSTICO CLAVE: el Perf local (home 43/shop 55/single 50) esta dominado
+      por el TTFB del servidor WordPress Studio (~2.5s en todas las paginas, SQLite
+      sin opcache de pagina), NO por los assets. El score local no mejora con
+      optimizacion de CSS porque Lighthouse penaliza server-response-time
+      (~3147ms savings). El beneficio real de Autoptimize se vera en PRODUCCION
+      (TTFB normal).
+    - PENDIENTE en produccion: (a) habilitar defer/agregar JS con exclusiones
+      finas (requiere testeo real, hoy rompe RevSlider en local), (b) page cache
+      (WP Super Cache u otro) para atacar el TTFB de produccion, (c) diferir/
+      reducir Google Fonts (28 variantes de 3 familias, render-blocking).
 29. NAVBAR STICKY "CORTADO" (reporte de usuario): RESUELTO = no-bug. El usuario
     vio el logo de la cinta negra del header cortado al scrollear, pero en una
     ventana de INCOGNITO (sin cache previo) NO se corta. Diagnostico CDP completo

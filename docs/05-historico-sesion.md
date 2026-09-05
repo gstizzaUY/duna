@@ -588,3 +588,42 @@
       1.3.0.
     - PENDIENTE para produccion: robots.txt Sitemap apuntando al dominio real
       (hoy localhost:8881) — documentado, no forzado.
+59. ETAPA CACHE/OPTIMIZACION - Autoptimize SOLO-CSS (2026-09-05; item 28):
+    - DIAGNOSTICO del problema real: el Perf Lighthouse local (home 43 / shop 55 /
+      single 50) NO esta dominado por los assets sino por el TTFB del servidor de
+      WordPress Studio local: ~2.5s en TODAS las paginas (incluso about-us simple;
+      medido 3x: 2.72/2.67/2.55s; el CSS estatico responde en 4ms). Es el costo de
+      arrancar WP + SQLite por request, sin opcache de pagina. En produccion el
+      TTFB seria normal (~100-300ms) y ahi la optimizacion de assets SI mueve el
+      score.
+    - Assets al inicio: 30 CSS (~950KB sin minificar: app.css 657KB, animation.css
+      86KB, header 66KB, child 52KB, bootstrap 48KB, theme-icons 24KB, wsf 15KB)
+      + 50 JS (11 sync en head) + Google Fonts (28 variantes de 3 familias).
+    - INSTALADO Autoptimize 3.1.15.1. CONFIG FINAL (solo-CSS, seguro):
+        autoptimize_css=1, autoptimize_css_aggregate=1, autoptimize_css_defer=1
+        autoptimize_js=0  (JS 100% intacto)
+        autoptimize_minify_excluded=0, autoptimize_js_include_inline=0
+    - POR QUE JS=0: con JS agregado o solo minificado, Autoptimize ROMPE RevSlider
+      (errores "ReferenceError: SR7 is not defined" en la home; el slider no
+      arranca). Causa: RevSlider registra sr7/tp-tools con strategy async y emite
+      bloques inline SR7.JSON que Autoptimize reordena/minifica rompiendo la
+      dependencia. Se descarto js_aggregate=1 con exclusiones (revslider,sr7,
+      tp-tools,migration) y js_aggregate=0 (solo minify): ambos seguian rompiendo.
+      La unica config sin errores es JS intacto (autoptimize_js=0).
+    - RESULTADO: el CSS del sitio pasa de ~30 hojas render-blocking a UN solo
+      archivo PHP agregado (incluye el .none concatenado-minificado) servido
+      DIFERIDO (no-bloqueante). El JS y Google Fonts quedan intactos.
+    - VERIFICADO sin regresiones (CDP): home/buscador/shop sin errores JS; skin
+      intacto (body #0d1117 / card #161b22 dark, #f7f8fa/#fff light; buscador
+      presente). Screenshots en temp/opencode/qa-autoptimize/.
+    - LIMITACION confirmada: el score Perf local NO mejora (sigue 43) porque el
+      TTFB de ~2.5s del servidor Studio domina el audit server-response-time
+      (savings ~3147ms). El beneficio real (CSS minificado+agregado+diferido) se
+      vera en PRODUCCION con TTFB normal. NO tiene sentido forzar mas optimizacion
+      en local (defer JS rompe RevSlider y el CSS ya esta optimizado).
+    - NOTA: la cache de autoptimize genera archivos .php (wrapper, incluye el
+      .none crudo) en wp-content/cache/autoptimize/; se limpio con clearall y se
+      borraron residuos .none huerfanos. wp-content/cache/ ya estaba en .gitignore.
+    - PENDIENTE en produccion: revisar si conviene habilitar defer JS con
+      exclusiones finas (el CSS ya esta; el JS requiere testeo real), y evaluar
+      WP Super Cache / page cache para el TTFB de produccion.
