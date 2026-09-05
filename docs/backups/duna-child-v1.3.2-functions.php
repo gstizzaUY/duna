@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Duna Child - tema hijo de Motors.
  *
@@ -21,60 +21,18 @@ function duna_child_enqueue() {
 		'duna-child',
 		get_stylesheet_directory_uri() . '/assets/css/duna-child.css',
 		array(),
-		'1.4.0'
+		'1.3.2'
 	);
 
 	wp_enqueue_script(
 		'duna-child',
 		get_stylesheet_directory_uri() . '/assets/js/duna-child.js',
 		array( 'jquery' ),
-		'1.4.0',
+		'1.3.2',
 		true
 	);
 }
 add_action( 'wp_enqueue_scripts', 'duna_child_enqueue', 20 );
-
-/**
- * A11y: el <meta name=viewport> del PARENT Motors trae user-scalable=no
- * (deshabilita el zoom en movil -> fallo meta-viewport de Lighthouse).
- * El parent lo imprime como HTML CRUDO en header.php (linea 5), ANTES de
- * wp_head, por lo que no se puede pisar agregando otro meta (el navegador usa
- * el primero). Regla de oro: no tocar el parent -> se filtra el HTML final con
- * un output-buffer (template_redirect) que elimina user-scalable=no del meta.
- */
-function duna_child_a11y_viewport_buffer() {
-	if ( is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) || ( defined( 'DOING_CRON' ) && DOING_CRON ) || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
-		return;
-	}
-	ob_start( 'duna_child_a11y_viewport_cb' );
-}
-add_action( 'template_redirect', 'duna_child_a11y_viewport_buffer', 0 );
-
-/**
- * Callback del buffer: quita user-scalable=no del contenido del meta viewport.
- */
-function duna_child_a11y_viewport_cb( $html ) {
-	if ( false === strpos( $html, 'user-scalable' ) ) {
-		return $html;
-	}
-	return str_replace(
-		array(
-			'width=device-width, initial-scale=1.0, user-scalable=no',
-			'width=device-width,initial-scale=1.0,user-scalable=no',
-			'user-scalable=no, ',
-			', user-scalable=no',
-			' user-scalable=no',
-		),
-		array(
-			'width=device-width, initial-scale=1.0',
-			'width=device-width,initial-scale=1.0',
-			'',
-			'',
-			'',
-		),
-		$html
-	);
-}
 
 /**
  * Optimizacion de Google Fonts: el parent (Motors) encola una URL con 28
@@ -122,47 +80,47 @@ function duna_child_meta_description() {
 	}
 
 	if ( is_front_page() ) {
-		$description = 'Venta de neumáticos, llantas y baterías en Uruguay: cubiertas para auto, camioneta, camión, agro e industrial. Alineación y balanceo.';
+		$description = 'Venta de neum├íticos, llantas y bater├¡as en Uruguay: cubiertas para auto, camioneta, cami├│n, agro e industrial. Alineaci├│n y balanceo.';
 	} elseif ( is_shop() ) {
-		$description = 'Tienda de Duna Neumáticos: neumáticos para auto, camioneta, camión y agro, llantas y baterías. Buscá por medida o vehículo y cotizá en U$S o $U.';
+		$description = 'Tienda de Duna Neum├íticos: neum├íticos para auto, camioneta, cami├│n y agro, llantas y bater├¡as. Busc├í por medida o veh├¡culo y cotiz├í en U$S o $U.';
 	} elseif ( is_product_category() ) {
 		$category = get_queried_object();
 		if ( $category && ! empty( $category->name ) ) {
-			$description = 'Comprá ' . mb_strtolower( $category->name, 'UTF-8' ) . ' en Duna Neumáticos: neumáticos, llantas y baterías con atención especializada en Las Piedras, Canelones, Uruguay.';
+			$description = 'Compr├í ' . mb_strtolower( $category->name, 'UTF-8' ) . ' en Duna Neum├íticos: neum├íticos, llantas y bater├¡as con atenci├│n especializada en Las Piedras, Canelones, Uruguay.';
 		}
 	} elseif ( is_product() ) {
 		$product = wc_get_product( get_queried_object_id() );
 		if ( $product ) {
 			$title      = $product->get_name();
 			$sku        = $product->get_sku();
-			$description = 'Comprá ' . $title . ( $sku ? ' (' . $sku . ')' : '' ) . ' en Duna Neumáticos. Envíos y atención en Las Piedras, Canelones, Uruguay.';
+			$description = 'Compr├í ' . $title . ( $sku ? ' (' . $sku . ')' : '' ) . ' en Duna Neum├íticos. Env├¡os y atenci├│n en Las Piedras, Canelones, Uruguay.';
 		}
 	} elseif ( is_page( 'contact-us' ) || is_page( 'contacto' ) ) {
-		$description = 'Contactate con Duna Neumáticos: Av. Dr. Enrique Pouey 830, Las Piedras, Canelones, Uruguay. Teléfono 2364 4300. Respondemos tu consulta.';
+		$description = 'Contactate con Duna Neum├íticos: Av. Dr. Enrique Pouey 830, Las Piedras, Canelones, Uruguay. Tel├®fono 2364 4300. Respondemos tu consulta.';
 	} elseif ( is_page( 'about-us' ) ) {
-		$description = 'Conocé Duna Neumáticos: más de 30 años en venta de neumáticos y servicios de alineación, balanceo, mecánica y reparación en Las Piedras.';
+		$description = 'Conoc├® Duna Neum├íticos: m├ís de 30 a├▒os en venta de neum├íticos y servicios de alineaci├│n, balanceo, mec├ínica y reparaci├│n en Las Piedras.';
 	} elseif ( is_page( 'pressure-pro' ) || is_page( 'pressure-pro-comercial' ) || is_page( 'pressure-pro-recreacional' ) || is_page( 'pressure-pro-pesados' ) || is_page( 'pressure-pro-portuarios' ) || is_page( 'pressure-pro-forestal' ) || is_page( 'pressure-pro-agricultura' ) || is_page( 'pressurepro-especiales' ) || is_page( 'pressure-pro-emergencias' ) ) {
-		$description = 'PressurePro en Duna Neumáticos: monitoreo de presión de neumáticos para flotas, transporte y maquinaria. Más seguridad y rendimiento.';
+		$description = 'PressurePro en Duna Neum├íticos: monitoreo de presi├│n de neum├íticos para flotas, transporte y maquinaria. M├ís seguridad y rendimiento.';
 	} elseif ( is_page( 'buscador-neumaticos' ) ) {
-		$description = 'Encontrá el neumático ideal para tu vehículo en Duna Neumáticos. Buscá por medida o vehículo y cotizá online en U$S o $U.';
+		$description = 'Encontr├í el neum├ítico ideal para tu veh├¡culo en Duna Neum├íticos. Busc├í por medida o veh├¡culo y cotiz├í online en U$S o $U.';
 	} elseif ( is_page( 'faq' ) ) {
-		$description = 'Preguntas frecuentes sobre neumáticos en Duna Neumáticos: medidas, mantenimiento, servicios y compra online. Resolvé tus dudas.';
+		$description = 'Preguntas frecuentes sobre neum├íticos en Duna Neum├íticos: medidas, mantenimiento, servicios y compra online. Resolv├® tus dudas.';
 	} elseif ( is_page( 'service' ) || is_page( 'inventory' ) ) {
-		$description = 'Servicios de Duna Neumáticos: alineación, balanceo, chequeo, mecánica y reparación de neumáticos. Agendá tu turno en Las Piedras.';
+		$description = 'Servicios de Duna Neum├íticos: alineaci├│n, balanceo, chequeo, mec├ínica y reparaci├│n de neum├íticos. Agend├í tu turno en Las Piedras.';
 	} elseif ( is_page( 'cart' ) ) {
-		$description = 'Revisá tu carrito de compras en Duna Neumáticos antes de finalizar. Neumáticos, llantas y baterías con precios en U$S o $U.';
+		$description = 'Revis├í tu carrito de compras en Duna Neum├íticos antes de finalizar. Neum├íticos, llantas y bater├¡as con precios en U$S o $U.';
 	} elseif ( is_page( 'checkout' ) ) {
-		$description = 'Finalizá tu compra en Duna Neumáticos de forma segura. Neumáticos, llantas y baterías con envío a todo Uruguay.';
+		$description = 'Finaliz├í tu compra en Duna Neum├íticos de forma segura. Neum├íticos, llantas y bater├¡as con env├¡o a todo Uruguay.';
 	} elseif ( is_page( 'my-account' ) ) {
-		$description = 'Accedé a tu cuenta en Duna Neumáticos para ver tus pedidos, direcciones y datos. Comprá online neumáticos, llantas y baterías.';
+		$description = 'Acced├® a tu cuenta en Duna Neum├íticos para ver tus pedidos, direcciones y datos. Compr├í online neum├íticos, llantas y bater├¡as.';
 	} elseif ( is_home() || is_post_type_archive( 'post' ) || is_page( 'blog' ) ) {
-		$description = 'Novedades y consejos de Duna Neumáticos: cuidado de neumáticos, seguridad vial y noticias en Las Piedras, Canelones, Uruguay.';
+		$description = 'Novedades y consejos de Duna Neum├íticos: cuidado de neum├íticos, seguridad vial y noticias en Las Piedras, Canelones, Uruguay.';
 	} elseif ( is_singular() ) {
 		$post = get_queried_object();
 		if ( $post && has_excerpt( $post ) ) {
 			$description = wp_strip_all_tags( get_the_excerpt( $post ) );
 		} elseif ( $post ) {
-			$description = $post->post_title . ' en Duna Neumáticos. Información, novedades y servicios de neumáticos en Las Piedras, Canelones, Uruguay.';
+			$description = $post->post_title . ' en Duna Neum├íticos. Informaci├│n, novedades y servicios de neum├íticos en Las Piedras, Canelones, Uruguay.';
 		}
 	}
 

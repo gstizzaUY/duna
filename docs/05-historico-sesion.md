@@ -752,3 +752,78 @@
       "solo child") o se mitigan desde el child.
     - VISTA MOVIL: pendiente revisar a fondo (el informe no mostro fallos moviles
       especificos, pero hay que auditar 375px: touch targets, overflow, drawer).
+
+64. ACCESIBILIDAD - MITIGACION DESDE EL CHILD (duna-child v1.4.0, 2026-09-05;
+    item 33 de 03-pendientes). DECISION: opcion (a) - mitigar TODO desde el
+    child (CSS+JS+functions.php) SIN tocar el plugin wheels-size-finder ni el
+    parent Motors. Lighthouse CLI A11y ANTES (70 home / 81 shop / 80 single) ->
+    DESPUES 100 en home/shop/single/categoria/buscador/contacto/empresa + movil.
+    - FIX 1 - viewport [user-scalable=no] (fallo meta-viewport): el parent lo
+      imprime como HTML CRUDO en header.php (linea 5) ANTES de wp_head, asi que
+      un <meta> extra no lo pisa. Solucion en functions.php: output-buffer
+      (template_redirect prio 0 con ob_start) que en el HTML final reemplaza
+      user-scalable=no (5 variantes de separadores) -> viewport accesible.
+      Verificado en el HTML servido.
+    - FIX 2 - sin punto de referencia principal (landmark-one-main): el parent
+      estructura <div id=wrapper><div id=main>. JS del child: role="main" en
+      #main. OK en todas.
+    - FIX 3 - enlaces sin nombre (link-name): eran los 8 iconos sociales
+      (5 header .header-main-socs + 3 footer .widget_socials) = <a> con solo
+      <i> (fontawesome). JS: aria-label segun href (Facebook/Instagram/
+      WhatsApp).
+    - FIX 4 - dots de testimonios (button-name + target-size, del plugin): JS
+      agrega aria-label "Ir a la página de testimonios N" + aria-current
+      sincronizado (MutationObserver de class, el plugin togglea wsf-active) +
+      CSS touch target 20x20 con dot visual de 7px via ::before (mantiene el
+      look). Lighthouse target-size OK.
+    - FIX 5 - selects del buscador sin label (select-name, del plugin): JS
+      agrega id al select y for al <label> del .wsf-select-item (queda un
+      <label> explicito + aria-labelledby). Cubre width/profile/rim/brand/
+      model/year/version.
+    - FIX 6 - heading-order (h4.icon-box/h5.productos/h6.widgets saltan tras
+      h2): JS ajusta la SEMANTICA (role=heading + aria-level) recorriendo los
+      encabezados visibles en orden DOM; si uno salta mas de un nivel pasa a
+      (nivel anterior)+1. Sin cambio visual. Verificado sin skips en
+      shop/single/cat/blog/home al asentarse.
+    - FIX 7 - IDs de ARIA duplicados (duplicate-id-aria): el PARENT
+      (inc/modals.php + listings/modals/*.php) imprime los .modal
+      (get-car-price/test-drive/trade-offer) ~2x por pagina con los MISMOs ids
+      hardcodeados (#get-car-price, #myModalLabel, #request-test-drive-form...).
+      JS: dedupe global (2da+ -> -2/-3) y re-apunta cada aria-labelledby de
+      .modal a los h3 de SU modal. dupIds -> 0.
+65. ACCESIBILIDAD - WOOCOMMERCE/PARENT en shop y single (v1.4.0, contin.).
+    - FIX 8 - paginacion del shop (link-name): el partial del parent
+      woocommerce/loop/pagination.php imprime prev/next como <a> solo-icono
+      dentro de .stm-prev-next, duplicando el href de la pagina numerada.
+      JS: aria-label "Página siguiente/anterior" + aria-hidden al <i>.
+    - FIX 9 - tabs de la ficha (aria-allowed-attr): WooCommerce pone
+      aria-selected en el <a> del <li role=tab> (violacion: el tab es el li).
+      JS: MutationObserver que retira aria-selected del <a> cuando WC lo
+      re-aplica (una sola pasada no alcanza: single-product.js lo re-agrega).
+    - FIX 10 - CONTRASTE autor de testimonios + anio de timeline
+      (color-contrast, del plugin .wsf-testimonial-author en dark 3.41 y
+      .wsf-timeline-year 3.56): ningun rojo cumple AA en ambos modos ->
+      CSS por modo: oscuro #ff7b6b (6.54:1), claro #d92020 (4.64:1 sobre
+      #f4f6f8 / 5.03 sobre #fff). Nota: #df1d1d falla por 0.02 en light
+      (4.48).
+    - FIX 11 - 404 de assets (radio.png) en home/shop: el parent
+      (motors/listings/trade-in.php:196) hardcodea el sprite del formulario
+      trade-in (oculto, modal) con get_stylesheet_directory_uri() (ruta del
+      CHILD) pero el archivo vive en el plugin. Fix: copiar
+      plugins/motors-car-dealership-classified-listings/assets/images/radio.png
+      (1.8KB) a duna-child/assets/images/radio.png. El 404 desaparece (era la
+      unica consola del barrido).
+    - VERIFICACION Lighthouse CLI (v13.4.1): home 100 | shop 100 | single 100 |
+      categoria(baterias) 100 | buscador 100 | contacto 100 | empresa(about-us)
+      100. HOME MOVIL (375) 100. Sin regresion de skin/overflow en 11 paginas x
+      dark/light x 375/1367 (regresion visual por CDP; screenshots en
+      temp/opencode/qa-a11y-v140/). Perf/SEO/BP sin cambios (SEO 100, BP 96,
+      Perf CLI 48 por TTFB local; navegador 90).
+66. VISTA MOVIL - AUDITORIA 375/768/1024 (v1.4.0, CDP): sin overflow horizontal
+    en ninguna pagina/ancho (home/shop/cat/single/buscador); grid de cards OK
+    (home 1col@375/3col@768/4col@1024; shop 1/3/3); boton "Filtros" solo <992
+    (block) y oculto >=992; topbar oculta <992; drawer .wsf-mobile-sidebar:
+    ciclo open/close OK (al abrir: open+inert=false+aria=false+foco en Cerrar+
+    body-lock; al cerrar: inert=true+aria=true+foco vuelve a Filtros+sidebar
+    restaurada en su origen). Lighthouse A11y movil home = 100. Sin fallos
+    moviles pendientes de skin.

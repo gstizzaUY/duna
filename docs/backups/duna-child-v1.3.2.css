@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
 
  * duna-child (tema hijo de Motors)
 
@@ -403,7 +403,7 @@
 
 
 /* Navbar (Motors motorcycle): extremos inclinados limpios y rojo uniforme.
-   Reemplaza las "colas" skewX del tema (lengua roja + cuña oscura en los
+   Reemplaza las "colas" skewX del tema (lengua roja + cu├▒a oscura en los
    extremos) por triangulos clip-path de altura completa pegados a la barra,
    de modo que los extremos queden en diagonal limpia sin sobresalir.
    Tambien unifica el fondo de la barra con el de los items. */
@@ -615,22 +615,22 @@ body.wsf-light #top-bar .top-bar-socials a i {
 }
 
 /* ============================================================
- * UNIFORM SKIN – base global (todas las páginas mismo estilo)
+ * UNIFORM SKIN ÔÇô base global (todas las p├íginas mismo estilo)
  * Corrige claros del parent (#eceff3 / #f0f2f5 / #f6f7f9 / #fff
  * / #8f9fad) y restos de page_bg_color inline para que todas
- * las páginas usen las variables --wsf-* del tema hijo.
+ * las p├íginas usen las variables --wsf-* del tema hijo.
  * Esta capa es DARK por defecto; body.wsf-light la invierte
  * via variables (definidas abajo).
  * ============================================================ */
 
-/* --- Corrección #wrapper page_bg_color inline (ej. Contacto #f0f2f5) --- */
+/* --- Correcci├│n #wrapper page_bg_color inline (ej. Contacto #f0f2f5) --- */
 html body #wrapper,
 body #wrapper,
 #wrapper {
     background-color: var(--wsf-surf-deep) !important;
 }
 
-/* --- Base global: body, wrapper, contenedores, tipografía --- */
+/* --- Base global: body, wrapper, contenedores, tipograf├¡a --- */
 html,
 body,
 body.stm-template-motorcycle {
@@ -899,7 +899,7 @@ select:focus,
     color: var(--wsf-txt) !important;
 }
 
-/* --- My Account: navegación --- */
+/* --- My Account: navegaci├│n --- */
 .woocommerce-MyAccount-navigation ul li,
 .woocommerce-MyAccount-navigation ul li a {
     background: var(--wsf-surf) !important;
@@ -986,7 +986,7 @@ select:focus,
     border-radius: var(--wsf-radius-sm);
 }
 
-/* --- Paginación / Page links --- */
+/* --- Paginaci├│n / Page links --- */
 .woocommerce-pagination .page-numbers,
 .pagination .page-numbers,
 .page-links a,
@@ -1198,14 +1198,14 @@ body #footer-main {
     font-size: clamp(18px, 1vw + 9px, 22px);
 }
 
-/* --- Mensajes y alerts genéricos --- */
+/* --- Mensajes y alerts gen├®ricos --- */
 .alert, .stm-alert, .wpcf7-response-output {
     background: var(--wsf-surf) !important;
     border-color: var(--wsf-border) !important;
     color: var(--wsf-txt) !important;
 }
 
-/* --- Corrección buscador: asegurar que los selects del plugin hereden variables del child --- */
+/* --- Correcci├│n buscador: asegurar que los selects del plugin hereden variables del child --- */
 .wsf-container .wsf-select-item select {
     background-color: var(--wsf-surf) !important;
     border-color: var(--wsf-border) !important;
@@ -1448,76 +1448,6 @@ body.wsf-mobile-scroll-lock {
 }
 
 /* ===== REDISENO V2 - Accesibilidad ===== */
-
-/* A11y v1.4.0 (PLUGIN/children) - dots del slider de testimonios
-   (wheels-size-finder): touch target >=24px con spacing (el plugin los pinta
-   de 7x7px -> fallo target-size). El dot en si queda del tamano visual
-   original pero el AREA clickeable (padding + margin) crece. */
-.wsf-testimonials-dots {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-    margin-top: 16px;
-}
-.wsf-testimonials-dots button {
-    width: 20px;
-    height: 20px;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    border-radius: 50%;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-}
-.wsf-testimonials-dots button::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 7px;
-    height: 7px;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: var(--wsf-dot-bg, rgba(255, 255, 255, 0.35));
-    border: 1px solid var(--wsf-dot-border, rgba(205, 211, 218, 0.6));
-    transition: background 0.2s, border-color 0.2s;
-}
-.wsf-testimonials-dots button:hover::before {
-    background: var(--wsf-dot-active, rgba(205, 211, 218, 0.8));
-    border-color: var(--wsf-dot-active, rgba(205, 211, 218, 0.8));
-}
-.wsf-testimonials-dots button.wsf-active::before {
-    background: var(--wsf-brand, #df1d1d);
-    border-color: var(--wsf-brand, #df1d1d);
-}
-.wsf-testimonials-dots button:focus {
-    outline: none;
-}
-.wsf-testimonials-dots button:focus-visible {
-    outline: 2px solid var(--wsf-focus, #4d9fff);
-    outline-offset: 1px;
-}
-
-/* A11y v1.4.0 - CONTRASTE del autor del testimonio (.wsf-testimonial-author).
-   El plugin lo pinta rojo var(--wsf-brand) sobre la card (surf-2). El rojo de
-   marca NO cumple AA ni en DARK (3.41:1 sobre #1a1f27) ni en LIGHT sobre
-   surf-2 (4.48:1, por debajo de 4.5). Ningun rojo cumple AA en ambos modos a
-   la vez -> color por modo:
-     - oscuro (default, visitantes): rojo claro #ff7b6b (6.54:1 sobre #1a1f27,
-       AA en todas las superficies oscuras).
-     - claro (body.wsf-light, admin): rojo #d92020 (4.64:1 sobre #f4f6f8 y
-       5.03:1 sobre #fff, AA en ambas superficies claras).
-   MISMO patron: .wsf-timeline-year (anio del timeline de "La empresa",
-   tambien rojo de marca 3.56:1 sobre #161b22 en dark). */
-.wsf-testimonial .wsf-testimonial-author,
-.wsf-timeline-year {
-    color: #ff7b6b;
-}
-body.wsf-light .wsf-testimonial .wsf-testimonial-author,
-body.wsf-light .wsf-timeline-year {
-    color: #d92020;
-}
 
 /* Foco visible: el tema y fixes previos dejaban outline:none + box-shadow:none
    en inputs/controles. Se restaura un anillo de foco visible usando

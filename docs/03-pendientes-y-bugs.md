@@ -149,50 +149,70 @@
     - CLS: RESUELTO (0). El fix del CSS inline elimino los shifts de carga.
     - ACCESIBILIDAD (A11y 70) y VISTA MOVIL: PENDIENTES para la proxima sesion -
       detalle COMPLETO en el item 33.
-33. ACCESIBILIDAD - INFORME DETALLADO para corregir (Lighthouse navegador real,
-    A11y 70, 2026-09-05; ver historico 63). Pendiente de ejecutar en proxima sesion:
+33. ACCESIBILIDAD - INFORME DETALLADO - **RESUELTO en duna-child v1.4.0**
+    (2026-09-05; ver historico 64-66). Lighthouse home/shop/single/categoria/
+    buscador/contacto/empresa + movil 375 = **A11y 100**. Se mitigo TODO desde
+    el child (opcion a: JS+CSS+functions.php, SIN tocar plugin ni parent):
     - NOMBRES Y ETIQUETAS:
-      * Botones sin nombre accesible: button y button.wsf-active (son los dots del
-        slider de testimonios .wsf-testimonials-dots del PLUGIN wheels-size-finder,
-        creados por JS sin aria-label ni texto). Fix posible en child: CSS no puede;
-        requiere JS del child que agregue aria-label a los dots, o tocar el plugin.
-      * Selects sin <label>: select.wsf-brand-select, .wsf-model-select,
-        .wsf-year-select, .wsf-version-select (buscador del PLUGIN). Fix: el plugin
-        no asocia labels; se puede mitigar desde child con <label> via JS o aria-
-        label, o corregir en el plugin.
-      * Enlaces sin nombre reconocible: 8x "a" (verificar cuales: posible logo sin
-        alt/texto, iconos de redes sociales, o el menu). Revisar por CDP.
+      * Botones sin nombre (dots de testimonios del PLUGIN): FIX en
+        duna-child.js (initA11y) - aria-label "Ir a la página de testimonios N"
+        + aria-current sincronizado (MutationObserver) con el slide activo.
+        Ademas CSS: touch target 20x20 (el dot visual queda 7px con ::before).
+      * Selects sin label (buscador del PLUGIN): FIX JS - cada select del
+        .wsf-select-item recibe id + su <label> del item recibe for (queda
+        asociado explicito; aria-labelledby al label). Cubre width/profile/rim/
+        brand/model/year/version.
+      * Enlaces sin nombre (8x "a"): eran los ICONOS SOCIALES del header
+        (.header-main-socs, 5) y footer (.widget_socials, 3) = <a> con solo
+        <i>. FIX JS - aria-label Facebook/Instagram/WhatsApp segun href.
     - PRACTICAS RECOMENDADAS:
-      * [user-scalable="no"] en <meta name=viewport>: lo emite el PARENT Motors.
-        Fix desde child: filtrar/reescribir el meta viewport (wp_head) quitando
-        user-scalable=no o poniendo maximum-scale>=5.
-      * Areas tactiles pequenas: button, button.wsf-active (dots de testimonios,
-        ~7px) - del plugin. Fix en child: agrandar los dots (min 24x24 + spacing)
-        via CSS del child.
-      * Documento sin punto de referencia principal: falta <main>. El PARENT no
-        usa <main> (usa divs). Fix desde child: via JS agregar role="main" al
-        contenedor principal (#main o .stm-template-motorcycle wrapper), o filtrar
-        el body. Evaluar.
-      * Enlaces identicos con misma finalidad.
+      * [user-scalable="no"] en viewport (PARENT Motors header.php): FIX en
+        functions.php del child con OUTPUT-BUFFER (template_redirect prio 0,
+        ob_start + str_replace en el HTML final). El parent imprime el meta
+        como HTML crudo ANTES de wp_head, por lo que un meta extra no lo pisa;
+        el buffer limpia user-scalable=no. Verificado en el HTML.
+      * Areas tactiles pequenas (dots 7px del plugin): FIX CSS (20px + gap 6px,
+        dot visual 7px via ::before centrado). Lighthouse target-size OK.
+      * Documento sin <main> (PARENT usa #wrapper/#main divs): FIX JS -
+        role="main" en #main (landmark-one-main OK en todas).
+      * Enlaces identicos con misma finalidad: la paginacion del parent
+        (.stm-prev-next, woocommerce/loop/pagination.php) duplicaba el href de
+        la pagina numerada en un <a> solo-icono. FIX JS - aria-label
+        "Página siguiente/anterior" + aria-hidden al <i>.
     - CONTRASTE:
-      * span.wsf-testimonial-author + div.wsf-testimonial: el autor del testimonio
-        (rojo var(--wsf-brand) sobre card) no cumple AA en algun modo. El plugin lo
-        pinta rojo; el child ya overridea .colored del footer. Fix en child: forzar
-        .wsf-testimonial-author a var(--wsf-txt) o un rojo que cumpla AA (como se
-        hizo con el badge v1.1.8).
-    - NAVEGACION (heading-order): h4.title.heading-font, h5, h6 saltan niveles
-      (heading-order). Revisar estructura de encabezados de la home (el theme usa
-      h4 en titulos de widgets/cards donde deberia ir h2/h3). Fix posible en child:
-      CSS no cambia el orden; requiere ajustar el markup o aceptar (evaluar).
-    - ARIA: "Los ID de ARIA son unicos" (posible ID duplicado del plugin).
-    - DECISION ABIERTA: muchos fallos son del PLUGIN wheels-size-finder
-      (testimonios/buscador) y del PARENT (viewport/landmark). La regla de oro es
-      "solo child". Opciones: (a) mitigar todo desde el child via CSS+JS+wp_head
-      (sin tocar plugin/parent), (b) autorizar tocar el plugin solo para a11y, o
-      (c) aceptar el 70. Recomendado: (a) intentar mitigar desde child primero.
-    - VISTA MOVIL: auditar a fondo (375px) en la misma sesion: touch targets,
-      overflow horizontal, drawer de filtros, topbar, menu. El informe no mostro
-      fallos moviles especificos pero hay que verificar con CDP.
+      * span.wsf-testimonial-author (rojo marca 3.41:1 dark / 4.48 light):
+        NINGUN rojo cumple AA en ambos modos -> FIX CSS por modo: oscuro
+        #ff7b6b (6.54:1 sobre card dark), claro #d92020 (4.64:1 sobre #f4f6f8
+        y 5.03:1 sobre #fff).
+      * span.wsf-timeline-year (anio del timeline de La empresa, mismo rojo
+        3.56:1): mismo fix (misma regla CSS).
+    - NAVEGACION (heading-order): h4.title.heading-font, h5 (productos), h6
+      (widgets/footer) saltan niveles por el markup del parent/plugin. FIX JS -
+      recorrido en orden DOM de los encabezados VISIBLES: si uno salta mas de
+      un nivel se le asigna role=heading + aria-level = nivel anterior + 1
+      (nunca baja de 2). Sin cambio visual. heading-order OK en todas.
+    - ARIA (IDs duplicados): NO era el plugin; era el PARENT (inc/modals.php +
+      listings/modals/*.php imprimen los .modal get-car-price/test-drive/
+      trade-offer ~2x por pagina con los MISMOs ids hardcodeados). FIX JS -
+      dedupe global de ids (2da+ ocurrencia -> id-2/id-3) y re-apuntado de cada
+      aria-labelledby de .modal a los h3 de SU modal.
+    - WooCommerce (single): tabs de la ficha con aria-selected en el <a>
+      (viola aria-allowed-attr; el rol tab esta en el <li>). FIX JS con
+      MutationObserver (WC lo re-aplica en init/click). aria-allowed-attr OK.
+    - 404 sprite radio.png (consola/BP): el PARENT (motors/listings/trade-in
+      .php:196) hardcodea get_stylesheet_directory_uri()/assets/images/
+      radio.png (ruta del CHILD) para el formulario trade-in oculto. FIX: se
+      copio el sprite real del plugin motors-car-dealership-classified-listings
+      a duna-child/assets/images/radio.png (1.8 KB). 404 eliminado.
+    - VISTA MOVIL (auditada 375/768/1024): sin overflow horizontal, grid de
+      cards OK (home 1/3/4 cols segun ancho; shop 1/3), boton Filtros solo
+      <992, topbar oculta <992, drawer .wsf-mobile-sidebar ciclo open/close OK
+      (inert+aria+body-lock+foco restaurado, sidebar restaurada), dots 20px.
+      Lighthouse home MOBILE a11y = 100.
+    - LIMITACIONES no mitigadas (documentadas, fuera de child): errores de
+      consola = conexion a http://localhost:3002 (API backend del buscador, no
+      corriendo en local); Perf CLI local 48 (TTFB servidor Studio ~3s, en
+      navegador 90). Cache/BP restantes (cache headers, gzip) = produccion.
 29. NAVBAR STICKY "CORTADO" (reporte de usuario): RESUELTO = no-bug. El usuario
     vio el logo de la cinta negra del header cortado al scrollear, pero en una
     ventana de INCOGNITO (sin cache previo) NO se corta. Diagnostico CDP completo

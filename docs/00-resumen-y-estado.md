@@ -69,10 +69,22 @@ Backend API Node del buscador: http://localhost:3002.
     en la home (wp_head prio -10, antes del <style> inline gigante de 2MB de
     WooCommerce). Adelanta la descarga del hero ~1s (el techo es el TTFB local
     ~3s; en produccion mejora el LCP real). Historico 61.
-  - ESTADO (2026-09-05): rediseno V2 COMPLETO + SEO + optimizacion de
-    rendimiento -> Lighthouse en navegador: PERF 90 (FCP 0.8/LCP 0.9/CLS 0),
-    SEO 100 (CLI), BP 96. PENDIENTE PRINCIPAL: ACCESIBILIDAD (A11y 70) + vista
-    movil - detalle completo en docs/03-pendientes-y-bugs.md item 33.
+  - v1.4.0 (2026-09-05): ACCESIBILIDAD de 70 a 100 (Lighthouse) + vista movil.
+    Fixes SOLO en el child (JS/CSS/functions.php, sin tocar plugin/parent):
+    viewport sin user-scalable=no (output-buffer), role=main en #main,
+    aria-label en iconos sociales (8) + dots de testimonios (aria-current sync)
+    + paginacion, labels en selects del buscador, quita aria-selected de tabs
+    WC, heading-order secuencial (aria-level), dedupe de IDs de los .modal del
+    parent, dots con touch target 20px, contraste AA de
+    .wsf-testimonial-author y .wsf-timeline-year (rojo por modo), fix 404 del
+    sprite radio.png (copiado al child). Resultado Lighthouse CLI: home/shop/
+    single/categoria/buscador/contacto/empresa = A11y 100 (+ movil 100), SEO
+    100, BP 96, Perf sin cambio (CLI 48 por TTFB local; en navegador 90).
+    Detalle completo en docs/03 item 33 y docs/05 items 64-66.
+  - ESTADO (2026-09-05, v1.4.0): rediseno V2 COMPLETO + SEO + optimizacion de
+    rendimiento + ACCESIBILIDAD 100 -> Lighthouse en navegador: PERF 90
+    (FCP 0.8/LCP 0.9/CLS 0), SEO 100 (CLI), BP 96. CERRADO el informe de
+    accesibilidad (item 33) salvo lo documentado como no-mitigable.
   - OPTIMIZACION (2026-09-05, historico 59-63): Autoptimize 3.1.15.1 solo-CSS
     (minify+agregar en archivo; JS intacto por RevSlider). El fix clave fue sacar
     el CSS inline de 2MB del head (HTML ~100KB) -> Perf 90 en navegador. El CLI

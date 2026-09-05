@@ -12,7 +12,209 @@
     initCategoryWidget();
     moveHeaderUser();
     initMobileSidebar();
+    initA11y();
   });
+
+  /**
+   * A11y (sesion v1.4.0). Mitigaciones desde el child para fallos del PLUGIN
+   * wheels-size-finder, del PARENT Motors y de WooCommerce (regla de oro: no
+   * tocar plugin/parent). Todo lo que se agrega es aria/rol SIN cambiar el
+   * aspecto visual:
+   *   - role="main" en #main (el parent no usa <main>): landmark principal.
+   *   - aria-label en iconos sociales del header/footer (enlaces con solo <i>).
+   *   - aria-label + aria-current en los dots del slider de testimonios del
+   *     plugin (los crea por JS sin nombre).
+   *   - labels asociados a los selects del buscador del plugin (.wsf-select-item).
+   *   - aria-label en la paginacion del parent (.stm-prev-next con solo icono).
+   *   - quita aria-selected de los <a> de los tabs de la ficha (WooCommerce lo
+   *     re-aplica; se usa MutationObserver).
+   *   - heading-order: ajusta aria-level en la secuencia visible de encabezados.
+   *   - dedupe de IDs de ARIA duplicados de los .modal del parent + re-apunta
+   *     cada aria-labelledby al titulo de SU modal.
+   */
+  function initA11y() {
+    // 1) Landmark principal: el parent estructura <div id=wrapper><div id=main>
+    var $main = $('#main');
+    if ($main.length) {
+      $main.attr('role', 'main');
+    }
+
+    // 2) Iconos sociales (header + footer): <a> con <i> sin texto ni alt.
+    $('a[href*="facebook.com"], a[href*="instagram.com"], a[href*="wa.me"], a[href*="whatsapp.com"]').each(function () {
+      var $a = $(this);
+      if ($a.attr('aria-label') || $a.attr('title') || ($a.text() || '').trim()) {
+        return;
+      }
+      var href = $a.attr('href') || '';
+      var label = '';
+      if (href.indexOf('facebook.com') !== -1) { label = 'Facebook'; }
+      else if (href.indexOf('instagram.com') !== -1) { label = 'Instagram'; }
+      else if (href.indexOf('wa.me') !== -1 || href.indexOf('whatsapp.com') !== -1) { label = 'WhatsApp'; }
+      if (label) {
+        $a.attr('aria-label', label);
+      }
+    });
+
+    // 3) Dots del slider de testimonios (los crea el plugin por JS sin
+    //    aria-label ni texto). Ver tambien CSS del child (touch target >=24px).
+    $('.wsf-testimonials').each(function () {
+      var $wrap = $(this);
+      var $dots = $wrap.find('.wsf-testimonials-dots button');
+      $dots.each(function (idx) {
+        var $d = $(this);
+        if (!$d.attr('aria-label')) {
+          $d.attr('aria-label', 'Ir a la p\u00E1gina de testimonios ' + (idx + 1));
+        }
+        $d.attr('aria-current', $d.hasClass('wsf-active') ? 'true' : 'false');
+      });
+      // Mantener aria-current sincronizado al cambiar de slide (el plugin
+      // togglea .wsf-active en los dots al avanzar).
+      if ($dots.length) {
+        var mut = new MutationObserver(function () {
+          $dots.each(function () {
+            $(this).attr('aria-current', $(this).hasClass('wsf-active') ? 'true' : 'false');
+          });
+        });
+        mut.observe($wrap[0], { subtree: true, attributes: true, attributeFilter: ['class'] });
+      }
+    });
+
+    // 4) Selects del buscador del PLUGIN sin <label> asociado (fallo
+    //    select-name): el plugin pinta <label> (visual) dentro de cada
+    //    .wsf-select-item pero sin for= ni aria. Se asocia cada select a su
+    //    label del .wsf-select-item dandole id y for (y aria-describedby si el
+    //    label del item ya existia). Incluye selects re-pintados por el plugin
+    //    (wsf-width/profile/rim/brand/model/year/version).
+    $('.wsf-select-item select').each(function () {
+      var $sel = $(this);
+      if ($sel.attr('aria-label') || $sel.attr('aria-labelledby')) { return; }
+      var $item = $sel.closest('.wsf-select-item');
+      var $lbl = $item.length ? $item.find('label').first() : $();
+      if (!$sel.attr('id')) {
+        var cls = String($sel.attr('class') || 'select').replace(/[^a-zA-Z0-9_-]/g, '');
+        $sel.attr('id', 'wsf-' + cls);
+      }
+      if ($lbl.length) {
+        if (!$lbl.attr('for')) {
+          $lbl.attr('for', $sel.attr('id'));
+        }
+        $sel.removeAttr('aria-label');
+        $sel.attr('aria-labelledby', $lbl.attr('id') || $lbl.attr('for'));
+      } else {
+        var text = ($sel.closest('.wsf-select-item').find('label').text() || $sel.find('option:selected').text() || 'Seleccionar').trim();
+        $sel.attr('aria-label', text);
+      }
+    });
+
+    // 4b) Paginacion de catalogos del PARENT (fallo link-name): el partial
+    //     woocommerce/loop/pagination.php (Motors) imprime next/prev como
+    //     enlaces de solo icono dentro de .stm-prev-next (duplicando ademas el
+    //     href de la pagina numerada -> identical-links-same-purpose). Se les
+    //     pone aria-label (y aria-hidden al icono para que no duplique).
+    $('.stm-prev-next a').each(function () {
+      var $a = $(this);
+      if ($a.attr('aria-label') || ($a.text() || '').trim()) { return; }
+      var $box = $a.closest('.stm-prev-next');
+      var label = $box.hasClass('stm-next-btn') ? 'P\u00E1gina siguiente' : 'P\u00E1gina anterior';
+      $a.attr('aria-label', label);
+      $a.find('i').attr('aria-hidden', 'true');
+    });
+
+    // 4c) Tabs de la ficha de producto (WooCommerce core): los <a> dentro del
+    //     <li role=tab> llevan aria-selected (viola aria-allowed-attr porque el
+    //     tab es el <li>, no el <a>). WooCommerce lo re-aplica en su init/click
+    //     (single-product.js), por lo que una sola pasada no alcanza: se usa un
+    //     MutationObserver que lo retira de los anclas cuando aparece.
+    var stripTabAria = function () {
+      $('.woocommerce-tabs ul.tabs li a[aria-selected]').removeAttr('aria-selected');
+    };
+    stripTabAria();
+    var tabObserver = new MutationObserver(function (muts) {
+      var hit = false;
+      for (var i = 0; i < muts.length; i++) {
+        if (muts[i].type === 'attributes' && muts[i].attributeName === 'aria-selected') { hit = true; break; }
+        if (muts[i].type === 'childList' && muts[i].addedNodes.length) { hit = true; break; }
+      }
+      if (hit) { stripTabAria(); }
+    });
+    if (document.querySelector('.woocommerce-tabs')) {
+      tabObserver.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['aria-selected'], childList: true });
+    }
+
+    // 5) heading-order (fallos de Lighthouse): la estructura del PARENT/plugin
+    //    salta niveles (h2 -> h4/h5/h6 de icon-box/productos/widgets/sidebar/
+    //    footer). CSS no cambia el arbol; se ajusta la SEMANTICA (aria-level)
+    //    sin tocar el aspecto: recorrido en orden DOM de los encabezados
+    //    VISIBLES, y si uno salta mas de un nivel respecto del anterior se le
+    //    asigna aria-level = (nivel anterior)+1 (nunca baja de 2). Asi h4/h5/h6
+    //    que siguen a un h2 pasan a nivel 3 (siblings de nivel 3 son validos).
+    function headingLevel(el) {
+      var tag = el.tagName.toLowerCase();
+      var native = parseInt(tag.charAt(1), 10);
+      var aria = parseInt(el.getAttribute('aria-level') || '', 10);
+      return aria || native;
+    }
+    var lastLevel = 1;
+    var headings = [];
+    Array.prototype.forEach.call(document.querySelectorAll('h1,h2,h3,h4,h5,h6'), function (h) {
+      if (h.closest('.modal, [aria-hidden=true], .wsf-mobile-sidebar')) { return; }
+      var r = h.getBoundingClientRect();
+      if (r.width === 0 && r.height === 0) { return; }
+      headings.push(h);
+    });
+    // Recorre en orden de documento.
+    headings.forEach(function (h) {
+      var level = headingLevel(h);
+      if (level > lastLevel + 1) {
+        level = Math.max(2, lastLevel + 1);
+        h.setAttribute('role', 'heading');
+        h.setAttribute('aria-level', String(level));
+      }
+      lastLevel = level;
+    });
+
+    // 6) IDs duplicados de los modales del parent (fallo duplicate-id-aria).
+    //    El PARENT imprime los .modal (get-car-price/test-drive/trade-offer)
+    //    mas de una vez por pagina (inc/modals.php + contenido/otros) con los
+    //    MISMOs ids hardcodeados (#get-car-price, #myModalLabel, #test-drive,
+    //    #request-test-drive-form, ...). P1: re-numerar las repeticiones
+    //    (2da+ ocurrencia -> id-2, id-3...). P2: re-apuntar el aria-labelledby
+    //    de CADA .modal a los h3 de SU modal (por si quedo renumerado).
+    var seen = {};
+    $('[id]').each(function () {
+      var id = this.id;
+      if (!id) { return; }
+      if (!seen[id]) { seen[id] = []; }
+      seen[id].push(this);
+    });
+    Object.keys(seen).forEach(function (id) {
+      var els = seen[id];
+      if (els.length < 2) { return; }
+      var refs = ['aria-labelledby', 'aria-describedby', 'aria-controls', 'aria-activedescendant'];
+      els.forEach(function (el, i) {
+        if (i === 0) { return; }
+        var newId = id + '-' + (i + 1);
+        if (el.id) { el.id = newId; }
+        refs.forEach(function (attr) {
+          if (el.hasAttribute(attr)) {
+            var toks = (el.getAttribute(attr) || '').split(/\s+/);
+            toks = toks.map(function (tok) { return (tok === id) ? newId : tok; });
+            el.setAttribute(attr, toks.join(' '));
+          }
+        });
+      });
+    });
+    $('.modal').each(function () {
+      var $modal = $(this);
+      var $h = $modal.find('.modal-title').first();
+      if ($h.length && !$h.attr('id')) {
+        $h.attr('id', 'modal-title-' + $modal.index());
+      }
+      if ($h.length && $modal.attr('aria-labelledby') !== $h.attr('id')) {
+        $modal.attr('aria-labelledby', $h.attr('id'));
+      }
+    });
+  }
 
   function initMobileSidebar() {
     var grid = $('ul.products').first();

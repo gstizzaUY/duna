@@ -275,18 +275,42 @@ acá y no se agreguen de nuevo al plugin.
   especificidad suficiente. Detectar = buscar "fondo de color + texto del
   mismo color" (detector CDP en temp/opencode/duna-sat.js).
 
+### Estado A11y - [HECHO en v1.4.0] (05-historico items 64-66)
+- ACCESIBILIDAD de 70 a 100 (Lighthouse CLI) en TODAS las paginas auditadas
+  (home/shop/single/categoria/buscador/contacto/empresa) + movil 375 (100).
+  Fixes 100% en el child (regla de oro intacta: NO se toco plugin ni parent).
+- Archivos tocados: functions.php (nuevo output-buffer que quita
+  user-scalable=no del meta viewport del parent), assets/js/duna-child.js
+  (nuevo initA11y: role=main, aria-label sociales/dots/paginacion, labels de
+  selects del buscador, aria-selected de tabs WC con MutationObserver,
+  heading-order secuencial via aria-level, dedupe de ids de los .modal del
+  parent), assets/css/duna-child.css (dots con touch target 20px + contraste
+  del autor de testimonios y .wsf-timeline-year por modo), assets/images/
+  radio.png (sprite 1.8KB copiado del plugin para el fix 404 del trade-in).
+- CONTRASTE del rojo de marca en texto sobre cards: NINGUN rojo cumple AA en
+  ambos modos (dark 3.41 / light 4.48 con #df1d1d). Solucion por modo: oscuro
+  #ff7b6b (6.54:1), claro #d92020 (4.64:1 sobre surf-2). LECCION: el rojo de
+  marca #df1d1d solo sirve para texto sobre superficies MUY oscuras o como
+  relleno con texto blanco; para texto de marca en cards hay que elegir por
+  modo.
+- Detalle completo del informe y cada fix: docs/03-pendientes-y-bugs.md item 33
+  (RESUELTO) y docs/05-historico-sesion.md items 64-66.
+
 ### Decisiones abiertas al retomar
 - Radio final de cards/botones/inputs (sugerido 4px cards / 2px botones).
 - Reduccion de la paleta roja vs superficies: mantener contraste AA.
 - Confirmar si `footer_copyright_text` (texto Motors) se deja o se gestiona aparte.
-- A11y del PLUGIN wheels-size-finder y del PARENT: PROXIMA SESION (detalle
-  completo en docs/03-pendientes-y-bugs.md item 33). Fallos: dots de testimonios
-  sin aria-label, selects sin label, autor de testimonio sin contraste (PLUGIN);
-  [user-scalable=no] y falta de <main> (PARENT); touch targets pequenos;
-  heading-order. DECIDIR: mitigar desde el child (CSS+JS+wp_head) vs autorizar
-  tocar plugin/parent. Recomendado: intentar mitigar desde child primero.
-- VISTA MOVIL: auditar a fondo en la misma sesion de a11y (375px: touch targets,
-  overflow, drawer de filtros, topbar, menu).
+- A11y del PLUGIN wheels-size-finder y del PARENT: **RESUELTO en v1.4.0**
+  (2026-09-05, ver docs/03-pendientes-y-bugs.md item 33 y docs/05-historico
+  items 64-66). Se eligio la opcion (a): mitigar TODO desde el child
+  (CSS+JS+functions.php) sin tocar plugin ni parent -> Lighthouse A11y 70 -> 100
+  en home/shop/single/categoria/buscador/contacto/empresa (+ movil 100).
+  Detalle de cada fix en el item 33 (ahora marcado RESUELTO). El child agrega
+  un bloque initA11y() en duna-child.js y un output-buffer en functions.php
+  (viewport), mas CSS de dots/contraste.
+- VISTA MOVIL: auditada a fondo en la sesion de a11y v1.4.0 (375/768/1024):
+  sin overflow horizontal, drawer de filtros OK, topbar oculta <992, grid de
+  cards OK, Lighthouse movil A11y 100. Sin cambios pendientes de skin.
 - Contenido/SEO: RESUELTO en v1.3.0 (2026-09-05) - ver docs/03-pendientes-y-bugs.md
   item 31 y historico item 58: meta-description implementada en el child via
   wp_head (opcion A sin plugin), typo del tagline corregido, link "La empresa"
