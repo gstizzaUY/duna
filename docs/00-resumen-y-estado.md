@@ -69,16 +69,15 @@ Backend API Node del buscador: http://localhost:3002.
     en la home (wp_head prio -10, antes del <style> inline gigante de 2MB de
     WooCommerce). Adelanta la descarga del hero ~1s (el techo es el TTFB local
     ~3s; en produccion mejora el LCP real). Historico 61.
-  - ESTADO: rediseno V2 del child COMPLETO (F1-F6) + fixes visuales
-    puntuales + SEO basico (meta-description) implementado + fuentes
-    optimizadas. Pendientes no-child: a11y del plugin (testimonios/buscador),
-    robots.txt Sitemap a dominio real en produccion (item 31), CLS del slider
-    RevSlider, imagenes grandes sin width/height, JS/CSS no usado del parent.
-  - OPTIMIZACION (2026-09-05, historico 59 y 62): se instalo Autoptimize 3.1.15.1
-    en modo solo-CSS (minify+agregar en archivo; JS intacto por RevSlider). Se
-    corrigio que inlineaba 2MB de CSS en el head (ahora CSS como archivo + HTML
-    ~100KB). El Perf local fluctua (42-68) por el TTFB del servidor Studio
-    (~2.5-4s); beneficio real en produccion.
+  - ESTADO (2026-09-05): rediseno V2 COMPLETO + SEO + optimizacion de
+    rendimiento -> Lighthouse en navegador: PERF 90 (FCP 0.8/LCP 0.9/CLS 0),
+    SEO 100 (CLI), BP 96. PENDIENTE PRINCIPAL: ACCESIBILIDAD (A11y 70) + vista
+    movil - detalle completo en docs/03-pendientes-y-bugs.md item 33.
+  - OPTIMIZACION (2026-09-05, historico 59-63): Autoptimize 3.1.15.1 solo-CSS
+    (minify+agregar en archivo; JS intacto por RevSlider). El fix clave fue sacar
+    el CSS inline de 2MB del head (HTML ~100KB) -> Perf 90 en navegador. El CLI
+    local fluctua por el TTFB del servidor Studio (~2.5-4s); en produccion se
+    vera el 90 estable.
 - **Home**: seccion "PRODUCTOS" (titulo WPBakery) con 4 cards de categorias de
   LISTINGS (Motorcycles, Scooters, ATVS, Watercraft) -> A REEMPLAZAR por categorias WooCommerce.
 - **7 listings demo** (motos) -> a convertir en SERVICIOS o eliminar.

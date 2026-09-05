@@ -132,21 +132,67 @@
     - RESUELTO en v1.3.1 (2026-09-05, historico 60): Google Fonts recortadas de
       28 a 7 variantes via child (se quito Montserrat no usada + pesos extra;
       Open Sans 400/600/700 + Exo 2 400/500/600/700 + display=swap).
-32. LIGHTHOUSE NAVEGADOR REAL (incognito, Perf 70/A11y 70/BP 96/SEO 92;
-    2026-09-05, historico 60) - hallazgos restantes:
+32. LIGHTHOUSE NAVEGADOR REAL - RENDIMIENTO RESUELTO A 90 (2026-09-05; ver historico
+    60-63) - hallazgos restantes:
+    - RENDIMIENTO: RESUELTO en gran parte -> 90 (FCP 0.8s/LCP 0.9s/CLS 0) tras
+      sacar el CSS inline de 2MB del head (Autoptimize CSS como archivo, item 62).
+      Restan (mayormente produccion): cache headers (None en assets ~5MB), gzip/br,
+      TTFB local, imagenes pesadas de la home (~1.3MB: headway.webp 563KB, Maxam
+      558KB, tuerca-cromada.jpg 356KB, Diseno-sin-titulo-82-1.png 165KB),
+      admin-ajax.php lento (~8.9s, order-attribution Woo), JS sin usar del parent
+      (~943KB).
     - SEO 92: robots.txt "Timed out fetching resource" (timeout local al
       fetchear, no el invalid previo; verificar en prod con dominio real).
     - BP 96: [user-scalable=no] en el viewport (del parent, fuera de child);
-      bfcache 3 motivos; errores de consola no reproducidos por CDP.
-    - CLS 0.081: ORIGEN = slider/hero RevSlider (.vc_custom_1471237765688 se
-      expande al cargar; shift 0.0256 x:35->0) + contenedor ancho completo con
-      lazy-load. NO corregible via child sin tocar RevSlider (fuera de alcance).
-    - Imagenes grandes: .wsf-category-card (home) muestra img 1500x1500 sin
-      width/height (el contenedor .wsf-category-image si tiene aspect-ratio 1/1,
-      pero Lighthouse pide dimensiones en el <img>). Requiere tocar el shortcode
-      del plugin (fuera de alcance child) o un filtro JS.
-    - JS/CSS no usado (~944/2009 KiB): del parent/plugins, requiere optimizador
-      agresivo (fuera de alcance, Autoptimize JS rompe RevSlider).
+      bfcache 3 motivos (cache-control:no-store); errores de consola no
+      reproducidos por CDP.
+    - CLS: RESUELTO (0). El fix del CSS inline elimino los shifts de carga.
+    - ACCESIBILIDAD (A11y 70) y VISTA MOVIL: PENDIENTES para la proxima sesion -
+      detalle COMPLETO en el item 33.
+33. ACCESIBILIDAD - INFORME DETALLADO para corregir (Lighthouse navegador real,
+    A11y 70, 2026-09-05; ver historico 63). Pendiente de ejecutar en proxima sesion:
+    - NOMBRES Y ETIQUETAS:
+      * Botones sin nombre accesible: button y button.wsf-active (son los dots del
+        slider de testimonios .wsf-testimonials-dots del PLUGIN wheels-size-finder,
+        creados por JS sin aria-label ni texto). Fix posible en child: CSS no puede;
+        requiere JS del child que agregue aria-label a los dots, o tocar el plugin.
+      * Selects sin <label>: select.wsf-brand-select, .wsf-model-select,
+        .wsf-year-select, .wsf-version-select (buscador del PLUGIN). Fix: el plugin
+        no asocia labels; se puede mitigar desde child con <label> via JS o aria-
+        label, o corregir en el plugin.
+      * Enlaces sin nombre reconocible: 8x "a" (verificar cuales: posible logo sin
+        alt/texto, iconos de redes sociales, o el menu). Revisar por CDP.
+    - PRACTICAS RECOMENDADAS:
+      * [user-scalable="no"] en <meta name=viewport>: lo emite el PARENT Motors.
+        Fix desde child: filtrar/reescribir el meta viewport (wp_head) quitando
+        user-scalable=no o poniendo maximum-scale>=5.
+      * Areas tactiles pequenas: button, button.wsf-active (dots de testimonios,
+        ~7px) - del plugin. Fix en child: agrandar los dots (min 24x24 + spacing)
+        via CSS del child.
+      * Documento sin punto de referencia principal: falta <main>. El PARENT no
+        usa <main> (usa divs). Fix desde child: via JS agregar role="main" al
+        contenedor principal (#main o .stm-template-motorcycle wrapper), o filtrar
+        el body. Evaluar.
+      * Enlaces identicos con misma finalidad.
+    - CONTRASTE:
+      * span.wsf-testimonial-author + div.wsf-testimonial: el autor del testimonio
+        (rojo var(--wsf-brand) sobre card) no cumple AA en algun modo. El plugin lo
+        pinta rojo; el child ya overridea .colored del footer. Fix en child: forzar
+        .wsf-testimonial-author a var(--wsf-txt) o un rojo que cumpla AA (como se
+        hizo con el badge v1.1.8).
+    - NAVEGACION (heading-order): h4.title.heading-font, h5, h6 saltan niveles
+      (heading-order). Revisar estructura de encabezados de la home (el theme usa
+      h4 en titulos de widgets/cards donde deberia ir h2/h3). Fix posible en child:
+      CSS no cambia el orden; requiere ajustar el markup o aceptar (evaluar).
+    - ARIA: "Los ID de ARIA son unicos" (posible ID duplicado del plugin).
+    - DECISION ABIERTA: muchos fallos son del PLUGIN wheels-size-finder
+      (testimonios/buscador) y del PARENT (viewport/landmark). La regla de oro es
+      "solo child". Opciones: (a) mitigar todo desde el child via CSS+JS+wp_head
+      (sin tocar plugin/parent), (b) autorizar tocar el plugin solo para a11y, o
+      (c) aceptar el 70. Recomendado: (a) intentar mitigar desde child primero.
+    - VISTA MOVIL: auditar a fondo (375px) en la misma sesion: touch targets,
+      overflow horizontal, drawer de filtros, topbar, menu. El informe no mostro
+      fallos moviles especificos pero hay que verificar con CDP.
 29. NAVBAR STICKY "CORTADO" (reporte de usuario): RESUELTO = no-bug. El usuario
     vio el logo de la cinta negra del header cortado al scrollear, pero en una
     ventana de INCOGNITO (sin cache previo) NO se corta. Diagnostico CDP completo

@@ -279,19 +279,24 @@ acá y no se agreguen de nuevo al plugin.
 - Radio final de cards/botones/inputs (sugerido 4px cards / 2px botones).
 - Reduccion de la paleta roja vs superficies: mantener contraste AA.
 - Confirmar si `footer_copyright_text` (texto Motors) se deja o se gestiona aparte.
-- A11y de los componentes del PLUGIN wheels-size-finder (testimonios dots sin
-  aria-label, .wsf-testimonial-author contraste, selects sin label): el scope
-  "solo child" no los toca; decidir si una etapa futura los corrige en el plugin.
+- A11y del PLUGIN wheels-size-finder y del PARENT: PROXIMA SESION (detalle
+  completo en docs/03-pendientes-y-bugs.md item 33). Fallos: dots de testimonios
+  sin aria-label, selects sin label, autor de testimonio sin contraste (PLUGIN);
+  [user-scalable=no] y falta de <main> (PARENT); touch targets pequenos;
+  heading-order. DECIDIR: mitigar desde el child (CSS+JS+wp_head) vs autorizar
+  tocar plugin/parent. Recomendado: intentar mitigar desde child primero.
+- VISTA MOVIL: auditar a fondo en la misma sesion de a11y (375px: touch targets,
+  overflow, drawer de filtros, topbar, menu).
 - Contenido/SEO: RESUELTO en v1.3.0 (2026-09-05) - ver docs/03-pendientes-y-bugs.md
   item 31 y historico item 58: meta-description implementada en el child via
   wp_head (opcion A sin plugin), typo del tagline corregido, link "La empresa"
   ya apuntaba a /about-us/. Queda SOLO en produccion: robots.txt Sitemap apuntando
   al dominio real (hoy localhost:8881, causa del "invalid" local).
-- (Futuro) etapa cache: plugin de cache + LazyLoad + minify child, fuera de scope.
-  ACTUALIZADO 2026-09-05 (historico 59): Autoptimize instalado en modo solo-CSS
-  (minify+agregar+diferir CSS; JS intacto porque rompe RevSlider). El Perf local
-  sigue limitado por el TTFB del servidor Studio (~2.5s), no por assets; el
-  beneficio real se vera en produccion.
+- Etapa cache/optimizacion: RESUELTO EN GRAN PARTE (historico 59-63). Autoptimize
+  en modo solo-CSS con CSS como ARCHIVO (no inline de 2MB en el head). Resultado:
+  Lighthouse navegador PERF 90 (FCP 0.8/LCP 0.9/CLS 0). Restan para produccion:
+  cache headers, gzip, TTFB, imagenes pesadas de la home (~1.3MB), JS sin usar del
+  parent.
 
 ### Nota sticky header (v1.1.5, sin cambios)
 Reporte de usuario de navbar sticky "cortado" (logo de la cinta negra) resulto

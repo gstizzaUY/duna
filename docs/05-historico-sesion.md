@@ -706,3 +706,49 @@
     - CONFIG Autoptimize final: css=1 aggregate=1 defer=0 inline=0; js=0
       (intacto por RevSlider). No se bumpeo el child (cambio de config del plugin,
       child sigue en 1.3.2).
+63. RENDIMIENTO 90 EN NAVEGADOR + INFORME DE ACCESIBILIDAD (2026-09-05):
+    - RESULTADO FINAL: con la config de Autoptimize CSS-como-archivo (item 62), el
+      usuario corrio Lighthouse en el navegador (incognito) y obtuvo RENDIMIENTO 90
+      con FCP 0.8s / LCP 0.9s / TBT 0 / CLS 0 / Speed Index 3.7s. Antes (con el
+      CSS inline de 2MB en el head) era ~61-70. El salto confirma que el fix clave
+      fue sacar los 2MB de CSS inline del <head>: el navegador pinta en 0.8s en vez
+      de parsear 2MB antes.
+    - RESTAN del informe de rendimiento (mayormente PRODUCCION o menor):
+      * Cache headers "None" en todos los assets (~5123 KiB ahorro en repetidas):
+        se configura en el hosting (Apache/nginx), no en local.
+      * Compresion de texto ausente (el server local no comprime; prod usa gzip/br).
+      * TTFB "server responded slowly (3453ms)": server local; prod ~200-300ms.
+      * Imagenes pesadas en la home: headway.webp 563KB, Maxam 558KB, tuerca
+        cromada.jpg 356KB, Diseno-sin-titulo-82-1.png 165KB (~1.3MB total ahorrable).
+      * admin-ajax.php tarda ~8.9s en la cadena critica (order-attribution de Woo
+        al cargar) - diferir/desactivar es delicado.
+      * JS sin usar ~943KB (sr7 162KB, tptools 124KB, chart 102KB, lightgallery
+        93KB, typeahead 80KB, owl 63KB...) - del parent/plugins, fuera de child.
+      * bfcache: 3 motivos por cache-control:no-store (del server local/woo).
+    - INFORME DE ACCESIBILIDAD (A11y 70) para la PROXIMA SESION - detalle completo:
+      * NOMBRES Y ETIQUETAS:
+        - Botones sin nombre accesible: button y button.wsf-active (dots del slider
+          de testimonios del PLUGIN wheels-size-finder, creados por JS).
+        - Selects sin <label>: select.wsf-brand-select, .wsf-model-select,
+          .wsf-year-select, .wsf-version-select (buscador del PLUGIN).
+        - Enlaces sin nombre reconocible: 8x "a" (probablemente iconos/logo del
+          header o del contenido - verificar cuales).
+      * PRACTICAS RECOMENDADAS:
+        - [user-scalable="no"] en <meta name=viewport> (del PARENT Motors).
+        - Areas tactiles pequenas: button, button.wsf-active (dots testimonios).
+        - Documento sin punto de referencia principal (falta <main> / landmark) -
+          del PARENT (header/footer/section).
+        - Enlaces identicos con misma finalidad.
+      * CONTRASTE:
+        - span.wsf-testimonial-author + div.wsf-testimonial (autor de testimonios
+          en rojo/oscuro - del PLUGIN, item ya conocido).
+      * NAVEGACION (orden de encabezados):
+        - h4.title.heading-font, h5, h6 saltan niveles (heading-order).
+      * ARIA: "Los ID de ARIA son unicos" (probablemente el plugin duplica IDs).
+    - OBSERVACION: los fallos de a11y del PLUGIN (testimonios dots sin aria-label,
+      selects sin label, autor sin contraste) ya estaban documentados como fuera de
+      alcance "solo child" (item 27 y Decisiones abiertas en 07-tema-hijo). La
+      proxima sesion debe DECIDIR si se corrigen en el plugin (rompe la regla de
+      "solo child") o se mitigan desde el child.
+    - VISTA MOVIL: pendiente revisar a fondo (el informe no mostro fallos moviles
+      especificos, pero hay que auditar 375px: touch targets, overflow, drawer).
