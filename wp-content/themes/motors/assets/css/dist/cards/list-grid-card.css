@@ -1,0 +1,55 @@
+#listings-result .mvl-list-card-skin.skin_1 .skin-list-gallery .image {
+    padding: 0;
+}
+
+#listings-result .mvl-list-card-skin.skin_1 .skin-list-gallery .image .mvl-label {
+    z-index: 2;
+}
+
+#listings-result .mvl-list-card-skin.skin_1 .skin-list-gallery .image .stm-car-medias {
+    top: unset !important;
+}
+
+#listings-result .mvl-list-card-skin.skin_1 .skin-list-gallery .image .stm-listing-favorite {
+    left: unset !important;
+    bottom: unset !important;
+}
+
+#listings-result .mvl-list-card-skin.skin_1 .skin-list-gallery .image .image-inner {
+    min-height: 260px !important;
+}
+
+#listings-result .mvl-list-card-skin.skin_1 .skin-list-gallery .image .image-inner .interactive-hoverable {
+    min-height: 260px !important;
+}
+
+#listings-result .mvl-list-card-skin.skin_1 .skin-list-gallery .image .image-inner img {
+    height: 100% !important;
+    max-height: 100%;
+}
+
+#listings-result .mvl-list-card-skin.skin_1 .skin-list-gallery .image .stm_compare_unit {
+    z-index: 10;
+}
+
+#listings-result .mvl-list-card-skin:hover {
+    background-color: var(--motors-card-bg-color);
+}
+
+#listings-result .stm-directory-grid-loop.skin_1 .image .mvl-label {
+    z-index: 2;
+}
+
+#listings-result .stm-directory-grid-loop.skin_1 .image .stm-listing-favorite {
+    left: unset !important;
+    bottom: unset !important;
+}
+
+#listings-result .stm-directory-grid-loop.skin_1 .image .stm-car-medias {
+    left: 16px;
+    right: inherit;
+}
+
+#listings-result .stm-directory-grid-loop.skin_1 .image .stm_compare_unit {
+    padding: 16px;
+}

@@ -1,0 +1,192 @@
+<?php
+$regular_price_label           = get_post_meta( get_the_ID(), 'regular_price_label', true );
+$special_price_label           = get_post_meta( get_the_ID(), 'special_price_label', true );
+$price                         = get_post_meta( get_the_id(), 'price', true );
+$sale_price                    = get_post_meta( get_the_id(), 'sale_price', true );
+$car_price_form_label          = get_post_meta( get_the_ID(), 'car_price_form_label', true );
+$data_price                    = '0';
+$mileage                       = get_post_meta( get_the_id(), 'mileage', true );
+$data_mileage                  = '0';
+$taxonomies                    = apply_filters( 'stm_get_taxonomies', array() );
+$categories                    = wp_get_post_terms( get_the_ID(), array_values( $taxonomies ) );
+$classes                       = array();
+$show_compare                  = apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_listing_compare' );
+$cars_in_compare               = apply_filters( 'stm_get_compared_items', array() );
+$car_already_added_to_compare  = '';
+$car_compare_status            = esc_html__( 'Add to compare', 'motors' );
+$placeholder_path              = 'Motor-small.jpg';
+$show_generated_title_as_label = apply_filters( 'motors_vl_get_nuxy_mod', false, 'show_generated_title_as_label' );
+$gallery_hover_interaction     = apply_filters( 'motors_vl_get_nuxy_mod', false, 'gallery_hover_interaction' );
+
+if ( ! empty( $price ) ) {
+	$data_price = $price;
+}
+
+if ( ! empty( $sale_price ) ) {
+	$data_price = $sale_price;
+}
+
+if ( empty( $price ) && ! empty( $sale_price ) ) {
+	$price = $sale_price;
+}
+
+if ( ! empty( $mileage ) ) {
+	$data_mileage = $mileage;
+}
+
+if ( ! empty( $categories ) ) {
+	foreach ( $categories as $category ) {
+		$classes[] = $category->slug . '-' . $category->term_id;
+	}
+}
+
+if ( ! empty( $cars_in_compare ) && in_array( get_the_ID(), $cars_in_compare, true ) ) {
+	$car_already_added_to_compare = 'active';
+	$car_compare_status           = esc_html__( 'Remove from compare', 'motors' );
+}
+
+$img_size    = 'stm-img-796-466';
+$thumb_width = 798;
+$thumbs      = apply_filters( 'stm_get_hoverable_thumbs', array(), get_the_ID(), $img_size );
+$img_attrs   = array(
+	'sizes'   => '(max-width: 767px) 100vw, (max-width: 990px) 50vw, (max-width: 1155px) 33vw, ' . esc_attr( $thumb_width ) . 'px',
+	'class'   => 'img-responsive',
+	'alt'     => get_the_title(),
+	'loading' => 'lazy',
+);
+?>
+<div
+	class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 stm-isotope-listing-item stm_moto_single_grid_item all <?php echo esc_attr( implode( ' ', $classes ) ); ?>"
+	data-price="<?php echo esc_attr( $data_price ); ?>"
+	data-date="<?php echo get_the_date( 'Ymdhi' ); ?>"
+	data-mileage="<?php echo esc_attr( $data_mileage ); ?>"
+	>
+	<a href="<?php echo esc_url( get_the_permalink() ); ?>" class="rmv_txt_drctn">
+		<div class="image">
+			<?php if ( $gallery_hover_interaction && count( $thumbs['gallery'] ) > 1 && ! wp_is_mobile() ) : ?>
+				<!-- "interactive-hoverable" -->
+				<?php do_action( 'stm_listing_image_hover_gallery', $thumbs, $img_size, $img_attrs ); ?>
+
+			<?php elseif ( has_post_thumbnail( get_the_ID() ) ) : ?>
+
+				<?php echo wp_kses_post( wp_get_attachment_image( get_post_thumbnail_id( get_the_ID() ), $img_size, false, $img_attrs ) ); ?>
+
+			<?php else : ?>
+
+				<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/' . $placeholder_path ); ?>" alt="<?php esc_attr_e( 'Placeholder', 'motors' ); ?>" class="img-responsive" loading="lazy"/>
+
+			<?php endif; ?>
+
+			<?php get_template_part( 'partials/listing-cars/listing-directory', 'badges' ); ?>
+
+			<div class="stm_moto_hover_unit">
+				<!--Compare-->
+				<?php if ( ! empty( $show_compare ) && $show_compare ) : ?>
+					<div
+						class="stm-listing-compare heading-font stm-compare-directory-new"
+						data-post-type="<?php echo esc_attr( get_post_type( get_the_ID() ) ); ?>"
+						data-id="<?php echo esc_attr( get_the_id() ); ?>"
+						data-title="<?php echo wp_kses_post( apply_filters( 'stm_generate_title_from_slugs', get_the_title( get_the_ID() ), get_the_ID(), false ) ); ?>"
+						>
+						<i class="stm-service-icon-compare-new"></i>
+						<?php esc_html_e( 'Compare', 'motors' ); ?>
+					</div>
+				<?php endif; ?>
+				<?php stm_get_boats_image_hover( get_the_ID() ); ?>
+				<div class="heading-font">
+					<?php if ( empty( $car_price_form_label ) ) : ?>
+						<?php if ( ! empty( $price ) && ! empty( $sale_price ) && $price !== $sale_price ) : ?>
+							<div class="price discounted-price">
+								<div class="regular-price"><?php echo esc_attr( apply_filters( 'stm_filter_price_view', '', $price ) ); ?></div>
+								<div class="sale-price"><?php echo esc_attr( apply_filters( 'stm_filter_price_view', '', $sale_price ) ); ?></div>
+							</div>
+						<?php elseif ( ! empty( $price ) ) : ?>
+							<div class="price">
+								<div class="normal-price"><?php echo esc_attr( apply_filters( 'stm_filter_price_view', '', $price ) ); ?></div>
+							</div>
+						<?php endif; ?>
+					<?php else : ?>
+						<div class="price">
+							<div class="normal-price"><?php echo esc_attr( $car_price_form_label ); ?></div>
+						</div>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+		<div class="listing-car-item-meta">
+			<div class="car-meta-top heading-font clearfix">
+				<div class="car-title">
+					<?php echo wp_kses_post( apply_filters( 'stm_generate_title_from_slugs', get_the_title( get_the_ID() ), get_the_ID(), true ) ); ?>
+				</div>
+			</div>
+
+			<?php $labels = apply_filters( 'stm_get_car_listings', array() ); ?>
+			<?php if ( ! empty( $labels ) ) : ?>
+				<div class="car-meta-bottom">
+					<ul>
+						<?php foreach ( $labels as $label ) : ?>
+							<?php $label_meta = get_post_meta( get_the_id(), $label['slug'], true ); ?>
+							<?php if ( ! apply_filters( 'is_empty_value', $label_meta ) && ! apply_filters( 'stm_is_listing_price_field', true, $label['slug'] ) ) : ?>
+								<li>
+									<?php if ( ! empty( $label['font'] ) ) : ?>
+										<i class="<?php echo esc_attr( $label['font'] ); ?>"></i>
+									<?php endif; ?>
+
+									<span class="stm_label">
+										<?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $label['single_name'], 'Label Name' ) ); ?>:
+									</span>
+
+									<?php if ( ! empty( $label['numeric'] ) && $label['numeric'] ) : ?>
+										<span><?php echo esc_attr( $label_meta ); ?></span>
+									<?php else : ?>
+
+										<?php
+											$data_meta_array = explode( ',', $label_meta );
+											$datas           = array();
+
+										if ( ! empty( $data_meta_array ) ) {
+											foreach ( $data_meta_array as $data_meta_single ) {
+												$data_meta = get_term_by( 'slug', $data_meta_single, $label['slug'] );
+												if ( ! empty( $data_meta->name ) ) {
+													$datas[] = esc_attr( $data_meta->name );
+												}
+											}
+										}
+										?>
+
+										<?php if ( ! empty( $datas ) ) : ?>
+
+											<?php
+											if ( count( $datas ) > 1 ) {
+												?>
+
+													<span
+														class="stm-tooltip-link"
+														data-toggle="tooltip"
+														data-placement="bottom"
+														title="<?php echo esc_attr( implode( ', ', $datas ) ); ?>">
+														<?php echo esc_html( $datas[0] ) . '<span class="stm-dots dots-aligned">...</span>'; ?>
+													</span>
+
+												<?php } else { ?>
+													<span><?php echo esc_html( implode( ', ', $datas ) ); ?></span>
+												<?php
+												}
+												?>
+										<?php endif; ?>
+
+									<?php endif; ?>
+
+									<?php if ( ! empty( $label['number_field_affix'] ) ) : ?>
+										<span><?php echo esc_html( apply_filters( 'stm_dynamic_string_translation', $label['number_field_affix'], 'Number Field Affix' ) ); ?></span>
+									<?php endif; ?>
+								</li>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+			<?php endif; ?>
+
+		</div>
+	</a>
+</div>

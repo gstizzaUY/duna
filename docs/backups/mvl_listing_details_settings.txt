@@ -1,0 +1,114 @@
+array (
+  'show_trade_in' => true,
+  'show_offer_price' => '',
+  'show_calculator' => true,
+  'show_added_date' => '',
+  'show_print_btn' => '',
+  'show_test_drive' => true,
+  'show_stock' => true,
+  'show_compare' => true,
+  'show_share' => true,
+  'show_pdf' => '',
+  'show_certified_logo_1' => '',
+  'show_certified_logo_2' => '',
+  'show_vin' => '',
+  'show_registered' => '',
+  'stm_show_number' => '',
+  'default_interest_rate' => '',
+  'default_month_period' => '',
+  'default_down_payment_type' => 'static',
+  'default_down_payment' => '',
+  'default_down_payment_percent' => '',
+  'stm_single_car_page' => 0,
+  'stm_car_link_quote' => '',
+  'stm_similar_query' => '',
+  'carguru_style' => 'STYLE1',
+  'carguru_min_rating' => 'GREAT_PRICE',
+  'carguru_default_height' => '42',
+  'fs_user_features' => 
+  array (
+    0 => 
+    array (
+      'tab_title_single' => 'Extra Features',
+      'tab_title_selected_labels' => 
+      array (
+        0 => 
+        array (
+          'value' => 'abs',
+          'label' => 'ABS',
+        ),
+        1 => 
+        array (
+          'value' => 'airbags',
+          'label' => 'Airbags',
+        ),
+        2 => 
+        array (
+          'value' => 'alloy-wheels',
+          'label' => 'Alloy wheels',
+        ),
+        3 => 
+        array (
+          'value' => 'auxiliary-heating',
+          'label' => 'Auxiliary heating',
+        ),
+        4 => 
+        array (
+          'value' => 'bluetooth',
+          'label' => 'Bluetooth',
+        ),
+        5 => 
+        array (
+          'value' => 'cd-player',
+          'label' => 'CD player',
+        ),
+        6 => 
+        array (
+          'value' => 'central-locking',
+          'label' => 'Central locking',
+        ),
+        7 => 
+        array (
+          'value' => 'electric-side-mirror',
+          'label' => 'Electric side mirror',
+        ),
+        8 => 
+        array (
+          'value' => 'immobilizer',
+          'label' => 'Immobilizer',
+        ),
+        9 => 
+        array (
+          'value' => 'mp3-interface',
+          'label' => 'MP3 interface',
+        ),
+        10 => 
+        array (
+          'value' => 'navigation-system',
+          'label' => 'Navigation system',
+        ),
+        11 => 
+        array (
+          'value' => 'panoramic-roof',
+          'label' => 'Panoramic roof',
+        ),
+        12 => 
+        array (
+          'value' => 'particulate-filter',
+          'label' => 'Particulate filter',
+        ),
+        13 => 
+        array (
+          'value' => 'sports-package',
+          'label' => 'Sports package',
+        ),
+        14 => 
+        array (
+          'value' => 'sports-suspension',
+          'label' => 'Sports suspension',
+        ),
+      ),
+      'single_group' => true,
+    ),
+  ),
+)

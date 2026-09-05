@@ -1,0 +1,3 @@
+array (
+  'listing_details_skin' => 'default',
+)

@@ -32,9 +32,18 @@ package-lock.json
 *.cache
 *.tmp
 *.log
-*.sql
-*.sqlite
 .wp-cli/
+
+# WordPress Studio local database (SQLite runtime + WAL files)
+# NOTE: /database/duna.sql (MySQL-compatible export) IS tracked on purpose
+/wp-content/database/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# Debug / accidental files
+/wsf-debug.php
+/posts}
 
 # OS
 Thumbs.db

@@ -1,0 +1,98 @@
+.stm-pro-layout h5 {
+    color: var(--motors-filter-field-text-color);
+}
+
+.stm-pro-layout .stm-inventory-pro-filter {
+    background: var(--motors-filter-bg-color);
+}
+
+@media (min-width: 1023px) {
+    .stm-pro-layout .stm-inventory-pro-filter--modular.stm-inventory-pro-filter--modular {
+        background-color: unset;
+    }
+}
+
+.stm-pro-layout .stm-inventory-pro-filter-fields input[type=text] {
+    background-color: var(--motors-filter-field-bg-color);
+    color: var(--motors-filter-field-text-color);
+    border: 1px solid var(--motors-filter-border-color);
+}
+
+.stm-pro-layout .stm-inventory-pro-filter-fields input[type=text]:focus {
+    border: 1px solid var(--motors-filter-field-link-color);
+    box-shadow: none;
+    background-color: var(--motors-filter-field-bg-color) !important;
+}
+
+.stm-pro-layout .stm-inventory-pro-filter-fields .stm-filter-pro-price-inputs .stm-filter-pro-price .stm-price-range-unit .stm-price-range.ui-slider-horizontal .ui-slider-handle .ballon {
+    background-color: var(--motors-filter-field-bg-color);
+    color: var(--motors-filter-field-text-color);
+}
+
+.stm-pro-layout .stm-inventory-pro-filter-fields .stm-filter-pro-price-inputs .extreme-value input[type=text] {
+    background-color: var(--motors-filter-field-bg-color);
+    color: var(--motors-filter-field-text-color);
+    border-color: var(--motors-filter-border-color);
+}
+
+.stm-pro-layout .stm-inventory-pro-filter-fields .stm-filter-pro-price-inputs .extreme-value input.filled-field {
+    border-color: var(--motors-filter-field-link-color);
+}
+
+.stm-pro-layout .stm-inventory-pro-filter-fields .stm-pro-filter-field {
+    background-color: var(--motors-filter-field-bg-color);
+}
+
+.stm-pro-layout .stm-inventory-pro-filter-fields .stm-pro-filter-field .stm-pro-filter-handle .handle-title {
+    color: var(--motors-filter-field-text-color);
+}
+
+.stm-pro-layout .stm-inventory-pro-filter-fields .stm-pro-filter-field .stm-pro-filter-dropdown {
+    background-color: var(--motors-filter-field-bg-color);
+}
+
+.stm-pro-layout .stm-inventory-pro-filter-fields .stm-filter-item .stm-filter-pro-item-heading .heading-title {
+    color: var(--motors-filter-field-text-color);
+}
+
+.stm-pro-layout .stm-inventory-pro-filter-fields .stm-filter-item .stm-filter-pro-item-heading .heading-action .action:hover {
+    color: var(--motors-filter-field-link-color-highalpha);
+}
+
+.stm-pro-layout .stm-inventory-pro-filter-fields .stm-filter-item .show-all:hover {
+    color: var(--motors-filter-field-link-color-highalpha);
+}
+
+.stm-pro-layout .stm-inventory-pro-filter-fields .stm-filter-item .show-less:hover {
+    color: var(--motors-filter-field-link-color-highalpha);
+}
+
+.stm-pro-layout .stm-inventory-pro-filter-fields .stm-filter-item .stm-filter-pro-options-list .option-title,
+.stm-pro-layout .stm-inventory-pro-filter-fields .stm-filter-item .stm-filter-pro-options-list .option-count {
+    color: var(--motors-filter-field-text-color-lowalpha);
+}
+
+.stm-pro-layout .stm-inventory-pro-filter-fields .select2-container--default .select2-selection--single,
+.stm-pro-layout .stm-inventory-pro-filter-fields .select2-container--pro .select2-selection--single {
+    background-color: var(--motors-filter-field-bg-color);
+}
+
+.stm-pro-layout .stm-inventory-pro-filter-fields .select2-container--default .select2-selection--single .select2-selection__rendered,
+.stm-pro-layout .stm-inventory-pro-filter-fields .select2-container--pro .select2-selection--single .select2-selection__rendered {
+    color: var(--motors-filter-field-text-color);
+}
+
+.stm-pro-layout .stm-inventory-pro-filter-fields .select2-container--default .select2-selection--single .select2-results__option--highlighted[aria-selected],
+.stm-pro-layout .stm-inventory-pro-filter-fields .select2-container--pro .select2-selection--single .select2-results__option--highlighted[aria-selected] {
+    background-color: var(--motors-filter-field-link-color-super-lowalpha) !important;
+}
+
+.stm-pro-layout .stm-inventory-pro-filter-footer {
+    margin-top: 15px;
+    background: var(--motors-filter-bg-color);
+}
+
+.stm-pro-layout .stm-inventory-pro-filter-footer .actions .actions-button .button {
+    box-shadow: none !important;
+    text-transform: capitalize !important;
+}

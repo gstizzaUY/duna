@@ -1,0 +1,12 @@
+array (
+  'listing_list_sort_slug' => 'make',
+  'listing_grid_choices' => '9,12,18,27',
+  'enable_search' => '',
+  'enable_features_search' => '',
+  'default_sort_by' => 'date_high',
+  'listing_filter_position' => 'right',
+  'enable_location' => '',
+  'distance_measure_unit' => '',
+  'distance_search' => '',
+  'inventory_skin' => 'default',
+)

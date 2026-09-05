@@ -1,0 +1,604 @@
+(function ($) {
+	; ('use strict')
+
+	$(document).ready(function () {
+		// Если на странице есть формы FormsEditor, отдаем обработку тест-драйва/трейд-оффера в mvl-forms.js
+		const hasFeForms = $('.mvl-fe-form, .mvl-fe-form-test-drive, .mvl-fe-form-offer-price, .mvl-fe-form-request-car-price').length > 0;
+		if (!hasFeForms) {
+		stm_ajax_add_test_drive()
+		stm_ajax_add_trade_offer()
+		}
+
+		// Initialize datetimepicker for elements outside Forms Editor modals
+		let date_time_picker = $('.stm-date-timepicker').not('.mvl-modal-form .stm-date-timepicker')
+
+		if (typeof $.datetimepicker === 'object' && date_time_picker.length) {
+			date_time_picker.datetimepicker({
+				timepicker: true,
+				format: 'd/m/Y H:i',
+				lang: stm_lang_code,
+				closeOnDateSelect: false,
+			})
+		}
+	})
+
+	$(document).ready(function () {
+		let stm_cookies = $.cookie(),
+			stm_car_compare = [],
+			post_type = ''
+
+		for (var key in stm_cookies) {
+			if (stm_cookies.hasOwnProperty(key)) {
+				if (key.indexOf(cc_prefix + post_type) > -1) {
+					stm_car_compare.push(stm_cookies[key])
+				}
+			}
+		}
+
+		$('.car-action-unit.add-to-compare').each(function () {
+			let $this = $(this),
+				stm_car_add_to = $this.data('id')
+
+			if ($.inArray(stm_car_add_to.toString(), stm_car_compare) !== -1) {
+				$this.addClass('active')
+				$this.addClass('stm-added')
+
+				let compareHtml =
+					'<i class="' + getAddedIcon($this) + ' stm-unhover"></i>\n' +
+					'<span class="stm-unhover">' +
+					stm_i18n.stm_label_in_compare +
+					'</span>\n' +
+					'<div class="stm-show-on-hover">\n' +
+					'<i class="' + getRemoveIcon($this) + '"></i>\n' +
+					stm_i18n.stm_label_remove_list +
+					'</div>'
+
+				if (
+					typeof stm_i18n.stm_label_remove !== 'undefined' &&
+					$this.data('view') !== 'grid'
+				) {
+					$this.html(compareHtml)
+					$this.attr('title', stm_i18n.stm_label_remove)
+				}
+				if ($this.data('view') === 'grid') {
+
+					$this
+						.find('i')
+						.removeClass(getRemoveIcon($this) + ', ' + getCompareIcon($this))
+						.addClass(getAddedIcon($this))
+				}
+			}
+		})
+	})
+
+	function getAddedIcon(node) {
+		let addedIcon = 'motors-icons-added';
+		if (node.attr('data-added-icon')) {
+			addedIcon = node.attr('data-added-icon');
+		}
+		return addedIcon;
+	}
+
+	function getRemoveIcon(node) {
+		let removeIcon = 'motors-icons-remove';
+		if (node.attr('data-remove-icon')) {
+			removeIcon = node.attr('data-remove-icon');
+		}
+		return removeIcon;
+	}
+
+	function getCompareIcon(node) {
+		let compareIcon = 'motors-icons-add';
+		if (node.attr('data-compare-icon')) {
+			compareIcon = node.attr('data-compare-icon');
+		}
+		return compareIcon;
+	}
+
+	$('.stm-gallery-action-unit.compare').each(function () {
+		let $this = $(this),
+			stm_car_add_to = $this.data('id'),
+			post_type = $this.data('post-type'),
+			stm_cookies = $.cookie(),
+			stm_car_compare = []
+
+		for (var key in stm_cookies) {
+			if (stm_cookies.hasOwnProperty(key)) {
+				if (key.indexOf(cc_prefix + post_type) > -1) {
+					stm_car_compare.push(stm_cookies[key])
+				}
+			}
+		}
+
+		if ($.inArray(stm_car_add_to.toString(), stm_car_compare) !== -1) {
+			$this.addClass('active')
+			$this.addClass('stm-added')
+		}
+	})
+
+	$(document).on('click', '.stm-gallery-action-unit.compare', function (e) {
+		e.preventDefault()
+		let $this = $(this),
+			stm_cookies = $.cookie(),
+			stm_car_compare = [],
+			stm_car_add_to = $this.data('id'),
+			post_type = $this.data('post-type'),
+			car_title = $this.data('title')
+
+		for (var key in stm_cookies) {
+			if (stm_cookies.hasOwnProperty(key)) {
+				if (key.indexOf(cc_prefix + post_type) > -1) {
+					stm_car_compare.push(stm_cookies[key])
+				}
+			}
+		}
+
+		let stm_compare_cars_counter = stm_car_compare.length
+
+		$.cookie.raw = true
+		if ($.inArray(stm_car_add_to.toString(), stm_car_compare) === -1) {
+			if (stm_car_compare.length < 3) {
+				$.cookie(
+					cc_prefix + post_type + '[' + stm_car_add_to + ']',
+					stm_car_add_to,
+					{ expires: 7, path: '/' }
+				)
+				stm_compare_cars_counter++
+
+				let $compareButton = $(
+					'.add-to-compare[data-id="' + stm_car_add_to + '"]'
+				)
+				if (!$compareButton.hasClass('active')) {
+					$compareButton.addClass('active')
+					$compareButton.addClass('stm-added')
+
+					let compareHtml =
+						'<i class="' + getAddedIcon($this) + ' stm-unhover"></i>\n' +
+						'<span class="stm-unhover">' +
+						stm_i18n.stm_label_in_compare +
+						'</span>\n' +
+						'<div class="stm-show-on-hover">\n' +
+						'<i class="' + getRemoveIcon($this) + '"></i>\n' +
+						stm_i18n.stm_label_remove_list +
+						'</div>'
+
+					$compareButton.html(compareHtml)
+					$compareButton.attr('title', stm_i18n.stm_label_remove)
+				}
+
+				$this.addClass('active')
+
+				showCompareNotification('added', car_title)
+			} else {
+				showCompareNotification('filled', '', post_type)
+			}
+		} else {
+			$.removeCookie(cc_prefix + post_type + '[' + stm_car_add_to + ']', {
+				path: '/',
+			})
+			$this.removeClass('active')
+			stm_compare_cars_counter--
+
+			let $compareButton = $(
+				'.add-to-compare[data-id="' + stm_car_add_to + '"]'
+			)
+			if ($compareButton.hasClass('active')) {
+				$compareButton.removeClass('active')
+				$compareButton.removeClass('stm-added')
+				$compareButton.find('.stm-show-on-hover').remove()
+
+				let addCompareHtml =
+					'<i class="motors-icons-add"></i>\n' +
+					'<span>' +
+					stm_i18n.stm_label_add +
+					'</span>'
+
+				$compareButton.html(addCompareHtml)
+				$compareButton.attr('title', stm_i18n.stm_label_add)
+			}
+
+			showCompareNotification('removed', car_title)
+		}
+	})
+
+	$(document).on(
+		'click',
+		'.add-to-compare, .mvl-skins-add-to-compare',
+		function (e) {
+			e.preventDefault()
+			let $this = $(this),
+				stm_cookies = $.cookie(),
+				stm_car_compare = [],
+				stm_car_add_to = $this.data('id'),
+				post_type = $this.data('post-type'),
+				car_title = $this.data('title'),
+				view = $this.data('view')
+
+			for (var key in stm_cookies) {
+				if (stm_cookies.hasOwnProperty(key)) {
+					if (key.indexOf(cc_prefix + post_type) > -1) {
+						stm_car_compare.push(stm_cookies[key])
+					}
+				}
+			}
+			let stm_compare_cars_counter = stm_car_compare.length
+			$.cookie.raw = true
+			if ($.inArray(stm_car_add_to.toString(), stm_car_compare) === -1) {
+				if (stm_car_compare.length < 3) {
+					$.cookie(
+						cc_prefix + post_type + '[' + stm_car_add_to + ']',
+						stm_car_add_to,
+						{ expires: 7, path: '/' }
+					)
+					stm_compare_cars_counter++
+
+					$('.stm-gallery-action-unit.compare').addClass('active')
+					$this.addClass('active stm-added')
+					$this.attr('data-action', 'remove')
+					if ($this.data('view') !== 'grid') {
+						$this.html('<i class="motors-icons-scales-ico"></i> ' + stm_i18n.remove_from_compare)
+					}
+					$this.attr('title', stm_i18n.stm_label_remove)
+
+					if (!$this.hasClass('mvl-skins-add-to-compare') && !$this.hasClass('single-listing-action')) {
+						let compareHtml =
+							'<i class="motors-icons-added stm-unhover"></i>\n' +
+							'<span class="stm-unhover">' +
+							stm_i18n.stm_label_in_compare +
+							'</span>\n' +
+							'<div class="stm-show-on-hover">\n' +
+							'<i class="' + getRemoveIcon($this.find('i')) + '"></i>\n' +
+							stm_i18n.stm_label_remove_list +
+							'</div>'
+
+						if (
+							typeof stm_i18n.stm_label_remove !== 'undefined' &&
+							'grid' !== view
+						) {
+							$this.html(compareHtml)
+						}
+						if ('grid' === view) {
+							$this
+								.find('i')
+								.removeClass(getRemoveIcon($this) + ' ' + getCompareIcon($this))
+								.addClass(getAddedIcon($this))
+						}
+					}
+
+					showCompareNotification('added', car_title)
+				} else {
+					showCompareNotification('filled', '', post_type)
+				}
+			} else {
+				$.removeCookie(cc_prefix + post_type + '[' + stm_car_add_to + ']', {
+					path: '/',
+				})
+				$this.removeClass('active stm-added')
+
+				$this.attr('title', stm_i18n.stm_label_add)
+				$this.attr('data-action', 'add')
+				if ($this.data('view') !== 'grid') {
+					$this.html('<i class="motors-icons-scales-ico"></i> ' + stm_i18n.add_to_compare)
+				}
+
+				if (!$this.hasClass('mvl-skins-add-to-compare')) {
+					$this.find('.stm-show-on-hover').remove()
+					if (typeof stm_i18n.stm_label_add !== 'undefined') {
+						$this
+							.find('i')
+							.removeClass(getRemoveIcon($this) + ' ' + getAddedIcon($this))
+							.addClass(getCompareIcon($this))
+						$this
+							.find('span')
+							.removeClass('stm-unhover')
+							.html(stm_i18n.stm_label_add)
+					}
+				}
+
+				if ($('.add-to-compare.active').length === 0) {
+					$('.stm-gallery-action-unit.compare').removeClass('active')
+				}
+
+				stm_compare_cars_counter--
+
+				if ($this.hasClass('stm_remove_after')) {
+					window.location.reload()
+				}
+
+				if ($this.hasClass('remove-from-compare')) {
+					$('.car-listing-row .compare-col-stm-' + stm_car_add_to).hide(
+						'slide',
+						{ direction: 'left' },
+						function () {
+							$('.car-listing-row .compare-col-stm-' + stm_car_add_to).remove()
+							$('.car-listing-row').append($('.compare-empty-car-top').html())
+						}
+					)
+
+					$('.stm-compare-row .compare-col-stm-' + stm_car_add_to).hide(
+						'slide',
+						{ direction: 'left' },
+						function () {
+							$('.stm-compare-row .compare-col-stm-' + stm_car_add_to).remove()
+							$('.stm-compare-row').append(
+								$('.compare-empty-car-bottom').html()
+							)
+						}
+					)
+
+					$('.compare-column-stm-' + stm_car_add_to).hide(
+						'slide',
+						{ direction: 'left' },
+						function () {
+							$('.stm-compare-row .compare-column-stm-' + stm_car_add_to).remove()
+							$('.stm-compare-row').append(
+								$('.compare-empty-car-bottom').html()
+							)
+						}
+					)
+
+
+					$('.row-compare-features .compare-col-stm-' + stm_car_add_to).hide(
+						'slide',
+						{ direction: 'left' },
+						function () {
+							$(
+								'.row-compare-features .compare-col-stm-' + stm_car_add_to
+							).remove()
+							if ($('.row-compare-features .col-md-3').length < 2) {
+								$('.row-compare-features').slideUp()
+							}
+						}
+					)
+				} else {
+					showCompareNotification('removed', car_title)
+				}
+			}
+			totalCompareCars(stm_compare_cars_counter);
+		}
+	)
+
+	$(document).on('click', '.compare-remove-all', remove_all_compare)
+
+	function totalCompareCars(compare_count) {
+		$('.stm-current-cars-in-compare').text(compare_count)
+	}
+
+	function showCompareNotification($status, $title, $post_type) {
+		if ('filled' === $status) {
+			$('.single-add-to-compare .stm-title').text(
+				stm_already_added_to_compare_text
+			)
+			$('.single-add-to-compare').addClass('single-add-to-compare-visible')
+			setTimeout(function () {
+				$('.single-add-to-compare').removeClass('single-add-to-compare-visible')
+				$('.single-add-to-compare').removeClass('overadded')
+				$('.compare-remove-all').remove()
+			}, 5000)
+			$('.single-add-to-compare').addClass('overadded')
+			$('.compare-remove-all').remove()
+			$('.single-add-to-compare .compare-fixed-link').before(
+				'<a href="#" style="margin-left: 15px;" data-post-type=' +
+				$post_type +
+				' class="compare-fixed-link compare-remove-all pull-right heading-font">' +
+				reset_all_txt +
+				'</a>'
+			)
+		}
+		if ('added' === $status) {
+			$('.single-add-to-compare .stm-title').text(
+				$title + ' - ' + stm_added_to_compare_text
+			)
+			$('.single-add-to-compare').addClass('single-add-to-compare-visible')
+			setTimeout(function () {
+				$('.single-add-to-compare').removeClass('single-add-to-compare-visible')
+			}, 5000)
+		}
+		if ('removed' === $status) {
+			$('.single-add-to-compare .stm-title').text(
+				$title + ' ' + stm_removed_from_compare_text
+			)
+			$('.single-add-to-compare').addClass('single-add-to-compare-visible')
+			setTimeout(function () {
+				$('.single-add-to-compare').removeClass('single-add-to-compare-visible')
+			}, 5000)
+			$('.single-add-to-compare').removeClass('overadded')
+			$('.compare-remove-all').remove()
+		}
+	}
+
+	function remove_all_compare(e) {
+		e.preventDefault()
+
+		var post_type = $(this).data('post-type')
+		var ids = {}
+		if (typeof compare_init_object !== 'undefined') {
+			ids = compare_init_object
+		}
+
+		if (typeof post_type !== 'undefined') {
+			$.each(ids[post_type], function (i, id) {
+				$.removeCookie(cc_prefix + post_type + '[' + id + ']', { path: '/' })
+			})
+
+			location.reload()
+		}
+	}
+
+	function stm_ajax_add_test_drive() {
+		$('#test-drive form').on('submit', function (event) {
+			event.preventDefault()
+
+			var $form = $(this)
+			var formData = new FormData(this)
+
+			formData.append('action', 'stm_ajax_add_test_drive')
+			formData.append('security', stm_add_test_drive_nonce)
+			formData.append('form_slug', 'test_drive')
+
+			$.ajax({
+				url: ajaxurl,
+				type: 'POST',
+				dataType: 'json',
+				context: this,
+				data: formData,
+				processData: false,
+				contentType: false,
+				beforeSend: function () {
+					$('.alert-modal').remove()
+					$(this).closest('form').find('input').removeClass('form-error')
+					$(this).closest('form').find('.stm-ajax-loader').addClass('loading')
+				},
+				success: function (data) {
+					$(this)
+						.closest('form')
+						.find('.stm-ajax-loader')
+						.removeClass('loading')
+					$(this)
+						.closest('form')
+						.find('.modal-body-message')
+						.append(
+							'<div class="alert-modal alert alert-' +
+							data.status +
+							'">' +
+							data.response +
+							'</div>'
+						)
+					for (var key in data.errors) {
+						$('#request-test-drive-form input[name="' + key + '"]').addClass(
+							'form-error'
+						)
+					}
+				},
+			})
+			$(this)
+				.closest('form')
+				.find('.form-error')
+				.on('hover', function () {
+					$(this).removeClass('form-error')
+				})
+		})
+	}
+
+	function stm_ajax_add_trade_offer() {
+		$('#trade-offer form').on('submit', function (event) {
+			event.preventDefault()
+
+			var formData = new FormData(this)
+			formData.append('action', 'stm_ajax_add_trade_offer')
+			formData.append('security', stm_security_nonce)
+			formData.append('form_slug', 'offer_price')
+
+			$.ajax({
+				url: ajaxurl,
+				type: 'POST',
+				dataType: 'json',
+				context: this,
+				data: formData,
+				processData: false,
+				contentType: false,
+				beforeSend: function () {
+					$('.alert-modal').remove()
+					$(this).closest('form').find('input').removeClass('form-error')
+					$(this).closest('form').find('.stm-ajax-loader').addClass('loading')
+				},
+				success: function (data) {
+					$(this)
+						.closest('form')
+						.find('.stm-ajax-loader')
+						.removeClass('loading')
+					$(this)
+						.closest('form')
+						.find('.modal-body')
+						.append(
+							'<div class="alert-modal alert alert-' +
+							data.status +
+							'">' +
+							data.response +
+							'</div>'
+						)
+					for (var key in data.errors) {
+						$('#request-trade-offer-form input[name="' + key + '"]').addClass(
+							'form-error'
+						)
+					}
+				},
+			})
+			$(this)
+				.closest('form')
+				.find('.form-error')
+				.on('hover', function () {
+					$(this).removeClass('form-error')
+				})
+		})
+	}
+
+	let shareTimer;
+
+	$('.stm-a2a-popup').closest('.stm-gallery-action-unit').on({
+		mouseenter: function () {
+			if (shareTimer) {
+				clearTimeout(shareTimer);
+			}
+			$(this).find('.stm-a2a-popup').addClass('stm-a2a-popup-active');
+		},
+		mouseleave: function () {
+			shareTimer = setTimeout(function () {
+				if ($('.stm-a2a-popup-active:hover').length == 0) {
+					$('.stm-a2a-popup').removeClass('stm-a2a-popup-active');
+				}
+			}, 500);
+
+			$('.stm-a2a-popup-active').mouseleave(function () {
+				$('.stm-a2a-popup').removeClass('stm-a2a-popup-active');
+			});
+		}
+	});
+
+})(jQuery)
+
+function updateGridItemTitles() {
+	var $ = jQuery;
+
+	$('.car-title').each(function () {
+		var $title = $(this);
+		var maxChar = parseInt($title.attr('data-max-char'));
+		var $labels = $title.find('.labels');
+
+		if ($labels.length > 0 && ($(this).text().length > maxChar)) {
+			var originalLabels = $labels.clone();
+			$labels.remove();
+			var originalText = $title.contents().filter(function () {
+				return this.nodeType === 3;
+			}).text().trim();
+
+			if (originalText.length > maxChar) {
+				var truncatedText = originalText.substr(0, maxChar) + '...';
+
+				$title.html('').append(originalLabels).append(truncatedText);
+			} else {
+				$title.html(originalText).prepend($labels)
+			}
+		} else {
+			if ($(this).attr('data-max-char') != 'undefined' && $(this).text().length > $(this).attr('data-max-char')) {
+				$(this).text($(this).text().trim().substr(0, $(this).attr('data-max-char')) + '...');
+			}
+		}
+	});
+}
+
+jQuery('[data-toggle="tooltip"]').tooltip({
+	trigger: 'hover',
+	placement: function () {
+		return jQuery(this).data('placement');
+	},
+	html: true,
+	container: 'body'
+});
+//Prevent default for show share button
+document.addEventListener('click', e => {
+	var parent = e.target.closest('.stm-share');
+	if (e.target.classList.contains('stm-share') || parent) {
+		e.preventDefault();
+	}
+});

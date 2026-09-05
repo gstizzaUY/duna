@@ -1,0 +1,20 @@
+{
+	"name": "motors_vehicles_listing/plugin",
+	"description": "Stm vehicles listing",
+	"require": {},
+	"autoload": {
+		"psr-4": {
+			"MotorsVehiclesListing\\": "includes/class/",
+			"MotorsNuxy\\": "includes/nuxy/",
+			"MotorsElementorWidgetsFree\\": "elementor/inc",
+			"MotorsVehiclesListing\\MagicKit\\": "magic-kit"
+		}
+	},
+	"config": {
+		"platform-check": false,
+		"optimize-autoloader": true,
+		"allow-plugins": {
+			"php-http/discovery": true
+		}
+	}
+}

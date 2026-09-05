@@ -1,0 +1,1050 @@
+/* ============================================================
+
+ * duna-child (tema hijo de Motors)
+
+ * Overrides de skin/aspecto del sitio (navbar, topbar,
+
+ * cards de producto, sidebar, widget categorias, theme toggle,
+
+ * modo claro). El plugin wheels-size-finder queda como
+
+ * buscador puro; los estilos de tema viven aca.
+
+ * ============================================================ */
+
+/* Tema (claro/oscuro): variables (propietario: duna-child) */
+
+:root {
+    --wsf-surf: #161b22;
+    --wsf-surf-2: #1a1f27;
+    --wsf-surf-deep: #0d1117;
+    --wsf-border: #30363d;
+    --wsf-border-soft: rgba(255, 255, 255, 0.08);
+    --wsf-txt: #e1e4e8;
+    --wsf-txt-soft: #b6bcc4;
+    --wsf-brand: #df1d1d;
+    --wsf-brand-hover: #b01b1c;
+    --wsf-dot-bg: rgba(255, 255, 255, 0.35);
+    --wsf-dot-border: rgba(205, 211, 218, 0.6);
+    --wsf-dot-active: rgba(205, 211, 218, 0.8);
+    --wsf-logo-filter: grayscale(1) brightness(0) invert(1);
+    --wsf-logo-filter-color: grayscale(1) brightness(1.15);
+}
+
+
+/* Cards de producto (OFERTAS, tienda, categorias) con borde igual a las de categoria */
+.woocommerce ul.products,
+.woocommerce-page ul.products {
+    display: flex;
+    flex-wrap: wrap;
+}
+.woocommerce ul.products li.product,
+.woocommerce-page ul.products li.product {
+    display: flex;
+    flex-direction: column;
+}
+.woocommerce ul.products li.product .stm-product-inner,
+.woocommerce-page ul.products li.product .stm-product-inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: var(--wsf-surf);
+    border: 1px solid var(--wsf-border);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 0;
+    margin-bottom: 30px;
+    min-height: 0;
+    transition: border-color 0.2s;
+}
+.woocommerce ul.products li.product .stm-product-inner:hover,
+.woocommerce-page ul.products li.product .stm-product-inner:hover {
+    border-color: var(--wsf-brand);
+}
+.woocommerce ul.products li.product .stm-product-inner .woocommerce-LoopProduct-link,
+.woocommerce-page ul.products li.product .stm-product-inner .woocommerce-LoopProduct-link {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+}
+.woocommerce ul.products li.product .stm-product-inner .product_thumbnail,
+.woocommerce-page ul.products li.product .stm-product-inner .product_thumbnail {
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 14px;
+}
+.woocommerce ul.products li.product .stm-product-inner .product_thumbnail img,
+.woocommerce-page ul.products li.product .stm-product-inner .product_thumbnail img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    margin: 0;
+}
+.woocommerce ul.products li.product .stm-product-inner h5,
+.woocommerce-page ul.products li.product .stm-product-inner h5 {
+    padding: 0 16px;
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    min-height: 2.8em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.woocommerce ul.products li.product .stm-product-inner .product_info,
+.woocommerce-page ul.products li.product .stm-product-inner .product_info {
+    padding: 0 16px;
+    margin: 0 0 12px;
+    min-height: 60px;
+}
+.woocommerce ul.products li.product .stm-product-inner .wsf-product-measure,
+.woocommerce-page ul.products li.product .stm-product-inner .wsf-product-measure {
+    margin: 0 0 4px;
+}
+.woocommerce ul.products li.product .stm-product-inner .product_info:not(:has(.wsf-product-measure))::before,
+.woocommerce-page ul.products li.product .stm-product-inner .product_info:not(:has(.wsf-product-measure))::before {
+    content: "";
+    display: block;
+    height: 34px;
+}
+.woocommerce ul.products li.product .stm-product-inner .price,
+.woocommerce-page ul.products li.product .stm-product-inner .price {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--wsf-txt);
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.woocommerce ul.products li.product .stm-product-inner .price .woocommerce-Price-amount,
+.woocommerce-page ul.products li.product .stm-product-inner .price .woocommerce-Price-amount {
+    font-weight: 700;
+    color: var(--wsf-txt);
+}
+.woocommerce ul.products li.product .stm-product-inner .price ins,
+.woocommerce-page ul.products li.product .stm-product-inner .price ins {
+    font-weight: 700;
+    color: var(--wsf-txt);
+    text-decoration: none;
+}
+.woocommerce ul.products li.product .stm-product-inner .price del,
+.woocommerce-page ul.products li.product .stm-product-inner .price del {
+    color: var(--wsf-txt-soft);
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 0.7;
+    text-decoration: line-through;
+}
+.woocommerce ul.products li.product .stm-product-inner a.button,
+.woocommerce-page ul.products li.product .stm-product-inner a.button {
+    margin: 12px 16px 16px;
+    width: calc(100% - 32px);
+    text-align: center;
+    background: var(--wsf-brand);
+    color: #ffffff;
+    border-radius: 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+    transition: background 0.2s;
+}
+.woocommerce ul.products li.product .stm-product-inner a.button:hover,
+.woocommerce-page ul.products li.product .stm-product-inner a.button:hover {
+    background: var(--wsf-brand-hover);
+    color: #ffffff;
+}
+
+/* Sidebar (widgets) con bordes consistentes con las cards.
+   IMPORTANTE: acotado a las areas de sidebar (shop/sidebar/bloques),
+   sin selector generico "aside.widget" para NO encajonar los widgets
+   del footer (cada columna del footer es un <aside class="widget">). */
+.stm-shop-sidebar-area .widget,
+.sidebar-area .widget,
+.stm-sidebar .widget,
+.wpb_widgetised_column .widget {
+    border: 1px solid var(--wsf-border) !important;
+    border-radius: 10px;
+    background: var(--wsf-surf);
+    padding: 24px !important;
+    box-shadow: none !important;
+}
+
+/* Widget de categorias: subcategorias colapsadas con flecha funcional */
+.widget_product_categories li.cat-parent > a:before {
+    content: none !important;
+}
+.widget_product_categories .wsf-cat-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    line-height: 1;
+    vertical-align: middle;
+    text-align: center;
+    border: none;
+    background: var(--wsf-brand) !important;
+    color: #ffffff !important;
+    cursor: pointer;
+    font-size: 11px;
+    padding: 0;
+    margin: 0 6px 0 0;
+    border-radius: 4px;
+    transform: rotate(0deg);
+    transition: transform 0.15s, background-color 0.2s;
+}
+.widget_product_categories .wsf-cat-toggle.open {
+    transform: rotate(90deg);
+}
+.widget_product_categories .wsf-cat-toggle:hover {
+    background: var(--wsf-brand-hover) !important;
+    color: #ffffff !important;
+}
+
+@media (max-width: 1200px) {
+    .wsf-categories {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 992px) {
+    .wsf-categories {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 600px) {
+    .wsf-categories {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Navbar (Motors motorcycle): extremos inclinados limpios y rojo uniforme.
+   Reemplaza las "colas" skewX del tema (lengua roja + cuña oscura en los
+   extremos) por triangulos clip-path de altura completa pegados a la barra,
+   de modo que los extremos queden en diagonal limpia sin sobresalir.
+   Tambien unifica el fondo de la barra con el de los items. */
+.stm-layout-header-motorcycle .stm_motorcycle-header .stm_mc-nav .main-menu .inner:before,
+.stm-layout-header-motorcycle .stm_motorcycle-header .stm_mc-nav .main-menu .inner:after {
+    content: none !important;
+    display: none !important;
+}
+.stm-layout-header-motorcycle .stm_motorcycle-header .stm_mc-nav .main-menu .inner .header-menu {
+    position: relative;
+    background-color: var(--hma_item_bg_color, #df1d1d) !important;
+}
+.stm-layout-header-motorcycle .stm_motorcycle-header .stm_mc-nav .main-menu .inner .header-menu:before,
+.stm-layout-header-motorcycle .stm_motorcycle-header .stm_mc-nav .main-menu .inner .header-menu:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 44px;
+    background-color: var(--hma_item_bg_color, #df1d1d);
+}
+.stm-layout-header-motorcycle .stm_motorcycle-header .stm_mc-nav .main-menu .inner .header-menu:before {
+    right: 100%;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+.stm-layout-header-motorcycle .stm_motorcycle-header .stm_mc-nav .main-menu .inner .header-menu:after {
+    left: 100%;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+/* Barra compacta: sin espacio vertical extra entre la barra negra y los items.
+   IMPORTANTE: line-height del UL en 0 (los LI flotados arrancan pegados al
+   borde superior; un line-height >0 los empuja hacia abajo de la barra). */
+.stm-layout-header-motorcycle .stm_motorcycle-header .stm_mc-nav .main-menu .inner .header-menu,
+.stm-layout-header-motorcycle .stm_motorcycle-header .stm_mc-nav .main-menu .inner .header-menu > li,
+.stm-layout-header-motorcycle .stm_motorcycle-header .stm_mc-nav .main-menu .inner .header-menu > li > a {
+    height: 50px !important;
+}
+.stm-layout-header-motorcycle .stm_motorcycle-header .stm_mc-nav .main-menu .inner .header-menu {
+    line-height: 0 !important;
+}
+.stm-layout-header-motorcycle .stm_motorcycle-header .stm_mc-nav .main-menu .inner .header-menu > li > a {
+    line-height: 50px !important;
+}
+/* Los submenus heredarian line-height 0 del UL: restaurar legibilidad */
+.stm-layout-header-motorcycle .stm_motorcycle-header .stm_mc-nav .main-menu .inner .header-menu > li > ul a {
+    line-height: 1.4 !important;
+}
+/* Items en blanco, hover en negro */
+.stm-layout-header-motorcycle .stm_motorcycle-header .stm_mc-nav .main-menu .inner .header-menu > li > a {
+    color: #ffffff !important;
+}
+.stm-layout-header-motorcycle .stm_motorcycle-header .stm_mc-nav .main-menu .inner .header-menu > li:hover > a {
+    color: #000000 !important;
+}
+
+/* Icono de usuario en el item "Mi cuenta" del menu del header */
+.stm_mc-nav li.motors-icons-user > a::before,
+.main-menu li.motors-icons-user > a::before {
+    font-family: "motors-icons";
+    content: "\e980";
+    margin-right: 6px;
+    font-size: 15px;
+    vertical-align: -1px;
+}
+
+/* Mi cuenta: se saca de la cinta roja y va como icono en la navbar negra */
+.stm_mc-nav li.motors-icons-user,
+.main-menu li.motors-icons-user {
+    display: none !important;
+}
+.wsf-header-user {
+    display: inline-block;
+    margin-right: 14px;
+    font-size: 18px;
+    line-height: 1;
+    vertical-align: middle;
+    color: #ffffff !important;
+}
+.wsf-header-user i::before {
+    font-family: "motors-icons";
+    content: "\e980";
+}
+.wsf-header-user:hover {
+    color: var(--wsf-brand) !important;
+}
+/* El icono "Mi cuenta" queda a la izquierda del carrito (el carrito esta
+   flotado; con flex el orden del DOM manda) */
+.pull-right.hdn-767,
+.right-right .pull-right.hdn-767 {
+    display: flex;
+    align-items: center;
+}
+
+/* Telefono de la navbar negra en blanco */
+.header-main-phone,
+.header-main-phone a,
+.header-main-phone .phone-number,
+.header-main-phone .phone {
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
+
+/* Iconos sociales de la barra negra (izquierda) en blanco */
+.stm_motorcycle-header .header-main-socs a,
+.stm_motorcycle-header .header-main-socs i {
+    color: #ffffff !important;
+}
+.stm_motorcycle-header .header-main-socs a:hover i {
+    color: var(--wsf-brand) !important;
+}
+
+/* Topbar (barra blanca): contenido centrado en lugar de pegado a la derecha */
+#top-bar .top-bar-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+#top-bar .top-bar-wrapper .pull-right,
+#top-bar .top-bar-wrapper .pull-left,
+#top-bar .top-bar-wrapper .xs-pull-left {
+    float: none !important;
+}
+/* Los iconos del topbar el tema los pinta de gris (#aaa) - casi invisibles */
+#top-bar .top-bar-info li i,
+#top-bar .top-bar-socials a i {
+    color: #ffffff !important;
+}
+body.wsf-light #top-bar .top-bar-info li i,
+body.wsf-light #top-bar .top-bar-socials a i {
+    color: #1a1a1a !important;
+}
+
+/* Evitar redondeos/imperfecciones en el borde topbar/navbar */
+#top-bar,
+#top-bar .top-bar-wrapper,
+.stm_motorcycle-header .stm_mc-main,
+.stm_motorcycle-header .header-main {
+    border-radius: 0 !important;
+}
+
+
+/* ===== Boton de alternar tema (claro/oscuro) ===== */
+.wsf-theme-toggle-li {
+    float: left;
+    height: 50px !important;
+    line-height: 0;
+    margin-left: 10px;
+}
+.wsf-theme-toggle {
+    background: none;
+    border: 1px solid var(--wsf-border);
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    color: var(--wsf-txt);
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    display: block;
+    margin: 8px 0 0 0;
+    padding: 0;
+    transition: background 0.2s, color 0.2s;
+}
+.wsf-theme-toggle:hover {
+    background: var(--wsf-brand);
+    border-color: var(--wsf-brand);
+    color: #fff;
+}
+
+/* ============================================================
+ * UNIFORM SKIN – base global (todas las páginas mismo estilo)
+ * Corrige claros del parent (#eceff3 / #f0f2f5 / #f6f7f9 / #fff
+ * / #8f9fad) y restos de page_bg_color inline para que todas
+ * las páginas usen las variables --wsf-* del tema hijo.
+ * Esta capa es DARK por defecto; body.wsf-light la invierte
+ * via variables (definidas abajo).
+ * ============================================================ */
+
+/* --- Corrección #wrapper page_bg_color inline (ej. Contacto #f0f2f5) --- */
+html body #wrapper,
+body #wrapper,
+#wrapper {
+    background-color: var(--wsf-surf-deep) !important;
+}
+
+/* --- Base global: body, wrapper, contenedores, tipografía --- */
+html,
+body,
+body.stm-template-motorcycle {
+    background-color: var(--wsf-surf-deep) !important;
+    color: var(--wsf-txt) !important;
+}
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.entry-header .h1,
+.stm_titlebox h1,
+.title-box h1 {
+    color: var(--wsf-txt) !important;
+}
+p, li, td, th, label, span, div {
+    /* herencia; el color base lo da body */
+}
+a { color: var(--wsf-txt); }
+a:hover, a:focus { color: var(--wsf-brand); }
+
+/* --- Topbar / Header negro: unificar a surf-deep --- */
+#top-bar {
+    background-color: var(--wsf-surf-deep) !important;
+    border-color: var(--wsf-border) !important;
+}
+.stm_motorcycle-header,
+.stm_motorcycle-header .header-main,
+.stm_motorcycle-header .stm_mc-main {
+    background-color: var(--wsf-surf-deep) !important;
+}
+
+/* --- Titlebox / Breadcrumbs / Paginas con cabecera --- */
+.entry-header,
+.stm_titlebox,
+.title-box,
+.stm_titlebox .container,
+.title-box .container {
+    background-color: var(--wsf-surf-deep) !important;
+    border-color: var(--wsf-border) !important;
+}
+.entry-header .entry-title h1,
+.stm_titlebox .entry-title h1,
+.title-box .h1,
+.entry-header .sub-title {
+    color: var(--wsf-txt) !important;
+}
+.colored-separator .first-long,
+.colored-separator .last-short {
+    background-color: var(--wsf-brand) !important;
+}
+.title-box-disabled {
+    background: transparent !important;
+    height: 0 !important;
+}
+.stm_breadcrumbs_unit,
+.navxtBreads,
+.woocommerce-breadcrumb,
+.woocommerce-breadcrumb a,
+.stm_breadcrumbs_unit a,
+.breadcrumb {
+    color: var(--wsf-txt-soft) !important;
+}
+.woocommerce-breadcrumb a:hover,
+.stm_breadcrumbs_unit a:hover {
+    color: var(--wsf-brand) !important;
+}
+
+/* --- Formularios / Inputs / Selects / Textareas (cubre #eceff3 #f6f7f9) --- */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="url"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+textarea,
+select,
+.input-text,
+.wpcf7-form-control,
+.woocommerce-input-wrapper input,
+.woocommerce-input-wrapper textarea,
+.woocommerce-input-wrapper select,
+.search-field,
+.search-field.form-control,
+.stm-date-timepicker,
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--multiple,
+body .select2-container--default .select2-selection--multiple {
+    background-color: var(--wsf-surf) !important;
+    background: var(--wsf-surf) !important;
+    border: 1px solid var(--wsf-border) !important;
+    border-color: var(--wsf-border) !important;
+    color: var(--wsf-txt) !important;
+    box-shadow: none !important;
+}
+input::placeholder,
+textarea::placeholder,
+.search-field::placeholder {
+    color: var(--wsf-txt-soft) !important;
+    opacity: 1 !important;
+}
+select option,
+.wsf-select-item select option,
+select option:checked {
+    background-color: var(--wsf-surf-deep) !important;
+    color: var(--wsf-txt) !important;
+}
+.select2-dropdown,
+.select2-results,
+.select2-results__options,
+.select2-container--default .select2-results__option {
+    background-color: var(--wsf-surf) !important;
+    border-color: var(--wsf-border) !important;
+    color: var(--wsf-txt) !important;
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected],
+.select2-container--default .select2-results__option--highlighted {
+    background-color: var(--wsf-surf-2) !important;
+    color: var(--wsf-txt) !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered,
+.select2-container--default .select2-selection__placeholder {
+    color: var(--wsf-txt) !important;
+}
+input:focus,
+textarea:focus,
+select:focus,
+.input-text:focus,
+.wpcf7-form-control:focus,
+.select2-container--default.select2-container--focus .select2-selection {
+    border-color: var(--wsf-brand) !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* --- WPCF7 / Contact Form 7 --- */
+.wpcf7-form,
+.wpcf7-form p,
+.wpcf7-form label {
+    color: var(--wsf-txt) !important;
+}
+.wpcf7-form-control.wpcf7-text,
+.wpcf7-form-control.wpcf7-email,
+.wpcf7-form-control.wpcf7-tel,
+.wpcf7-form-control.wpcf7-textarea,
+.wpcf7-form-control.wpcf7-select {
+    background: var(--wsf-surf) !important;
+    border-color: var(--wsf-border) !important;
+    color: var(--wsf-txt) !important;
+}
+.wpcf7-submit,
+.wpcf7-form input[type="submit"],
+.wpcf7-form .wpcf7-submit {
+    background: var(--wsf-brand) !important;
+    color: #ffffff !important;
+    border-color: var(--wsf-brand) !important;
+}
+.wpcf7-response-output,
+.wpcf7-not-valid-tip {
+    background: var(--wsf-surf) !important;
+    border-color: var(--wsf-border) !important;
+    color: var(--wsf-txt) !important;
+}
+
+/* --- WooCommerce: tablas, carrito, checkout, totales, mensajes --- */
+.woocommerce table.shop_table,
+.woocommerce table.shop_table th,
+.woocommerce table.shop_table td,
+.woocommerce-cart .cart-collaterals .cart_totals,
+.woocommerce-cart .cart-collaterals .cart_totals table,
+.woocommerce-checkout #order_review,
+.woocommerce-checkout #order_review_heading,
+.woocommerce-checkout #payment,
+.woocommerce-checkout #payment div.payment_box,
+.woocommerce-MyAccount-content,
+.woocommerce-MyAccount-navigation ul,
+.cart_totals table,
+.shop_table_responsive {
+    background-color: var(--wsf-surf) !important;
+    border-color: var(--wsf-border) !important;
+    color: var(--wsf-txt) !important;
+}
+.woocommerce table.shop_table th {
+    background-color: var(--wsf-surf-2) !important;
+    color: var(--wsf-txt) !important;
+    border-color: var(--wsf-border) !important;
+}
+.woocommerce table.shop_table td a,
+.woocommerce-cart .product-name a,
+.woocommerce-checkout .product-name a {
+    color: var(--wsf-txt) !important;
+}
+.woocommerce table.shop_table td a:hover {
+    color: var(--wsf-brand) !important;
+}
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error,
+.woocommerce-notice,
+.cart-empty.woocommerce-info {
+    background-color: var(--wsf-surf) !important;
+    border: 1px solid var(--wsf-border) !important;
+    color: var(--wsf-txt) !important;
+}
+.woocommerce-message a,
+.woocommerce-info a {
+    color: var(--wsf-brand) !important;
+}
+.woocommerce #respond input#submit,
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button,
+.woocommerce-cart .wc-proceed-to-checkout a.checkout-button,
+.woocommerce-checkout #place_order {
+    background: var(--wsf-brand) !important;
+    color: #ffffff !important;
+    border-color: var(--wsf-brand) !important;
+}
+.woocommerce #respond input#submit:hover,
+.woocommerce a.button:hover,
+.woocommerce button.button:hover,
+.woocommerce input.button:hover {
+    background: var(--wsf-brand-hover) !important;
+    color: #ffffff !important;
+}
+.woocommerce .quantity .qty,
+.woocommerce .quantity input.qty {
+    background: var(--wsf-surf) !important;
+    border-color: var(--wsf-border) !important;
+    color: var(--wsf-txt) !important;
+}
+
+/* --- My Account: navegación --- */
+.woocommerce-MyAccount-navigation ul li,
+.woocommerce-MyAccount-navigation ul li a {
+    background: var(--wsf-surf) !important;
+    border-color: var(--wsf-border) !important;
+    color: var(--wsf-txt) !important;
+}
+.woocommerce-MyAccount-navigation ul li.is-active a,
+.woocommerce-MyAccount-navigation ul li a:hover {
+    background: var(--wsf-surf-2) !important;
+    color: var(--wsf-brand) !important;
+    border-color: var(--wsf-border) !important;
+}
+
+/* --- Single product (ficha) --- */
+.single-product .product_title,
+.woocommerce div.product .product_title,
+.woocommerce div.product .summary,
+.woocommerce div.product .woocommerce-product-details__short-description,
+.woocommerce div.product .price,
+.woocommerce div.product p.price,
+.woocommerce div.product span.price,
+.woocommerce div.product .woocommerce-Price-amount {
+    color: var(--wsf-txt) !important;
+}
+.woocommerce div.product .woocommerce-tabs ul.tabs,
+.woocommerce div.product .woocommerce-tabs ul.tabs li,
+.woocommerce div.product .woocommerce-tabs ul.tabs li a,
+.woocommerce-tabs,
+.wc-tabs,
+.woocommerce-Tabs-panel {
+    background-color: var(--wsf-surf) !important;
+    border-color: var(--wsf-border) !important;
+    color: var(--wsf-txt) !important;
+}
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active a,
+.wc-tabs li.active a {
+    background-color: var(--wsf-surf-2) !important;
+    color: var(--wsf-txt) !important;
+    border-color: var(--wsf-border) !important;
+}
+.woocommerce div.product .woocommerce-tabs .panel {
+    background: var(--wsf-surf) !important;
+    border: 1px solid var(--wsf-border) !important;
+    color: var(--wsf-txt-soft) !important;
+}
+.single-product .related.products h2,
+.single-product .upsells.products h2,
+.woocommerce .related h2,
+.woocommerce .upsells h2 {
+    color: var(--wsf-txt) !important;
+}
+.woocommerce-product-gallery,
+.woocommerce-product-gallery__wrapper,
+.woocommerce-product-gallery__image {
+    background: transparent !important;
+}
+
+/* --- Paginación / Page links --- */
+.woocommerce-pagination .page-numbers,
+.pagination .page-numbers,
+.page-links a,
+.stm_pagination .page-numbers,
+.page-links span {
+    background: var(--wsf-surf) !important;
+    border: 1px solid var(--wsf-border) !important;
+    color: var(--wsf-txt) !important;
+}
+.page-numbers.current,
+.pagination .current,
+.woocommerce-pagination .current,
+.page-links > span.page-numbers.current {
+    background: var(--wsf-brand) !important;
+    color: #ffffff !important;
+    border-color: var(--wsf-brand) !important;
+}
+
+/* --- Footer (unifica transparente) --- */
+#footer,
+#footer-main,
+#footer-copyright,
+body #footer,
+body #footer-main {
+    background-color: var(--wsf-surf-deep) !important;
+    color: var(--wsf-txt) !important;
+    border-top: 1px solid var(--wsf-border) !important;
+}
+#footer a,
+#footer .widget-title,
+#footer .widget-title h6,
+#footer .copyright-text,
+#footer .widget_text .textwidget {
+    color: var(--wsf-txt) !important;
+}
+#footer a:hover { color: var(--wsf-brand) !important; }
+
+/* --- Footer: columnas SIN "cajas" ni borde interior --- */
+/* El parent pinta cada columna (aside.widget) con el layout del footer;
+   aqui se remueve cualquier residuo de "card" (borde/fondo/radio) que
+   pudiera heredar de reglas genericas. El padding NO se fuerza a 0 con
+   !important para que el gutter del grid (ver media queries abajo)
+   pueda separar las columnas. */
+.footer_widgets_wrapper aside,
+#footer aside {
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Footer: espaciado vertical uniforme entre widgets */
+.footer_widgets_wrapper .widget-title { margin-bottom: 16px; }
+.footer_widgets_wrapper .widget-title h6 { font-size: 15px; letter-spacing: 0.4px; }
+.footer_widgets_wrapper aside .widget-wrapper { padding: 0; }
+
+/* Desktop ancho: mantener la grilla de columnas del parent pero con
+   gutter mas generoso (el parent usa 15px; usamos padding en el aside
+   porque el grid son floats con width fija). */
+@media (min-width: 1200px) {
+    .footer_widgets_wrapper .cols_1 aside,
+    .footer_widgets_wrapper .cols_2 aside,
+    .footer_widgets_wrapper .cols_3 aside,
+    .footer_widgets_wrapper .cols_4 aside {
+        float: left;
+        margin: 0 0 24px;
+    }
+    .footer_widgets_wrapper .cols_1 aside { width: 100%; padding: 0; }
+    .footer_widgets_wrapper .cols_2 aside { width: 50%; padding: 0 20px; }
+    .footer_widgets_wrapper .cols_3 aside { width: 33.33333%; padding: 0 20px; }
+    .footer_widgets_wrapper .cols_4 aside { width: 25%; padding: 0 20px; }
+}
+
+/* Debajo de 1200px: apilar a una sola columna para que el texto respire
+   (el parent no tiene breakpoints para .cols_*: dejaria 25% en movil).
+   El parent usa .cols_x { margin: 0 -15px } (compensa el padding del
+   .container); al apilar cancelamos ese margen negativo y aplicamos el
+   padding horizontal directamente sobre cada aside para que el contenido
+   no quede pegado al borde izquierdo de la pantalla. */
+@media (max-width: 1199px) {
+    .footer_widgets_wrapper .cols_1,
+    .footer_widgets_wrapper .cols_2,
+    .footer_widgets_wrapper .cols_3,
+    .footer_widgets_wrapper .cols_4 {
+        margin: 0;
+    }
+    .footer_widgets_wrapper .cols_1 aside,
+    .footer_widgets_wrapper .cols_2 aside,
+    .footer_widgets_wrapper .cols_3 aside,
+    .footer_widgets_wrapper .cols_4 aside {
+        float: none;
+        width: 100%;
+        padding: 0 16px;
+        margin: 0 0 32px;
+    }
+    .footer_widgets_wrapper aside:last-child { margin-bottom: 0; }
+}
+
+/* --- Widgets / Sidebar: asegurar que search y otros usen surf --- */
+.widget_search .search-form,
+.widget_product_search .woocommerce-product-search,
+.widget .search-field,
+.widget .woocommerce-product-search .search-field {
+    background: var(--wsf-surf) !important;
+    border-color: var(--wsf-border) !important;
+    color: var(--wsf-txt) !important;
+}
+
+/* --- Generic light blocks de VC / Gutenberg que queden claros --- */
+.vc_row[data-vc-full-width],
+.vc_column-inner,
+.wpb_wrapper,
+.wp-block-group,
+.wp-block-columns {
+    /* no forzar bg, solo texto para contraste; los fondos claros
+       con vc_custom_* quedan cubiertos por el modo light abajo */
+}
+.entry-content,
+.page-content-wrap,
+.wpb_text_column,
+.wpb_text_column p,
+.vc_column_text,
+.vc_column_text p {
+    color: var(--wsf-txt-soft) !important;
+}
+.entry-content h1,
+.entry-content h2,
+.entry-content h3,
+.wpb_text_column h1,
+.wpb_text_column h2,
+.wpb_text_column h3 {
+    color: var(--wsf-txt) !important;
+}
+
+/* --- Mensajes y alerts genéricos --- */
+.alert, .stm-alert, .wpcf7-response-output {
+    background: var(--wsf-surf) !important;
+    border-color: var(--wsf-border) !important;
+    color: var(--wsf-txt) !important;
+}
+
+/* --- Corrección buscador: asegurar que los selects del plugin hereden variables del child --- */
+.wsf-container .wsf-select-item select {
+    background-color: var(--wsf-surf) !important;
+    border-color: var(--wsf-border) !important;
+    color: var(--wsf-txt) !important;
+}
+
+/* ===== MODO CLARO (body.wsf-light) ===== */
+body.wsf-light {
+    --wsf-surf: #ffffff;
+    --wsf-surf-2: #f4f6f8;
+    --wsf-surf-deep: #f7f8fa;
+    --wsf-border: #e2e4e8;
+    --wsf-border-soft: rgba(0, 0, 0, 0.08);
+    --wsf-txt: #1a1a1a;
+    --wsf-txt-soft: #555;
+    --wsf-dot-bg: rgba(0, 0, 0, 0.25);
+    --wsf-dot-border: rgba(0, 0, 0, 0.35);
+    --wsf-dot-active: rgba(0, 0, 0, 0.55);
+    --wsf-logo-filter: grayscale(1) brightness(0.9);
+    --wsf-logo-filter-color: grayscale(1) brightness(1.05);
+}
+
+/* Tema (wrapper, top bar, header, footer) */
+body.wsf-light #wrapper { background-color: #ffffff !important; }
+body.wsf-light h1,
+body.wsf-light h2,
+body.wsf-light h3,
+body.wsf-light h4,
+body.wsf-light h5,
+body.wsf-light h6 { color: #1a1a1a !important; }
+body.wsf-light #top-bar { background-color: #f5f5f5 !important; }
+body.wsf-light #top-bar,
+body.wsf-light #top-bar a,
+body.wsf-light #top-bar .top-bar-info li,
+body.wsf-light #top-bar .top-bar-socials a,
+body.wsf-light #top-bar .top-bar-info,
+body.wsf-light #top-bar .top-bar-wrapper { color: #1a1a1a !important; }
+body.wsf-light #header,
+body.wsf-light .stm_motorcycle-header { background-color: #ffffff !important; }
+body.wsf-light .stm_mc-nav .header-menu > li > a,
+body.wsf-light .main-menu .header-menu > li > a,
+body.wsf-light.transparent-header .stm_mc-nav .header-menu > li > a,
+body.wsf-light.transparent-header .main-menu .header-menu > li > a { color: #1a1a1a !important; }
+body.wsf-light .stm_mc-nav .header-menu > li > a:hover,
+body.wsf-light .main-menu .header-menu > li > a:hover,
+body.wsf-light.transparent-header .stm_mc-nav .header-menu > li > a:hover,
+body.wsf-light.transparent-header .main-menu .header-menu > li > a:hover { color: #df1d1d !important; }
+body.wsf-light #footer,
+body.wsf-light #footer-main,
+body.wsf-light #footer-copyright { background-color: #f5f5f5 !important; color: #1a1a1a !important; }
+body.wsf-light #footer a,
+body.wsf-light #footer .widget-title,
+body.wsf-light #footer .widget-title h6,
+body.wsf-light #footer .copyright-text,
+body.wsf-light #footer .widget_text .textwidget,
+body.wsf-light #footer .stm_wp_widget_text .textwidget,
+body.wsf-light #footer .widget_socials a { color: #1a1a1a !important; }
+
+/* Secciones demo de la home que estan en oscuro */
+body.wsf-light .vc_custom_1470915670746 { background-color: rgba(255, 255, 255, 0.95) !important; }
+body.wsf-light .vc_custom_1471237765688 { border-top-color: #e2e4e8 !important; }
+body.wsf-light .vc_custom_1471237968258 .icon-box,
+body.wsf-light .vc_custom_1471237968258 .icon-box .title,
+body.wsf-light .vc_custom_1471237968258 .icon-box .content span,
+body.wsf-light .vc_custom_1471237968258 .icon-box .content p,
+body.wsf-light .vc_custom_1471237968258 .icon-box .content { color: #1a1a1a !important; }
+body.wsf-light .vc_custom_1471239363431 {
+    border-left-color: #e2e4e8 !important;
+    border-right-color: #e2e4e8 !important;
+    border-top-color: #e2e4e8 !important;
+    border-bottom-color: #e2e4e8 !important;
+}
+body.wsf-light .vc_custom_1470917841792 h2,
+body.wsf-light .vc_custom_1471239417907 h2 { color: #1a1a1a !important; }
+body.wsf-light [style*="color:#ffffff"],
+body.wsf-light [style*="color: #ffffff"],
+body.wsf-light [style*="color:#fff"],
+body.wsf-light [style*="color: #fff"],
+body.wsf-light [style*="color:rgba(255, 255, 255"],
+body.wsf-light [style*="color: rgba(255, 255, 255"],
+body.wsf-light [style*="color:rgba(255,255,255"],
+body.wsf-light [style*="color: rgba(255,255,255"] { color: #1a1a1a !important; }
+body.wsf-light .wpb_text_column,
+body.wsf-light .wpb_text_column p { color: #333333 !important; }
+body.wsf-light .icon-box .content,
+body.wsf-light .icon-box .content p,
+body.wsf-light .icon-box .content span { color: #1a1a1a !important; }
+body.wsf-light .stm_mc-filter-selects select,
+body.wsf-light .stm_mc-filter-selects .form-group select { color: #1a1a1a !important; background-color: #ffffff !important; }
+body.wsf-light .stm_mc-filter-selects .stm_mc-plural-name,
+body.wsf-light .stm_mc-filter-selects .stm_mc-found { color: #1a1a1a !important; }
+
+/* ===== Responsive movil ===== */
+
+/* Boton "Filtros" (solo <992px) */
+.wsf-mobile-filters {
+    display: none;
+    width: 100%;
+    margin: 0 0 24px;
+    padding: 12px 16px;
+    background: var(--wsf-brand, #df1d1d);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    text-align: center;
+}
+.woocommerce .wsf-mobile-filters:hover,
+.woocommerce-page .wsf-mobile-filters:hover {
+    background: var(--wsf-brand-hover, #b01b1c);
+    color: #ffffff;
+}
+
+@media (max-width: 991px) {
+    .wsf-mobile-filters {
+        display: block;
+    }
+}
+
+/* Panel deslizante de la sidebar */
+.wsf-mobile-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(330px, 88vw);
+    background: var(--wsf-surf, #161b22);
+    z-index: 99990;
+    overflow-y: auto;
+    padding: 16px;
+    transform: translateX(-105%);
+    transition: transform 0.25s ease;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.45);
+}
+.wsf-mobile-sidebar.open {
+    transform: translateX(0);
+}
+.wsf-mobile-sidebar .wpb_widgetised_column,
+.wsf-mobile-sidebar .wpb_wrapper,
+.wsf-mobile-sidebar .vc_column-inner,
+.wsf-mobile-sidebar .wpb_column {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    float: none !important;
+}
+.wsf-mobile-sidebar aside.widget,
+.wsf-mobile-sidebar .widget {
+    margin-bottom: 16px;
+}
+.wsf-mobile-sidebar-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--wsf-border, #30363d);
+    color: var(--wsf-txt, #e1e4e8);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+.wsf-mobile-sidebar-close {
+    background: none;
+    border: none;
+    color: var(--wsf-txt, #e1e4e8);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 4px 8px;
+}
+.wsf-mobile-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 99980;
+}
+.wsf-mobile-overlay.open {
+    display: block;
+}
+body.wsf-mobile-scroll-lock {
+    overflow: hidden;
+}
+
+/* Topbar: oculta toda en movil (<992px) */
+@media (max-width: 991px) {
+    #top-bar {
+        display: none !important;
+    }
+}
