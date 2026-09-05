@@ -74,10 +74,11 @@ Backend API Node del buscador: http://localhost:3002.
     optimizadas. Pendientes no-child: a11y del plugin (testimonios/buscador),
     robots.txt Sitemap a dominio real en produccion (item 31), CLS del slider
     RevSlider, imagenes grandes sin width/height, JS/CSS no usado del parent.
-  - OPTIMIZACION (2026-09-05, historico 59): se instalo Autoptimize 3.1.15.1
-    en modo solo-CSS (minify+agregar+diferir; JS intacto por RevSlider). El
-    Perf local sigue bajo (home 43) por el TTFB del servidor Studio (~2.5s),
-    no por assets; beneficio real en produccion.
+  - OPTIMIZACION (2026-09-05, historico 59 y 62): se instalo Autoptimize 3.1.15.1
+    en modo solo-CSS (minify+agregar en archivo; JS intacto por RevSlider). Se
+    corrigio que inlineaba 2MB de CSS en el head (ahora CSS como archivo + HTML
+    ~100KB). El Perf local fluctua (42-68) por el TTFB del servidor Studio
+    (~2.5-4s); beneficio real en produccion.
 - **Home**: seccion "PRODUCTOS" (titulo WPBakery) con 4 cards de categorias de
   LISTINGS (Motorcycles, Scooters, ATVS, Watercraft) -> A REEMPLAZAR por categorias WooCommerce.
 - **7 listings demo** (motos) -> a convertir en SERVICIOS o eliminar.

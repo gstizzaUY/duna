@@ -115,16 +115,17 @@
     cache (item 28). Git commit por fase aun pendiente si se desea.
 28. ETAPA CACHE/OPTIMIZACION - PARCIALMENTE RESUELTO (2026-09-05, ver historico 59):
     - Se instalo y configuro Autoptimize 3.1.15.1 en modo SOLO-CSS (minify +
-      agregar + diferir CSS en 1 archivo no-bloqueante; autoptimize_js=0).
-      El parent/plugins seguian ~950KB CSS en ~30 hojas render-blocking; ahora
-      un solo archivo diferido. JS intacto (autoptimize rompe RevSlider si lo
-      toca: "SR7 is not defined").
-    - DIAGNOSTICO CLAVE: el Perf local (home 43/shop 55/single 50) esta dominado
-      por el TTFB del servidor WordPress Studio (~2.5s en todas las paginas, SQLite
-      sin opcache de pagina), NO por los assets. El score local no mejora con
-      optimizacion de CSS porque Lighthouse penaliza server-response-time
-      (~3147ms savings). El beneficio real de Autoptimize se vera en PRODUCCION
-      (TTFB normal).
+      agregar CSS en 1 archivo; autoptimize_js=0). El parent/plugins seguian
+      ~950KB CSS en ~30 hojas render-blocking; ahora un solo archivo cache.
+      JS intacto (autoptimize rompe RevSlider si lo toca: "SR7 is not defined").
+    - CORRECCION (historico 62): la config inicial con css_defer=1 INLINEABA el
+      CSS agregado en un <style> de 2MB en el head (HTML ~2.3MB). Se paso a
+      css_defer=0 + css_inline=0: CSS como archivo enlazado, HTML ~100KB.
+    - DIAGNOSTICO CLAVE: el Perf local (home 42-68 fluctuante) esta dominado por
+      el TTFB del servidor WordPress Studio (~2.5-4s variable, SQLite sin opcache
+      de pagina), NO por los assets. El score local no es representativo; el
+      beneficio real de Autoptimize (CSS minificado+agregado en archivo + HTML
+      liviano) se vera en PRODUCCION (TTFB normal).
     - PENDIENTE en produccion: (a) habilitar defer/agregar JS con exclusiones
       finas (requiere testeo real, hoy rompe RevSlider en local), (b) page cache
       (WP Super Cache u otro) para atacar el TTFB de produccion.

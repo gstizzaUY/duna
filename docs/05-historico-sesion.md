@@ -686,3 +686,23 @@
       inmediatamente (mejora el LCP real).
     - Bump version -> 1.3.2 (functions.php + style.css). Sin regresiones
       (home/shop/buscador sin errores JS, skin intacto).
+62. OPTIMIZACION - Autoptimize CSS inline -> ARCHIVO (2026-09-05):
+    - PROBLEMA detectado: con la config previa (css_defer=1), Autoptimize INLINEABA
+      todo el CSS agregado en un <style media="all"> gigante de ~2091 KB al inicio
+      del head (posicion ~289), haciendo que el HTML pesara ~2.3MB y el navegador
+      tuviera que parsear 2MB de CSS antes de pintar (FCP) y antes de llegar al
+      <link rel=preload> del hero.
+    - FIX: autoptimize_css_defer=0 + autoptimize_css_inline=0 (CSS agregado como
+      ARCHIVO cache enlazado con <link>). RESULTADO: el head paso de 2.1MB a
+      45KB (HTML total de ~2.3MB a ~100KB); payload total Lighthouse 7891 -> 5367
+      KiB. El CSS ahora se descarga en paralelo al HTML (correcto para produccion
+      con TTFB normal).
+    - VERIFICADO sin regresiones (CDP): skin intacto (body #0d1117 / card #161b22
+      dark, #f7f8fa/#fff light; shop 12 productos; buscador presente; sin errores
+      JS).
+    - NOTA: el score Lighthouse LOCAL sigue fluctuando (42-68) por el TTFB del
+      servidor Studio (2.8-4.1s variable); no refleja el cambio. El beneficio real
+      (HTML liviano + CSS en paralelo) se vera en produccion.
+    - CONFIG Autoptimize final: css=1 aggregate=1 defer=0 inline=0; js=0
+      (intacto por RevSlider). No se bumpeo el child (cambio de config del plugin,
+      child sigue en 1.3.2).
