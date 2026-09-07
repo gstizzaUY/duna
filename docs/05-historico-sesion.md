@@ -827,14 +827,6 @@
     body-lock; al cerrar: inert=true+aria=true+foco vuelve a Filtros+sidebar
     restaurada en su origen). Lighthouse A11y movil home = 100. Sin fallos
      moviles pendientes de skin.
-67. AUDITORIA VISUAL FASE A + INFORME (2026-09-07; docs/10-auditoria-visual.md):
-    70 capturas full-page + dump CDP de 13 paginas x dark/light x 1367/375
-    (+768/1024 en home/shop/ficha/buscador) + cart/checkout con item. Base
-    sana: sin overflow, sin errores JS (salvo API :3002 apagada), paridad
-    claro/oscuro OK (drift 0), grid F3 intacto, breadcrumb simple del parent
-    presente (item 18 de pendientes: cubierto). Hallazgos solo-child C1-C5 +
-    M1/D1 + patrones de contenido (ingles sin .mo es-UY de Woo/Motors, demo
-    Motors visible, U$S 0,00, taxonomias EN). Detalle en docs/10.
 68. TANDA T1 APLICADA (duna-child v1.5.0, 2026-09-07): C1 aire contacto <992
     (H2 y=293 sin overlap); C2 html:root blinda radius (cards 4px servido);
     C3 titlebox light a #fff+borde y H1 clamp movil; C4 CTA checkout a
@@ -842,3 +834,9 @@
     bump 1.5.0. Backup docs/backups/duna-child-v1.4.0.*. Autoptimize clearall
     + regenerado con T1. Regresion 11 pag x 2 modos x anchos OK; Lighthouse
     home/shop A11y 100 / BP 100 / SEO 92 (solo robots-txt local). Sin bajas.
+69. TANDA T2 APLICADA (duna-child v1.5.1, 2026-09-07): M1 tabla de atributos
+    de la ficha a 13.5px/1.6 + padding (th txt-soft uppercase); D1 scrollbar
+    fina propia por modo (thin + webkit 10px, hover brand). Solo CSS + bump
+    1.5.1. Backup docs/backups/duna-child-v1.5.0.css. Autoptimize clearall +
+    regenerado con T2. Lighthouse ficha A11y 100 / BP 100 / SEO 92 (solo
+    robots-txt local); paridad T1 intacta (re-check light OK, cards 4px).

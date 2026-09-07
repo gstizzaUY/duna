@@ -1031,30 +1031,6 @@ body.wsf-light .wc-block-components-combobox select {
     border: 1px solid var(--wsf-border);
     border-radius: var(--wsf-radius-sm);
 }
-/* T2-M1 (auditoria visual 10): la tabla de atributos de la ficha hereda 12px
-   del parent (denso + fila YEARS larguisima). Lectura a 13.5px con aire
-   vertical; th en txt-soft uppercase coherente con el skin. */
-.woocommerce table.shop_attributes th,
-.woocommerce table.shop_attributes td {
-    font-size: 13.5px !important;
-    line-height: 1.6 !important;
-    padding: 10px 14px !important;
-    border-color: var(--wsf-border) !important;
-}
-.woocommerce table.shop_attributes th {
-    color: var(--wsf-txt-soft) !important;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    font-weight: 700 !important;
-    white-space: nowrap;
-}
-.woocommerce table.shop_attributes td {
-    color: var(--wsf-txt) !important;
-}
-.woocommerce table.shop_attributes td p {
-    margin: 0;
-    overflow-wrap: anywhere;
-}
 
 /* --- Paginación / Page links --- */
 .woocommerce-pagination .page-numbers,
@@ -1652,41 +1628,4 @@ textarea:focus-visible,
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
-}
-
-/* T2-D1 (auditoria visual 10): scrollbar propia fina coherente con el skin
-   (antes: nativa del SO). Firefox via scrollbar-color/scrollbar-width;
-   WebKit via ::-webkit-scrollbar. Sin !important: no compite con nada. */
-html {
-    scrollbar-width: thin;
-    scrollbar-color: var(--wsf-border) var(--wsf-surf-deep);
-}
-body.wsf-light,
-html.wsf-light {
-    scrollbar-color: #c3c7cd #eef0f3;
-}
-::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
-::-webkit-scrollbar-track {
-    background: var(--wsf-surf-deep);
-}
-::-webkit-scrollbar-thumb {
-    background: var(--wsf-border);
-    border-radius: 5px;
-    border: 2px solid var(--wsf-surf-deep);
-}
-::-webkit-scrollbar-thumb:hover {
-    background: var(--wsf-brand);
-}
-body.wsf-light ::-webkit-scrollbar-track {
-    background: #eef0f3;
-}
-body.wsf-light ::-webkit-scrollbar-thumb {
-    background: #c3c7cd;
-    border-color: #eef0f3;
-}
-body.wsf-light ::-webkit-scrollbar-thumb:hover {
-    background: var(--wsf-brand);
 }

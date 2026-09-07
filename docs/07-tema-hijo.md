@@ -297,9 +297,9 @@ acá y no se agreguen de nuevo al plugin.
   (RESUELTO) y docs/05-historico-sesion.md items 64-66.
 
 ### Decisiones abiertas al retomar
-- T2 pendiente de aprobacion (docs/10-auditoria-visual.md): M1 tabla de
-  atributos de la ficha a 13-14px + padding; D1 scrollbar fina propia.
-  Opcional NO recomendado en esta tanda: reducir los 206 !important.
+- Auditoria visual CERRADA (docs/10): T1 (C1-C5, v1.5.0) + T2 (M1/D1, v1.5.1)
+  aplicadas y verificadas. Solo queda el opcional NO recomendado: reducir los
+  ~206 !important (riesgo medio sin cambio visual).
 - Contenido (gestiona el usuario, listado en docs/10): instalar traducciones
   es-UY de Woo/Motors (ingles visible en cart/checkout/cuenta/ficha/blog),
   widgets demo (blog sidebar, footer PHOTO GALLERY/copyright Motors), FAQ

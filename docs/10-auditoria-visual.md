@@ -150,3 +150,16 @@ conocido; re-check puntual OK en light). Lighthouse CLI v13.4.1:
 home A11y 100 / BP 100 / SEO 92 (solo `robots-txt` local) = shop A11y 100 /
 BP 100 / SEO 92. Sin bajas vs v1.4.0. Capturas: `auditoria-visual/t1-after/`
 + `t1-regress/`.
+
+## T2 APLICADA (child v1.5.1)
+
+- **M1**: `table.shop_attributes th/td` a 13.5px/1.6 + padding 10px 14px;
+  `th` en txt-soft uppercase nowrap; `td` en txt con `overflow-wrap:anywhere`.
+  Verificado: 13.5px servido, sin overflow, captura `t2-after/`.
+- **D1**: scrollbar propia fina (`scrollbar-width:thin` + `scrollbar-color`;
+  `::-webkit-scrollbar` 10px, thumb border, hover brand; variante light).
+  Verificado: `scrollbarWidth=thin` computado.
+- Solo CSS + bump 1.5.1. Backup `docs/backups/duna-child-v1.5.0.css`.
+  Autoptimize clearall + regenerado con T2 (T2-M1/T2-D1 presentes en el CSS
+  agregado). Lighthouse ficha: A11y 100 / BP 100 / SEO 92 (solo robots-txt
+  local). Paridad T1 intacta (re-check shop/categoria light OK, cards 4px).
