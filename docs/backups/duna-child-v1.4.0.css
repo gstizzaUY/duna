@@ -670,15 +670,6 @@ a:hover, a:focus { color: var(--wsf-brand); }
     background-color: var(--wsf-surf-deep) !important;
     border-color: var(--wsf-border) !important;
 }
-/* T1-C3 (auditoria visual 10): el titlebox sin imagen queda como bloque
-   gris plano en modo claro (#f7f8fa sobre wrapper #fff). En light se
-   iguala al wrapper con un borde inferior sutil. */
-body.wsf-light .entry-header,
-body.wsf-light .stm_titlebox,
-body.wsf-light .title-box {
-    background-color: #ffffff !important;
-    border-bottom: 1px solid var(--wsf-border) !important;
-}
 .entry-header .entry-title h1,
 .stm_titlebox .entry-title h1,
 .title-box .h1,
@@ -894,43 +885,6 @@ select:focus,
     background: var(--wsf-brand-hover) !important;
     color: #ffffff !important;
     box-shadow: var(--wsf-shadow-hover);
-}
-/* T1-C4 (auditoria visual 10): el checkout por BLOQUES de Woo pinta el CTA
-   "Proceed to Checkout" gris con texto rojo apagado (sin jerarquia en el
-   funnel). Se le da el tratamiento de boton primario de marca. */
-.woocommerce-cart .wc-proceed-to-checkout a.checkout-button,
-.woocommerce-cart .wp-block-woocommerce-cart .wc-block-cart__submit-button,
-.wc-block-cart__submit-container .wc-block-cart__submit-button {
-    background: var(--wsf-brand) !important;
-    border-color: var(--wsf-brand) !important;
-    color: #ffffff !important;
-    border-radius: var(--wsf-radius-sm) !important;
-    font-weight: 700 !important;
-    text-transform: uppercase;
-}
-.woocommerce-cart .wc-proceed-to-checkout a.checkout-button:hover,
-.woocommerce-cart .wp-block-woocommerce-cart .wc-block-cart__submit-button:hover,
-.wc-block-cart__submit-container .wc-block-cart__submit-button:hover {
-    background: var(--wsf-brand-hover) !important;
-    border-color: var(--wsf-brand-hover) !important;
-    color: #ffffff !important;
-}
-/* T1-C5 (auditoria visual 10): el checkout por bloques deja los <select>
-   (Pais/Estado) blancos en modo dark. Se llevan a las variables del skin. */
-.wc-block-checkout select,
-.wc-block-checkout .wc-block-components-select select,
-.wc-block-components-select .wc-block-components-select__select,
-.wc-block-components-combobox select {
-    background-color: var(--wsf-surf) !important;
-    border-color: var(--wsf-border) !important;
-    color: var(--wsf-txt) !important;
-    color-scheme: dark;
-}
-body.wsf-light .wc-block-checkout select,
-body.wsf-light .wc-block-checkout .wc-block-components-select select,
-body.wsf-light .wc-block-components-select .wc-block-components-select__select,
-body.wsf-light .wc-block-components-combobox select {
-    color-scheme: light;
 }
 .woocommerce #respond input#submit:active,
 .woocommerce a.button:active,
@@ -1284,18 +1238,6 @@ a.wsf-cta:hover {
    buscador (wheels-finder) lee sus variables --wsf-* desde :root
    (documentElement) para pintar los selects inline. Asi el buscador se aclara
    en modo claro. */
-
-/* T1-C2 (auditoria visual 10): el plugin wheels-size-finder emite un <style>
-   inline posterior (:root{...--wsf-radius:6px...}, setting
-   wsf_input_border_radius) que PISA los tokens de radio del child por orden
-   de cascada (cards a 6px en vez de 4px). html:root (0,1,1) gana a :root
-   (0,1,0) y re-blinda los 3 tokens. Los inputs del plugin siguen en 6px por
-   su propio var(--wsf-radius,6px) con fallback. */
-html:root {
-    --wsf-radius: 4px;
-    --wsf-radius-sm: 2px;
-    --wsf-radius-lg: 6px;
-}
 html.wsf-light,
 body.wsf-light {
     --wsf-surf: #ffffff;
@@ -1399,26 +1341,6 @@ body.wsf-light .stm_mc-filter-selects .stm_mc-plural-name,
 body.wsf-light .stm_mc-filter-selects .stm_mc-found { color: #1a1a1a !important; }
 
 /* ===== Responsive movil ===== */
-
-/* T1-C1 (auditoria visual 10): Contacto no tiene .entry-header (el H2
-   WPBakery va directo en el contenido) y en <992px la cinta de navegacion
-   absolute lo tapa (H2 en y=101 < navBottom 166). Se da aire superior al
-   contenido de la pagina de contacto en movil. */
-/* T1-C3b (auditoria visual 10): el H1 del titlebox de archivo es 45px fijo
-   tambien en movil (SHOP/BATERIAS/MY ACCOUNT muy grandes en 375). Escala
-   fluida solo en el titlebox, sin tocar los vc_custom_heading. */
-@media (max-width: 991px) {
-    body.page-id-712 #main > .container,
-    body.page-id-712 .wsf-page {
-        padding-top: 96px;
-    }
-}
-@media (max-width: 767px) {
-    .entry-header.small_title_box .entry-title h1,
-    .entry-header.small_title_box .entry-title h2 {
-        font-size: clamp(26px, 7vw, 36px);
-    }
-}
 
 /* Boton "Filtros" (solo <992px) */
 .wsf-mobile-filters {

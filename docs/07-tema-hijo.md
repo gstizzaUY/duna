@@ -297,6 +297,13 @@ acá y no se agreguen de nuevo al plugin.
   (RESUELTO) y docs/05-historico-sesion.md items 64-66.
 
 ### Decisiones abiertas al retomar
+- T2 pendiente de aprobacion (docs/10-auditoria-visual.md): M1 tabla de
+  atributos de la ficha a 13-14px + padding; D1 scrollbar fina propia.
+  Opcional NO recomendado en esta tanda: reducir los 206 !important.
+- Contenido (gestiona el usuario, listado en docs/10): instalar traducciones
+  es-UY de Woo/Motors (ingles visible en cart/checkout/cuenta/ficha/blog),
+  widgets demo (blog sidebar, footer PHOTO GALLERY/copyright Motors), FAQ
+  Lorem ipsum, precios U$S 0,00, taxonomias EN mezcladas.
 - Radio final de cards/botones/inputs (sugerido 4px cards / 2px botones).
 - Reduccion de la paleta roja vs superficies: mantener contraste AA.
 - Confirmar si `footer_copyright_text` (texto Motors) se deja o se gestiona aparte.

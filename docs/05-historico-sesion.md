@@ -772,7 +772,7 @@
       <i> (fontawesome). JS: aria-label segun href (Facebook/Instagram/
       WhatsApp).
     - FIX 4 - dots de testimonios (button-name + target-size, del plugin): JS
-      agrega aria-label "Ir a la página de testimonios N" + aria-current
+      agrega aria-label "Ir a la pï¿½gina de testimonios N" + aria-current
       sincronizado (MutationObserver de class, el plugin togglea wsf-active) +
       CSS touch target 20x20 con dot visual de 7px via ::before (mantiene el
       look). Lighthouse target-size OK.
@@ -795,7 +795,7 @@
     - FIX 8 - paginacion del shop (link-name): el partial del parent
       woocommerce/loop/pagination.php imprime prev/next como <a> solo-icono
       dentro de .stm-prev-next, duplicando el href de la pagina numerada.
-      JS: aria-label "Página siguiente/anterior" + aria-hidden al <i>.
+      JS: aria-label "Pï¿½gina siguiente/anterior" + aria-hidden al <i>.
     - FIX 9 - tabs de la ficha (aria-allowed-attr): WooCommerce pone
       aria-selected en el <a> del <li role=tab> (violacion: el tab es el li).
       JS: MutationObserver que retira aria-selected del <a> cuando WC lo
@@ -826,4 +826,19 @@
     ciclo open/close OK (al abrir: open+inert=false+aria=false+foco en Cerrar+
     body-lock; al cerrar: inert=true+aria=true+foco vuelve a Filtros+sidebar
     restaurada en su origen). Lighthouse A11y movil home = 100. Sin fallos
-    moviles pendientes de skin.
+     moviles pendientes de skin.
+67. AUDITORIA VISUAL FASE A + INFORME (2026-09-07; docs/10-auditoria-visual.md):
+    70 capturas full-page + dump CDP de 13 paginas x dark/light x 1367/375
+    (+768/1024 en home/shop/ficha/buscador) + cart/checkout con item. Base
+    sana: sin overflow, sin errores JS (salvo API :3002 apagada), paridad
+    claro/oscuro OK (drift 0), grid F3 intacto, breadcrumb simple del parent
+    presente (item 18 de pendientes: cubierto). Hallazgos solo-child C1-C5 +
+    M1/D1 + patrones de contenido (ingles sin .mo es-UY de Woo/Motors, demo
+    Motors visible, U$S 0,00, taxonomias EN). Detalle en docs/10.
+68. TANDA T1 APLICADA (duna-child v1.5.0, 2026-09-07): C1 aire contacto <992
+    (H2 y=293 sin overlap); C2 html:root blinda radius (cards 4px servido);
+    C3 titlebox light a #fff+borde y H1 clamp movil; C4 CTA checkout a
+    brand+blanco (4.85:1); C5 selects checkout blocks a variables. Solo CSS +
+    bump 1.5.0. Backup docs/backups/duna-child-v1.4.0.*. Autoptimize clearall
+    + regenerado con T1. Regresion 11 pag x 2 modos x anchos OK; Lighthouse
+    home/shop A11y 100 / BP 100 / SEO 92 (solo robots-txt local). Sin bajas.
