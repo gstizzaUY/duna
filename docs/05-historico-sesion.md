@@ -840,3 +840,7 @@
     1.5.1. Backup docs/backups/duna-child-v1.5.0.css. Autoptimize clearall +
     regenerado con T2. Lighthouse ficha A11y 100 / BP 100 / SEO 92 (solo
     robots-txt local); paridad T1 intacta (re-check light OK, cards 4px).
+70. FIX M1b (duna-child v1.5.2, 2026-09-07, reporte usuario): valores de la
+    tabla de atributos invisibles en modo claro (parent Woo pinta
+    `shop_attributes td p` en #fff). Fix child: td p a var(--wsf-txt).
+    Verificado dark/light + capturas t3-after. Backup duna-child-v1.5.1.css.

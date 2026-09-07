@@ -163,3 +163,13 @@ BP 100 / SEO 92. Sin bajas vs v1.4.0. Capturas: `auditoria-visual/t1-after/`
   Autoptimize clearall + regenerado con T2 (T2-M1/T2-D1 presentes en el CSS
   agregado). Lighthouse ficha: A11y 100 / BP 100 / SEO 92 (solo robots-txt
   local). Paridad T1 intacta (re-check shop/categoria light OK, cards 4px).
+
+## FIX M1b APLICADO (child v1.5.2, reporte de usuario)
+
+Reporte: en la ficha, pestaña "Additional Information", se veian los titulos
+pero no los datos en modo claro. Causa: el parent (Woo base) fuerza
+`.woocommerce table.shop_attributes td p { color:#fff }` → blanco sobre panel
+blanco en light (en dark coincide con el skin y no se notaba). Fix child:
+`td p` a `var(--wsf-txt) !important` (coherente con M1). Verificado:
+dark `#e1e4e8` sobre `#161b22` / light `#1a1a1a` sobre `#fff` (~15.9:1),
+sin overflow. Capturas `t3-after/`. Backup `duna-child-v1.5.1.css`.

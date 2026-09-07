@@ -21,14 +21,14 @@ function duna_child_enqueue() {
 		'duna-child',
 		get_stylesheet_directory_uri() . '/assets/css/duna-child.css',
 		array(),
-		'1.5.1'
+		'1.5.2'
 	);
 
 	wp_enqueue_script(
 		'duna-child',
 		get_stylesheet_directory_uri() . '/assets/js/duna-child.js',
 		array( 'jquery' ),
-		'1.5.1',
+		'1.5.2',
 		true
 	);
 }

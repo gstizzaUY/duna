@@ -16,7 +16,7 @@ Backend API Node del buscador: http://localhost:3002.
   - Campo nuevo `_wsf_tire_size` (post meta) en 181 productos, extraido del titulo.
   - `find_by_sku` busca en `_sku` y `_wsf_tire_size` (= y LIKE), normaliza entrada.
   - Funciona por medidas y por vehiculo (end-to-end verificado).
-- **Tema hijo duna-child v1.5.1** (skin del sitio, ver docs/07-tema-hijo.md):
+- **Tema hijo duna-child v1.5.2** (skin del sitio, ver docs/07-tema-hijo.md):
    - v1.5.0 (2026-09-07): AUDITORIA VISUAL + T1. Informe en
      docs/10-auditoria-visual.md (70 capturas + dump CDP de 13 paginas x
      dark/light x anchos). Fixes solo-child C1-C5: overlap contacto movil,
@@ -26,6 +26,8 @@ Backend API Node del buscador: http://localhost:3002.
      BP 100 / SEO 92 (solo robots-txt local). Detalle en docs/05 items 67-68.
    - v1.5.1 (2026-09-07): T2 (M1 atributos ficha 13.5px + D1 scrollbar fina).
      Lighthouse ficha A11y 100 / BP 100 / SEO 92. Detalle en docs/05 item 69.
+   - v1.5.2 (2026-09-07): fix M1b (valores de atributos invisibles en claro:
+     parent Woo `td p` en #fff → var(--wsf-txt)). Detalle item 70.
      Auditoria visual CERRADA; queda solo contenido (traducciones es-UY,
      demo, FAQ).
   - v1.0.3: footer sin cajas/bordes + gutter 20px desktop + apilado <1200px con

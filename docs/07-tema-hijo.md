@@ -298,8 +298,9 @@ acá y no se agreguen de nuevo al plugin.
 
 ### Decisiones abiertas al retomar
 - Auditoria visual CERRADA (docs/10): T1 (C1-C5, v1.5.0) + T2 (M1/D1, v1.5.1)
-  aplicadas y verificadas. Solo queda el opcional NO recomendado: reducir los
-  ~206 !important (riesgo medio sin cambio visual).
+  + fix M1b (td p blanco en claro, v1.5.2) aplicados y verificados. Solo
+  queda el opcional NO recomendado: reducir los ~206 !important (riesgo
+  medio sin cambio visual).
 - Contenido (gestiona el usuario, listado en docs/10): instalar traducciones
   es-UY de Woo/Motors (ingles visible en cart/checkout/cuenta/ficha/blog),
   widgets demo (blog sidebar, footer PHOTO GALLERY/copyright Motors), FAQ
